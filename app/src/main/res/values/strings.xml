@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">MyFitnessTracker</string>
+
+    //Buttons
     <string name="button_log_activity">Log Acitvity</string>
+    <string name="button_start_stop">Start</string>
+
+    //ArrayLists
+    <string-array name="listActivities">
+        <item>Walking</item>
+        <item>Running</item>
+        <item>Swimming</item>
+        <item>Ballsports</item>
+        <item>Dancing</item>
+        <item>Martial Arts</item>
+        <item>Weight Training</item>
+        <item>Yoga</item>
+        <item>Other</item>
+    </string-array>
+
 </resources>
