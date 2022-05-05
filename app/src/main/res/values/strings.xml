@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyFitnessTracker</string>
+    <string name="button_log_activity">Log Acitvity</string>
 </resources>
