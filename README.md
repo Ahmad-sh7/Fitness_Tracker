@@ -11,3 +11,8 @@ Learning/Research Sources:
 - Detect when users start or end an activity : https://developer.android.com/guide/topics/location/transitions
 
 - Motion sensors: https://developer.android.com/guide/topics/sensors/sensors_motion
+
+
+GUI Sources:
+
+- Drop-Down-Menu (Spinner): https://developer.android.com/guide/topics/ui/controls/spinner#java
