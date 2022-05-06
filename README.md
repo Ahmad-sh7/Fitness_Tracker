@@ -2,7 +2,7 @@
 
 ____________________________________________________________
 
-Learning/Research Sources:
+## Learning/Research Sources:
 
 - Adding an existing project to GitHub: https://gist.github.com/alexpchin/102854243cd066f8b88e
 
@@ -13,6 +13,6 @@ Learning/Research Sources:
 - Motion sensors: https://developer.android.com/guide/topics/sensors/sensors_motion
 
 
-GUI Sources:
+## GUI Sources:
 
 - Drop-Down-Menu (Spinner): https://developer.android.com/guide/topics/ui/controls/spinner#java
