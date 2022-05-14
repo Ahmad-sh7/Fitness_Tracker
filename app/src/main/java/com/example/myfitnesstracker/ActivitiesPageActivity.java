@@ -25,7 +25,7 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
     private SensorManager sensorManager;
     private Sensor Accelerometer;
     Handler handler;
-    int interval = 60000; //read sensor data every 1 minute = 6000 ms
+    int interval = 6000; //read sensor data every 1 minute = 6000 ms
     boolean flag = false; //initialized
     TextView txt_x; //declare x axis object
     TextView txt_y; //declare y axis object
@@ -35,13 +35,18 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
     private double accelerationPreviousValue;
     private double changedAcceleration;
 
+    Button startButton;
+    Button stopButton;
+
+
+
 
     private final Runnable processSensors = new Runnable() {
         @Override
         public void run() {
             // Do work with the sensor values.
 
-            flag = true;
+            //flag = true;
             // The Runnable is posted to be run after the specified amount of time elapses
             handler.postDelayed(this, interval);
         }
@@ -61,8 +66,8 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        Button startButton = (Button) findViewById(R.id.start);
-        Button stopButton = (Button) findViewById(R.id.stop);
+        startButton = (Button) findViewById(R.id.start);
+        stopButton = (Button) findViewById(R.id.stop);
         startButton.setOnClickListener(this);
         stopButton.setOnClickListener(this);
 
@@ -92,6 +97,7 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
     }
 
     public void onSensorChanged(SensorEvent sensorEvent) {
+
         //assign directions
         if (flag) {
             float x = sensorEvent.values[0];
@@ -107,7 +113,10 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
             txt_y.setText(String.format("prev =%s", accelerationPreviousValue));
             txt_z.setText(String.format("changed =%s", changedAcceleration));
 
-            flag = false;
+        }else{
+            txt_x.setText("Waiting for sensor data..");
+            txt_y.setText("Waiting for sensor data..");
+            txt_z.setText("Waiting for sensor data..");
         }
     }
 
@@ -121,10 +130,16 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
         switch (view.getId()) {
             case R.id.start:
                 sensorManager.registerListener(this, Accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+                stopButton.setEnabled(true);
+                startButton.setEnabled(false);
+                flag=true;
                 break;
             case R.id.stop:
                 sensorManager.unregisterListener(this, Accelerometer);
                 sensorManager.unregisterListener(this);
+                startButton.setEnabled(true);
+                stopButton.setEnabled(false);
+                flag=false;
                 break;
         }
     }
