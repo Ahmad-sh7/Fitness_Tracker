@@ -12,7 +12,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final int DB_V = 1;
     //define names for table Activity_Data
     private final String TABLE_A_DATA = "Activity_Data";
-    private final String KEY_S_TIME = "Start_Time";
+    private final String KEY_R_TIME = "Record_Time";
     private final String KEY_DATA = "Device_Data";
     private final String KEY_SOURCE = "Data_Source";
 
@@ -21,6 +21,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private final String KEY_AID = "Activity_ID";
     private final String KEY_A_TYPE = "Activity_Type";
     private final String KEY_E_TIME = "End_Time";
+    private final String KEY_S_TIME = "Start_Time";
     // Start_Time defined above
 
     //define names for table Mood_Log
@@ -41,7 +42,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         //Create table activity data table
         String CREATE_TABLE = "CREATE TABLE " + TABLE_A_DATA + "." + TABLE_A_DATA + "("
-                + KEY_S_TIME + "REAL PRIMARY KEY, "
+                + KEY_R_TIME + "REAL PRIMARY KEY, "
                 + KEY_DATA + " REAL, "
                 + KEY_SOURCE + " TEXT" + ")";
         db.execSQL((CREATE_TABLE));
@@ -65,7 +66,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void safeActivityData(long sTime, long data, String source){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
-        cValues.put(KEY_S_TIME, sTime);
+        cValues.put(KEY_R_TIME, sTime);
         cValues.put(KEY_DATA, data);
         cValues.put(KEY_SOURCE, source);
         db.insert(TABLE_A_DATA,null,cValues);
