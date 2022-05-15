@@ -1,4 +1,4 @@
-package com.example.moodrecorder;
+package com.example.myfitnesstracker;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
