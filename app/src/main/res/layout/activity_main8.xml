@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity8">
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="93dp"
+        android:layout_marginEnd="259dp"
+        android:layout_marginBottom="381dp"
+        android:text="0" />
+
+    <SeekBar
+        android:id="@+id/seekBar9"
+        style="@android:style/Widget.Material.SeekBar.Discrete"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="424dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="142dp"
+        android:max="6"
+        android:progress="0" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="107dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="425dp"
+        android:layout_marginEnd="214dp"
+        android:layout_marginBottom="154dp"
+        android:text="trifft gar nicht zu"
+        android:textColor="@color/black"
+        android:textSize="7sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginEnd="260dp"
+        android:layout_marginBottom="134dp"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="426dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginBottom="155dp"
+        android:text="trifft voll und ganz zu"
+        android:textColor="@color/black"
+        android:textSize="7sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="276dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="297dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="207dp"
+        android:text="Seit der letzten Abfrage habe ich mich gegenüber einer anderen Person ärgerlich oder aggressiv
+verhalten, was mir danach leidtat"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="275dp"
+        android:layout_height="111dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="442dp"
+        android:text="Seit der letzten Abfrage habe ich impulsiv gehandelt, d.h. ich habe gehandelt, ohne mir Gedanken
+über mögliche Konsequenzen zu machen"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/fertig1"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="85dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="527dp"
+        android:layout_marginEnd="288dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#673FCA"
+        android:text="FERTIG" />
+
+    <Button
+        android:id="@+id/zurück7"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="85dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="526dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="31dp"
+        android:backgroundTint="#673FCA"
+        android:text="zurück" />
+
+    <SeekBar
+        android:id="@+id/seekBar8"
+        style="@android:style/Widget.Material.SeekBar.Discrete"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="177dp"
+        android:layout_marginEnd="79dp"
+        android:layout_marginBottom="388dp"
+        android:max="6"
+        android:progress="0"/>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="107dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="178dp"
+        android:layout_marginEnd="214dp"
+        android:layout_marginBottom="401dp"
+        android:text="trifft gar nicht zu"
+        android:textColor="@color/black"
+        android:textSize="7sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="179dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginBottom="401dp"
+        android:text="trifft voll und ganz zu"
+        android:textColor="@color/black"
+        android:textSize="7sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>
