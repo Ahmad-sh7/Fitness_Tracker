@@ -17,5 +17,24 @@
         <item>Yoga</item>
         <item>Other</item>
     </string-array>
+    <string-array name="answers">
+        <item>Keine</item>
+        <item>Lebenspartner*in</item>
+        <item>Familie</item>
+        <item>Freunde</item>
+        <item>Arbeitskolleg*innen</item>
+        <item>Fremde</item>
+    </string-array>
+
+    <string-array name="answers2">
+        <item>Keine</item>
+        <item>Zuhause</item>
+        <item>Arbeit</item>
+        <item>Sport</item>
+        <item>Einkaufen</item>
+        <item>Besuch</item>
+        <item>sonstiges Hobby</item>
+        <item>Sonstiges</item>
+    </string-array>
 
 </resources>
