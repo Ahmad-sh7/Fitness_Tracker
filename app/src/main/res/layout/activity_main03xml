@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="352dp"
+        android:layout_height="123dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="426dp"
+        android:text="Sind Sie im Moment alleine?"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/ja1"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="118dp"
+        android:layout_height="71dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="117dp"
+        android:layout_marginEnd="266dp"
+        android:layout_marginBottom="416dp"
+        android:backgroundTint="@color/teal_700"
+        android:text="JA"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/nein1"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="118dp"
+        android:layout_height="71dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="117dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="416dp"
+        android:backgroundTint="@color/teal_700"
+        android:text="NEIN"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="379dp"
+        android:layout_height="109dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="234dp"
+        android:text="Wenn Sie an die Personen denken, die Sie gerade umgeben, inwiefern trifft folgende Aussage zu? Ich
+mag diese Leute nicht!"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <SeekBar
+        android:id="@+id/seekBarID6"
+        style="@style/Widget.AppCompat.SeekBar"
+        android:layout_width="299dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="397dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="136dp"
+        android:defaultFocusHighlightEnabled="false"
+        android:max="100"
+        android:scaleX="1"
+        android:scaleY="2"
+        android:scrollbarThumbHorizontal="?android:attr/listDivider"
+        android:scrollbarThumbVertical="?attr/dividerVertical"
+        android:thumb="?attr/dividerVertical"
+        android:thumbOffset="0dp"
+        android:thumbTint="#00ED0909"
+        android:thumbTintMode="multiply" />
+
+    <TextView
+        android:id="@+id/trifftüberhauptnichtzu"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="407dp"
+        android:layout_marginEnd="174dp"
+        android:layout_marginBottom="178dp"
+        android:text="trifft überhaupt nicht zu"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/trifftvölligzu"
+        android:layout_width="119dp"
+        android:layout_height="18dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="254dp"
+        android:layout_marginTop="407dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="178dp"
+        android:text="trifft völlig zu"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="437dp"
+        android:layout_marginEnd="305dp"
+        android:layout_marginBottom="144dp"
+        android:text="0%"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/weiter3"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="85dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="527dp"
+        android:layout_marginEnd="288dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#673FCA"
+        android:text="Weiter" />
+
+    <Button
+        android:id="@+id/zurück3"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="85dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="526dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="31dp"
+        android:backgroundTint="#673FCA"
+        android:text="zurück" />
+
+</RelativeLayout>
