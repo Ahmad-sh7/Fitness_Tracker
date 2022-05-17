@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-
-
     <TextView
         android:layout_width="303dp"
         android:layout_height="62dp"
@@ -20,7 +17,7 @@
         android:layout_marginTop="31dp"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="511dp"
-        android:text="@string/in_den_letzten_24_stunden_f_hlte_ich_mich_im_durchschnitt"
+        android:text="In den letzten 24 Stunden fühlte ich mich im Durchschnitt…"
         android:textColor="@color/black"
         android:textSize="19sp"
         android:textStyle="bold" />
@@ -350,7 +347,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/barprogress1"
+        android:id="@+id/progress1"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:layout_alignParentStart="true"
@@ -365,7 +362,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/barprogress2"
+        android:id="@+id/progress2"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:layout_alignParentStart="true"
@@ -380,7 +377,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/barprogress3"
+        android:id="@+id/progress3"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:layout_alignParentStart="true"
@@ -395,7 +392,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/barprogress4"
+        android:id="@+id/progress4"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:layout_alignParentStart="true"
@@ -410,7 +407,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/barprogress5"
+        android:id="@+id/progress5"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:layout_alignParentStart="true"
@@ -425,7 +422,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/barprogress6"
+        android:id="@+id/progress6"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:layout_alignParentStart="true"
