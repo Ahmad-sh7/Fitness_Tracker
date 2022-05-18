@@ -18,8 +18,12 @@ public class MainActivity extends AppCompatActivity {
     public void goToActivityPage(View view) {
         Intent intent = new Intent(this, ActivitiesPageActivity.class);
         startActivity(intent);
-
     }
 
+    /** Called when the user taps the My Statistics button */
+    public void goToStatisticsPage(View view) {
+        Intent intent = new Intent(this, StatisticsPageActivity.class);
+        startActivity(intent);
+    }
 
 }
