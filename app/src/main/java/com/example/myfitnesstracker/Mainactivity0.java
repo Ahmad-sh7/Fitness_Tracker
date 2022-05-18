@@ -140,10 +140,23 @@ public class MainActivity0 extends AppCompatActivity {
                 openActivity2();
             }
         });
-    }
+
+        button = (Button) findViewById(R.id.zurück1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
+            openMainActivity();
+        }
+    });
+}
 
     public void openActivity2() {
         Intent intent = new Intent(this, MainActivity2.class);
+        startActivity(intent);
+    }
+
+    public void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
