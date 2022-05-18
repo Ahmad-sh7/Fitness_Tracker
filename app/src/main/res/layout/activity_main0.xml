@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -71,7 +71,7 @@
         android:thumbTintMode="multiply" />
 
     <SeekBar
-        android:id="@+id/SeekBarID3"
+        android:id="@+id/seekBarID3"
         style="@style/Widget.AppCompat.SeekBar"
         android:layout_width="260dp"
         android:layout_height="68dp"
@@ -95,7 +95,7 @@
         android:thumbTintMode="multiply" />
 
     <SeekBar
-        android:id="@+id/SeekBarID4"
+        android:id="@+id/seekBarID4"
         style="@style/Widget.AppCompat.SeekBar"
         android:layout_width="260dp"
         android:layout_height="68dp"
