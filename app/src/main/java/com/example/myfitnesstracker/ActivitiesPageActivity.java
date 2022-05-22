@@ -8,9 +8,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View.OnClickListener;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -20,6 +24,15 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.myfitnesstracker.model.ActivtyRecord;
+import com.example.myfitnesstracker.model.AppDatabase;
+import com.example.myfitnesstracker.model.SensorData;
+import com.example.myfitnesstracker.model.SensorDataDao;
+
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ActivitiesPageActivity extends AppCompatActivity implements SensorEventListener,OnClickListener {
     private SensorManager sensorManager;
@@ -35,8 +48,13 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
     private double accelerationPreviousValue;
     private double changedAcceleration;
 
+    ArrayList<SensorData> periodicSensorData = new ArrayList<>();
+
     Button startButton;
     Button stopButton;
+    Spinner spinner;
+    AppDatabase db;
+
 
 
 
@@ -56,8 +74,10 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activities_page);
+        db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"sensordb").build();
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_activities);
+
+       spinner = (Spinner) findViewById(R.id.spinner_activities);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.listActivities, android.R.layout.simple_spinner_item);
@@ -78,6 +98,10 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
         txt_z = findViewById(R.id.textView4); //create z axis object
 
 
+
+
+
+
         //create the sensor manager
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         //create the accelerometer
@@ -95,6 +119,10 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
         //sensorManager.unregisterListener(this);
         handler.removeCallbacks(processSensors); // Remove any pending posts of Runnable that are in the message queue.
     }
+    Boolean isFirstTime=true;
+    Timer timer=new Timer();
+    Timer timer2 = new Timer();
+
 
     public void onSensorChanged(SensorEvent sensorEvent) {
 
@@ -113,10 +141,32 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
             txt_y.setText(String.format("prev =%s", accelerationPreviousValue));
             txt_z.setText(String.format("changed =%s", changedAcceleration));
 
+            if (isFirstTime){
+                int begin=0;
+                int timeInterval =1000;
+                timer.schedule(new TimerTask() {
+                    int counter=0;
+                    @Override
+                    public void run() {
+                        periodicSensorData.add(new SensorData(
+                                System.currentTimeMillis(),
+                                x,y,z
+                        ));
+          
+
+                    }
+                },begin,2000);
+                isFirstTime=false;
+            }
+
+
+
+
         }else{
             txt_x.setText("Waiting for sensor data..");
             txt_y.setText("Waiting for sensor data..");
             txt_z.setText("Waiting for sensor data..");
+
         }
     }
 
@@ -129,10 +179,35 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.start:
+                timer= new Timer();
+                timer2= new Timer();
+                isFirstTime = true;
+
                 sensorManager.registerListener(this, Accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
                 stopButton.setEnabled(true);
                 startButton.setEnabled(false);
                 flag=true;
+
+                timer2.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                SensorDataDao sensorDataDao=db.sensorDataDao();
+                                String[] arrayActivities = getResources().getStringArray(R.array.listActivities);
+                                sensorDataDao.insertAll(new ActivtyRecord(
+                                        periodicSensorData, arrayActivities[spinner.getSelectedItemPosition()],System.currentTimeMillis(),System.currentTimeMillis()
+                                ));
+                                sensorDataDao.getAll();
+                                periodicSensorData.clear();
+
+                            }
+                        });
+                    }
+                },0,60000);
+
+
                 break;
             case R.id.stop:
                 sensorManager.unregisterListener(this, Accelerometer);
@@ -140,6 +215,12 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
                 startButton.setEnabled(true);
                 stopButton.setEnabled(false);
                 flag=false;
+                timer.cancel();
+                timer2.cancel();
+
+
+
+
                 break;
         }
     }
