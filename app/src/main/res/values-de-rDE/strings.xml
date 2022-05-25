@@ -5,4 +5,5 @@
     <string name="button_start_stop">Start</string>
     <string name="button_log_mood">Neues Quiz</string>
     <string name="button_statistics">Meine Daten</string>
+    <string name="text_statistics_activity_chart">Tägliche Aktivität in Minuten</string>
 </resources>

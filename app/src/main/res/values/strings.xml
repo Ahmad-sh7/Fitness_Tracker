@@ -19,5 +19,6 @@
     </string-array>
     <string name="button_log_mood">Log Mood</string>
     <string name="button_statistics">My Statistics</string>
+    <string name="text_statistics_activity_chart">Daily Activity in minuts</string>
 
 </resources>

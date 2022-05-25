@@ -52,10 +52,10 @@ public class StatisticsPageActivity extends AppCompatActivity {
             barActivityEntries.add(barEntry);// Add Values in Array List
         }
 
-        BarDataSet barDataSet = new BarDataSet(barActivityEntries, "Daily Activity in minutes");// Initialize Bar Data Set
+        BarDataSet barDataSet = new BarDataSet(barActivityEntries, "Activity in minutes");// Initialize Bar Data Set
         barDataSet.setColors(Color.rgb(55,0,179));// Set Bar Color
         barChartActivity.setData(new BarData(barDataSet));// Set Bar Data
-        barChartActivity.animateY(5000);// Set Animations
+        barChartActivity.animateY(3000);// Set Animations
         barChartActivity.getDescription().setText(" ");// Removing Description text
         //barChartActivity.getDescription().setTextColor(Color.WHITE);
     }
@@ -82,7 +82,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
         //yAxis.setAxisMaximum(100);
 
         // Example values
-        for(int i = 1; i <= linesMoodEntries.size(); i++){
+        for(int i = 0; i < linesMoodEntries.size(); i++){
             for(int j = 1; j <= 7; j++){
                 float value = (float) ((i+j)*10.0);// Convert To Float
                 Entry lineEntry = new Entry(j, value);// Initialize Entry
@@ -91,12 +91,12 @@ public class StatisticsPageActivity extends AppCompatActivity {
         }
 
         ArrayList<ILineDataSet> lineDataSetList = new ArrayList<>(); // List of the sets
-        LineDataSet line1 = new LineDataSet(Mood1, "Mood1");
-        LineDataSet line2 = new LineDataSet(Mood2, "Mood1");
-        LineDataSet line3 = new LineDataSet(Mood3, "Mood1");
-        LineDataSet line4 = new LineDataSet(Mood4, "Mood1");
-        LineDataSet line5 = new LineDataSet(Mood5, "Mood1");
-        LineDataSet line6 = new LineDataSet(Mood6, "Mood1");
+        LineDataSet line1 = new LineDataSet(Mood1, "zufrieden");
+        LineDataSet line2 = new LineDataSet(Mood2, "ruhe");
+        LineDataSet line3 = new LineDataSet(Mood3, "wohl");
+        LineDataSet line4 = new LineDataSet(Mood4, "entspannt");
+        LineDataSet line5 = new LineDataSet(Mood5, "energie");
+        LineDataSet line6 = new LineDataSet(Mood6, "wach");
         lineDataSetList.add(line1);
         lineDataSetList.add(line2);
         lineDataSetList.add(line3);
@@ -106,7 +106,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
 
         LineData data = new LineData(lineDataSetList);
         lineChartMood.setData(data);
-        lineChartMood.animateXY(1000,1000);
+        lineChartMood.animateXY(2000,2000);
 
     }
 
