@@ -9,19 +9,19 @@ android:padding="16dp"
 tools:context=".MainActivity">
 
     //Activity Chart
-<com.github.mikephil.charting.charts.BarChart
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:id="@+id/bar_chart_activity"
-    android:layout_marginBottom="8dp"/>
-
-    //Mood Chart
     <com.github.mikephil.charting.charts.BarChart
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/bar_chart_mood"
+        android:id="@+id/bar_chart_activity"
+        android:layout_marginBottom="8dp"/>
+
+    //Mood Chart
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/line_chart_mood"
         android:layout_marginBottom="8dp"/>
 
 </LinearLayout>
