@@ -45,7 +45,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
         for (int i=1; i<=7; i++){
 
             // Convert To Float
-            float value = (float) (i*10.0);
+            float value = (float) ((i+1)*10.0);
 
             // Initialize Bar and Pie Chart Entry
             BarEntry barEntry = new BarEntry(i, value);
@@ -56,12 +56,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
 
         // Initialize Bar Data Set
         BarDataSet barDataSet = new BarDataSet(barActivityEntries, "Daily Activity in minutes");
-
-        // Set Colors
-        barDataSet.setColors(Color.rgb(55,00,179));
-
-        // Hide draw values
-        barDataSet.setDrawValues(false);
+        barDataSet.setColors(Color.rgb(55,0,179));
 
         // Set Bar Data
         barChartActivity.setData(new BarData(barDataSet));
