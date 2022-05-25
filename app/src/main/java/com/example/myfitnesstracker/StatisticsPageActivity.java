@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import android.graphics.Color;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -75,6 +76,10 @@ public class StatisticsPageActivity extends AppCompatActivity {
         linesMoodEntries.add(Mood5);
         linesMoodEntries.add(Mood6);
 
+        //Set Graph axis
+        YAxis yAxis = lineChartMood.getAxisLeft();
+        yAxis.setAxisMinimum(0);
+        yAxis.setAxisMaximum(100);
     }
 
 }
