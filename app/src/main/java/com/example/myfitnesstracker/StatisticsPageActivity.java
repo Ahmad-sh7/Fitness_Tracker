@@ -52,8 +52,8 @@ public class StatisticsPageActivity extends AppCompatActivity {
             barActivityEntries.add(barEntry);// Add Values in Array List
         }
 
-        BarDataSet barDataSet = new BarDataSet(barActivityEntries, "Activity in minutes");// Initialize Bar Data Set
-        barDataSet.setColors(Color.rgb(55,0,179));// Set Bar Color
+        BarDataSet barDataSet = new BarDataSet(barActivityEntries, "Activität in Minuten");// Initialize Bar Data Set
+        barDataSet.setColors(Color.parseColor("#3A2BA9"));// Set Bar Color
         barChartActivity.setData(new BarData(barDataSet));// Set Bar Data
         barChartActivity.animateY(3000);// Set Animations
         barChartActivity.getDescription().setText(" ");// Removing Description text
@@ -92,11 +92,29 @@ public class StatisticsPageActivity extends AppCompatActivity {
 
         ArrayList<ILineDataSet> lineDataSetList = new ArrayList<>(); // List of the sets
         LineDataSet line1 = new LineDataSet(Mood1, "zufrieden");
+        line1.setColor(Color.parseColor("#F94144"));
+        line1.setCircleColor(Color.parseColor("#F94144"));
+        line1.setLineWidth(2F);
         LineDataSet line2 = new LineDataSet(Mood2, "ruhe");
+        line2.setColor(Color.parseColor("#F8961E"));
+        line2.setCircleColor(Color.parseColor("#F8961E"));
+        line2.setLineWidth(2F);
         LineDataSet line3 = new LineDataSet(Mood3, "wohl");
+        line3.setColor(Color.parseColor("#F9C74F"));
+        line3.setCircleColor(Color.parseColor("#F9C74F"));
+        line3.setLineWidth(2F);
         LineDataSet line4 = new LineDataSet(Mood4, "entspannt");
+        line4.setColor(Color.parseColor("#90BE6D"));
+        line4.setCircleColor(Color.parseColor("#90BE6D"));
+        line4.setLineWidth(2F);
         LineDataSet line5 = new LineDataSet(Mood5, "energie");
+        line5.setColor(Color.parseColor("#43AA8B"));
+        line5.setCircleColor(Color.parseColor("#43AA8B"));
+        line5.setLineWidth(2F);
         LineDataSet line6 = new LineDataSet(Mood6, "wach");
+        line6.setColor(Color.parseColor("#3D559F"));
+        line6.setCircleColor(Color.parseColor("#3D559F"));
+        line6.setLineWidth(2F);
         lineDataSetList.add(line1);
         lineDataSetList.add(line2);
         lineDataSetList.add(line3);
@@ -106,7 +124,8 @@ public class StatisticsPageActivity extends AppCompatActivity {
 
         LineData data = new LineData(lineDataSetList);
         lineChartMood.setData(data);
-        lineChartMood.animateXY(2000,2000);
+        lineChartMood.animateX(3000);
+        lineChartMood.getDescription().setText(" ");
 
     }
 
