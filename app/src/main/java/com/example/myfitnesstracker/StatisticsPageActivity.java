@@ -14,10 +14,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-//import com.github.mikephil.charting.data.LineEntry;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
-import java.util.*;
 import java.util.ArrayList;
 
 public class StatisticsPageActivity extends AppCompatActivity {
@@ -62,7 +59,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
 
     private void makeLineChart(){
 
-        ArrayList<ArrayList<Entry>> linesMoodEntries = new ArrayList<ArrayList<Entry>>(); // List of all Moods
+        ArrayList<ArrayList<Entry>> linesMoodEntries = new ArrayList<>(); // List of all Moods
         ArrayList<Entry> Mood1 = new ArrayList<>();
         ArrayList<Entry> Mood2 = new ArrayList<>();
         ArrayList<Entry> Mood3 = new ArrayList<>();
@@ -80,6 +77,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
         YAxis yAxis = lineChartMood.getAxisLeft();
         yAxis.setAxisMinimum(0);
         //yAxis.setAxisMaximum(100);
+        //yAxis.setLabelCount(7, false);
 
         // Example values
         for(int i = 0; i < linesMoodEntries.size(); i++){
@@ -90,7 +88,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
             }
         }
 
-        ArrayList<ILineDataSet> lineDataSetList = new ArrayList<>(); // List of the sets
+        //making the 6 different lines
         LineDataSet line1 = new LineDataSet(Mood1, "zufrieden");
         line1.setColor(Color.parseColor("#F94144"));
         line1.setCircleColor(Color.parseColor("#F94144"));
@@ -115,6 +113,9 @@ public class StatisticsPageActivity extends AppCompatActivity {
         line6.setColor(Color.parseColor("#3D559F"));
         line6.setCircleColor(Color.parseColor("#3D559F"));
         line6.setLineWidth(2F);
+
+        //adding all lines to the list: lineDataSetList
+        ArrayList<ILineDataSet> lineDataSetList = new ArrayList<>(); // List of the sets
         lineDataSetList.add(line1);
         lineDataSetList.add(line2);
         lineDataSetList.add(line3);
@@ -122,6 +123,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
         lineDataSetList.add(line5);
         lineDataSetList.add(line6);
 
+        //Inputting the line data into the graph
         LineData data = new LineData(lineDataSetList);
         lineChartMood.setData(data);
         lineChartMood.animateX(3000);
