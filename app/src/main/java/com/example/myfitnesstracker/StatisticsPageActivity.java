@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 //import com.github.mikephil.charting.data.LineEntry;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.*;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
         // Example Instances
         for (int i=1; i<=7; i++){
             float value = (float) ((i+1)*10.0);// Convert To Float
-            BarEntry barEntry = new BarEntry(i, value);// Initialize Bar and Pie Chart Entry
+            BarEntry barEntry = new BarEntry(i, value);// Initialize Entry
             barActivityEntries.add(barEntry);// Add Values in Array List
         }
 
@@ -68,7 +69,6 @@ public class StatisticsPageActivity extends AppCompatActivity {
         ArrayList<Entry> Mood4 = new ArrayList<>();
         ArrayList<Entry> Mood5 = new ArrayList<>();
         ArrayList<Entry> Mood6 = new ArrayList<>();
-
         linesMoodEntries.add(Mood1);
         linesMoodEntries.add(Mood2);
         linesMoodEntries.add(Mood3);
@@ -76,10 +76,38 @@ public class StatisticsPageActivity extends AppCompatActivity {
         linesMoodEntries.add(Mood5);
         linesMoodEntries.add(Mood6);
 
-        //Set Graph axis
+        //Set Graphs y-Axis
         YAxis yAxis = lineChartMood.getAxisLeft();
         yAxis.setAxisMinimum(0);
-        yAxis.setAxisMaximum(100);
+        //yAxis.setAxisMaximum(100);
+
+        // Example values
+        for(int i = 1; i <= linesMoodEntries.size(); i++){
+            for(int j = 1; j <= 7; j++){
+                float value = (float) ((i+j)*10.0);// Convert To Float
+                Entry lineEntry = new Entry(j, value);// Initialize Entry
+                linesMoodEntries.get(i).add(lineEntry);// Add Values in Array List
+            }
+        }
+
+        ArrayList<ILineDataSet> lineDataSetList = new ArrayList<>(); // List of the sets
+        LineDataSet line1 = new LineDataSet(Mood1, "Mood1");
+        LineDataSet line2 = new LineDataSet(Mood2, "Mood1");
+        LineDataSet line3 = new LineDataSet(Mood3, "Mood1");
+        LineDataSet line4 = new LineDataSet(Mood4, "Mood1");
+        LineDataSet line5 = new LineDataSet(Mood5, "Mood1");
+        LineDataSet line6 = new LineDataSet(Mood6, "Mood1");
+        lineDataSetList.add(line1);
+        lineDataSetList.add(line2);
+        lineDataSetList.add(line3);
+        lineDataSetList.add(line4);
+        lineDataSetList.add(line5);
+        lineDataSetList.add(line6);
+
+        LineData data = new LineData(lineDataSetList);
+        lineChartMood.setData(data);
+        lineChartMood.animateXY(1000,1000);
+
     }
 
 }
