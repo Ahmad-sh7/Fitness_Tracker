@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import android.graphics.Color;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -49,6 +50,9 @@ public class StatisticsPageActivity extends AppCompatActivity {
             barActivityEntries.add(barEntry);// Add Values in Array List
         }
 
+        XAxis xAxis = barChartActivity.getXAxis();
+        xAxis.setDrawGridLines(false);
+
         BarDataSet barDataSet = new BarDataSet(barActivityEntries, "Activität in Minuten");// Initialize Bar Data Set
         barDataSet.setColors(Color.parseColor("#3A2BA9"));// Set Bar Color
         barChartActivity.setData(new BarData(barDataSet));// Set Bar Data
@@ -73,16 +77,20 @@ public class StatisticsPageActivity extends AppCompatActivity {
         linesMoodEntries.add(Mood5);
         linesMoodEntries.add(Mood6);
 
-        //Set Graphs y-Axis
-        YAxis yAxis = lineChartMood.getAxisLeft();
-        yAxis.setAxisMinimum(0);
-        //yAxis.setAxisMaximum(100);
-        //yAxis.setLabelCount(7, false);
+        //Set Graphs Axis
+        YAxis yAxisL = lineChartMood.getAxisLeft();
+        YAxis yAxisR = lineChartMood.getAxisRight();
+        yAxisL.setAxisMinimum(0);
+        yAxisL.setAxisMaximum(100);
+        yAxisR.setAxisMinimum(0);
+        yAxisR.setAxisMaximum(100);
+        XAxis xAxis = lineChartMood.getXAxis();
+        xAxis.setDrawGridLines(false);
 
         // Example values
         for(int i = 0; i < linesMoodEntries.size(); i++){
             for(int j = 1; j <= 7; j++){
-                float value = (float) ((i+j)*10.0);// Convert To Float
+                float value = (float) ((i+j)*8.0);// Convert To Float
                 Entry lineEntry = new Entry(j, value);// Initialize Entry
                 linesMoodEntries.get(i).add(lineEntry);// Add Values in Array List
             }
