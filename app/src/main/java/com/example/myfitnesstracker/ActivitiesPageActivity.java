@@ -187,6 +187,7 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
                 stopButton.setEnabled(true);
                 startButton.setEnabled(false);
                 flag=true;
+                dialogTimer.start(); //start timer as soon as sport is started
 
                 timer2.schedule(new TimerTask() {
                     @Override
@@ -217,6 +218,8 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
                 flag=false;
                 timer.cancel();
                 timer2.cancel();
+                dialogTimer.cancel(); //in case the timer is started and user finished activity before the 3 hours are up
+                //fragebatterie
 
 
 
@@ -224,4 +227,51 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
                 break;
         }
     }
+    
+    void exitActivity() {
+        sensorManager.unregisterListener(this, Accelerometer);
+        startButton.setEnabled(true);
+        stopButton.setEnabled(false);
+        flag=false;
+    }
+    
+    void showAlertDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Erinnerung");
+        builder.setMessage("Bist Du schon fertig?");
+        //add action buttons
+        builder.setPositiveButton("JA", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                exitActivity();
+                //fragebatterie
+            }
+        });
+        builder.setNegativeButton("NEIN", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+
+            }
+        });
+        //Create AlertDialog object
+        AlertDialog alertDialog = builder.create();
+        //show the AlertDialog using show() method
+        alertDialog.show();
+
+    }
+    
+    // 10800000ms = 3 hours
+
+   final CountDownTimer dialogTimer = new CountDownTimer(10800000, 1000) {
+          public void onTick(long millisUntilFinished) {
+          }
+                    public void onFinish () {
+                        if (flag == true) {
+                            showAlertDialog();
+                        }
+                    }
+
+          };
 }
