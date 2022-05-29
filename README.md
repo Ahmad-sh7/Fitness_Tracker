@@ -14,6 +14,11 @@
 - Providing Service: https://developer.android.com/guide/components/services#Foreground
 
 
+## Libraries:
+
+- Chart Library: https://github.com/PhilJay/MPAndroidChart
+
+
 ## GUI Sources:
 
 - Drop-Down-Menu (Spinner): https://developer.android.com/guide/topics/ui/controls/spinner#java

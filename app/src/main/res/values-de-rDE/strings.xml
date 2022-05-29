@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MyFitnessTracker</string>
+    <string name="app_name">MeinFitnessTracker</string>
     <string name="button_log_activity">Neue Aktivität</string>
     <string name="button_start_stop">Start</string>
     <string name="button_log_mood">Neues Quiz</string>
     <string name="button_statistics">Meine Daten</string>
+    <string name="text_statistics_activity_chart">Tägliche Aktivität in Minuten</string>
 </resources>
