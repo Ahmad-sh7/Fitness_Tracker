@@ -11,6 +11,13 @@
 
 - Motion sensors: https://developer.android.com/guide/topics/sensors/sensors_motion
 
+- Providing Service: https://developer.android.com/guide/components/services#Foreground
+
+
+## Libraries:
+
+- Chart Library: https://github.com/PhilJay/MPAndroidChart
+
 
 ## GUI Sources:
 

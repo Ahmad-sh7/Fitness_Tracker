@@ -10,6 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        //Chart library
+        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "MyFitnessTracker"
