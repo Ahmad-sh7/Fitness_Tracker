@@ -215,10 +215,7 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
                 timer.cancel();
                 timer2.cancel();
                 dialogTimer.cancel();
-
-
-
-
+                goToMainActivity0(); //fragebatterie nach dem sport beantworten
                 break;
         }
     }
