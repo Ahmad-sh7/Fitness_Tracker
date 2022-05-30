@@ -9,10 +9,10 @@ import java.util.List;
 @Dao
 public interface SensorDataDao {
     @Query("SELECT * FROM activityrecord")
-    List<ActivtyRecord> getAll();
+    List<ActivityRecord> getAll();
 
     @Insert
-    void insertAll(ActivtyRecord...activtyRecords);
+    void insertAll(ActivityRecord...activtyRecords);
 
 
 }

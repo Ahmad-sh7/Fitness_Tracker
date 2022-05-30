@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user taps the Log Activity button */
     public void goToActivityPage(View view) {
-        Intent intent = new Intent(this, ActivitiesPageActivity.class);
+        Intent intent = new Intent(this, com.example.myfitnesstracker.view.activities.ActivitiesPageActivity.class);
         startActivity(intent);
     }
 

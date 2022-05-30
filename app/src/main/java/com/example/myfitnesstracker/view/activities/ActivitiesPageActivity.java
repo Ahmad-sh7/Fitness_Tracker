@@ -22,10 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.example.myfitnesstracker.R;
-import com.example.myfitnesstracker.model.ActivtyRecord;
+import com.example.myfitnesstracker.model.ActivityRecord;
 import com.example.myfitnesstracker.model.AppDatabase;
 import com.example.myfitnesstracker.model.SensorData;
-import com.example.myfitnesstracker.model.dao.SensorDataDao;
+import com.example.myfitnesstracker.model.SensorDataDao;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -193,7 +193,7 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
                             public void run() {
                                 SensorDataDao sensorDataDao=db.sensorDataDao();
                                 String[] arrayActivities = getResources().getStringArray(R.array.listActivities);
-                                sensorDataDao.insertAll(new ActivtyRecord(
+                                sensorDataDao.insertAll(new ActivityRecord(
                                         periodicSensorData, arrayActivities[spinner.getSelectedItemPosition()],System.currentTimeMillis(),System.currentTimeMillis()
                                 ));
                                 sensorDataDao.getAll();

@@ -8,7 +8,7 @@ import androidx.room.TypeConverters;
 
 import com.example.myfitnesstracker.model.typeconverter.SensorDataListTypeConverter;
 
-@Database(entities = {ActivtyRecord.class},version = 1)
+@Database(entities = {ActivityRecord.class},version = 1)
 @TypeConverters(SensorDataListTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract SensorDataDao sensorDataDao();

@@ -23,7 +23,7 @@
 
 
         <activity
-            android:name=".ActivitiesPageActivity"
+            android:name=".view.activities.ActivitiesPageActivity"
             android:parentActivityName=".MainActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
