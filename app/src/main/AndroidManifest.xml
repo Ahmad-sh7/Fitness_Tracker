@@ -13,28 +13,32 @@
 
         <activity
             android:name=".StatisticsPageActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".view.activities.MainActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".view.activities.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".view.activities.MainActivity0"
+            android:exported="false" />
 
 
         <activity
             android:name=".view.activities.ActivitiesPageActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".view.activities.MainActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".view.activities.MainActivity" />
         </activity>
 
 
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
