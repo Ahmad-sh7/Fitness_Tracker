@@ -228,6 +228,11 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
         stopButton.setEnabled(false);
         flag=false;
     }
+    
+    void goToMainActivity0() {
+        Intent intent = new Intent(this, MainActivity0.class);
+        startActivity(intent);
+    }
 
     void showAlertDialog() {
 
@@ -239,7 +244,7 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 exitActivity();
-                //fragebatterie
+                goToMainActivity0(); //fragebatterie
             }
         });
         builder.setNegativeButton("NEIN", new DialogInterface.OnClickListener() {
