@@ -2,10 +2,11 @@ package com.example.myfitnesstracker;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
+import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "Tracker_Database";
@@ -88,11 +89,24 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     //TODO: implement entering activity end
 /*    public void insertActivityEnd(long eTime){
-
     }*/
-
-
-
-
+    /**
+     * returns an arraylist of only the data value from the data table or null if the table is empty
+     *
+     */
+    public ArrayList getActivityData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_A_DATA, new String[]{KEY_DATA},null,null,null,null,null);
+        if (cursor.isNull(0)) return null;
+        ArrayList out = new ArrayList(cursor.getCount());
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            out.add(cursor.getFloat(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return out;
+    }
 
 }
