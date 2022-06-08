@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="In den letzten 24 Stunden fühlte ich mich im Durchschnitt…"
+        android:text="@string/_how_are_you_feeling"
         android:textColor="@color/black"
         android:textSize="19sp"
         android:textStyle="bold"
@@ -147,7 +147,7 @@
         android:layout_width="78dp"
         android:layout_height="18dp"
         android:layout_marginTop="32dp"
-        android:text="unzufrieden"
+        android:text="@string/_dissatisfied"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -160,7 +160,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:text="zufrieden"
+        android:text="@string/_satisfied"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/unzufrieden"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
@@ -171,7 +171,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="unruhig"
+        android:text="@string/_restless"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/seekBarID1"
         app:layout_constraintTop_toBottomOf="@+id/seekBarID1" />
@@ -180,7 +180,7 @@
         android:id="@+id/Ruhig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ruhig"
+        android:text="@string/_calm"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/unruhig"
         app:layout_constraintEnd_toEndOf="@+id/seekBarID1"
@@ -191,7 +191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="unwohl"
+        android:text="@string/_unwell"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/seekBarID2"
         app:layout_constraintTop_toBottomOf="@+id/seekBarID2" />
@@ -200,7 +200,7 @@
         android:id="@+id/wohl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="wohl"
+        android:text="@string/_well"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/seekBarID2"
         app:layout_constraintTop_toTopOf="@+id/unwohl" />
@@ -210,7 +210,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="angespannt"
+        android:text="@string/_strained"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/seekBarID3"
         app:layout_constraintTop_toBottomOf="@+id/seekBarID3" />
@@ -219,7 +219,7 @@
         android:id="@+id/entspannt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="entspannt"
+        android:text="@string/_relaxed"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/seekBarID3"
         app:layout_constraintTop_toTopOf="@+id/angespannt" />
@@ -229,7 +229,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="energielos"
+        android:text="@string/_no_energie"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/seekBarID4"
         app:layout_constraintTop_toBottomOf="@+id/seekBarID4" />
@@ -238,7 +238,7 @@
         android:id="@+id/energiegeladen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="energiegeladen"
+        android:text="@string/_full_energy"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/seekBarID4"
         app:layout_constraintTop_toTopOf="@+id/energielos" />
@@ -248,7 +248,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="müde"
+        android:text="@string/_sleepy"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/seekBarID5"
         app:layout_constraintTop_toBottomOf="@+id/seekBarID5" />
@@ -257,7 +257,7 @@
         android:id="@+id/wach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="wach"
+        android:text="@string/_awake"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/seekBarID5"
         app:layout_constraintTop_toTopOf="@+id/müde" />

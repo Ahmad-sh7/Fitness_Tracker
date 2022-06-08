@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Von welchen Menschen sind Sie momentan umgeben?"
+        android:text="@string/_people_surrounded"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -39,7 +39,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="#673FCA"
-        android:text="Fertig"
+        android:text="@string/_done_people_eurrounded"
         app:layout_constraintEnd_toEndOf="@+id/spinner1"
         app:layout_constraintStart_toStartOf="@+id/spinner1"
         app:layout_constraintTop_toBottomOf="@+id/spinner1" />
