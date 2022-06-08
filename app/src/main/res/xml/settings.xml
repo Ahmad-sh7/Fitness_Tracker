@@ -1,0 +1,36 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:icon="@drawable/ic_baseline_settings_24"
+        app:title="Allgemeine Verwaltung">
+
+        <Preference
+            app:key="lang"
+            app:title="Sprache"
+            app:summary="Sprache feststellen"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:icon="@drawable/ic_baseline_notifications_24"
+        app:title="Benachrichtigungen">
+
+        <SwitchPreferenceCompat
+            app:key="Benachrichtigungen"
+            app:title="Benachrichtigungen anzeiegn"
+            app:summaryOn="Benachrichtigungen von MyFitnessTracker erhalten"
+            app:summaryOff="Benachrichtigungen von MyFitnessTracker nicht erhalten"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:icon="@drawable/ic_baseline_control_point_24"
+        app:title="Erweiterte Funktionen">
+
+        <Preference
+        app:key="query"
+        app:title="Tagesabfrage"
+        app:summary="Feststellen wie oft die Tagesabfrage erhalten"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>
