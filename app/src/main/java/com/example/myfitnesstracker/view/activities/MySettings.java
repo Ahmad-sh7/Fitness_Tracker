@@ -2,10 +2,7 @@ package com.example.myfitnesstracker.view.activities;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.viewmodel.CreationExtras;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.myfitnesstracker.R;
 
@@ -17,7 +14,7 @@ public class MySettings extends AppCompatActivity {
         setContentView(R.layout.my_settings);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.settings_container_view, new MySettingsFragment())
+                .replace(R.id.settings_container_view, new com.example.myfitnesstracker.view.activities.MySettingsFragment())
                 .commit();
     }
 }

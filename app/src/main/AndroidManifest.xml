@@ -25,6 +25,10 @@
             android:name=".view.activities.MainActivity0"
             android:exported="false" />
 
+        <activity
+            android:name=".view.activities.MySettings"
+            android:exported="false" />
+
 
         <activity
             android:name=".view.activities.ActivitiesPageActivity"

@@ -1,27 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">MyFitnessTracker</string>
-    //Buttons
     <string name="button_log_activity">Aktivität aufzeichnen</string>
     <string name="button_start_stop">Start</string>
-
-    //ArrayLists
-    <string-array name="listActivities">
-        <item>Gehen</item>
-        <item>Laufen</item>
-        <item>Schwimmen</item>
-        <item>Ballsport</item>
-        <item>Tanzen</item>
-        <item>Kampfsport</item>
-        <item>Kraft Training</item>
-        <item>Yoga</item>
-        <item>andere</item>
-    </string-array>
-    <string-array name="language_choices">
-        <item>Deutsch</item>
-        <item>English</item>
-    </string-array>
-
-
     <string name="_log_activity">Aktivität aufzeichnen</string>
     <string name="_mood_record">Mood aufzeichnen</string>
     <string name="_choose_your_activity">Wählen Sie Ihre Aktivität aus</string>
@@ -73,8 +53,30 @@
     <string name="einstellungen">Einstellungen</string>
     <string name="_choose_language">Wählen Sie eine Sprache aus</string>
     <string name="_go_to_home">Gehen Sie zum Homescreen</string>
-
-
+    <string name="button_log_mood">Mood aufnehmen</string>
+    <string name="button_statistics">Mein Statistics</string>
+    <string name="text_statistics_activity_chart">Tägliche Aktivitäten in Minuten</string>
+    <string name="_language">Sprache</string>
+    <string name="_choose_language_summary">Sprache feststellen</string>
+    <string name="_general_settings">Allgemeine Verwaltung</string>
+    <string name="_notification">Benachrichtigungen</string>
+    <string name="_notification_send">Benachrichtigungen anzeiegn</string>
+    <string name="_recieve_notification_summary_on">Benachrichtigungen von MyFitnessTracker erhalten</string>
+    <string name="_recieve_notification_summary_summary_off">Benachrichtigungen von MyFitnessTracker nicht erhalten</string>
+    <string name="_extended_function">Erweiterte Funktionen</string>
+    <string name="_daily_query">Tagesabfrage</string>
+    <string name="_how_often_take_query">Feststellen wie oft die Tagesabfrage erhalten</string>
+    <string-array name="listActivities">
+        <item>Gehen</item>
+        <item>Laufen</item>
+        <item>Schwimmen</item>
+        <item>Ballsport</item>
+        <item>Tanzen</item>
+        <item>Kampfsport</item>
+        <item>Kraft Training</item>
+        <item>Yoga</item>
+        <item>andere</item>
+    </string-array>
     <string-array name="answers">
         <item>Keine</item>
         <item>Lebenspartner*in</item>
@@ -95,6 +97,11 @@
         <item>Sonstiges</item>
     </string-array>
 
+    <string-array name="language_choices">
+        <item>Deutsch</item>
+        <item>English</item>
+    </string-array>
+
     <string-array name="answers3">
         <item>Laufen</item>
         <item>Schwimmen</item>
@@ -106,18 +113,5 @@
         <item>Yoga</item>
         <item>Sonstiges</item>
     </string-array>
-    <string name="button_log_mood">Mood aufnehmen</string>
-    <string name="button_statistics">Mein Statistics</string>
-    <string name="text_statistics_activity_chart">Tägliche Aktivitäten in Minuten</string>
-    <string name="_language">Sprache</string>
-    <string name="_choose_language_summary">Sprache feststellen</string>
-    <string name="_general_settings">Allgemeine Verwaltung</string>
-    <string name="_notification">Benachrichtigungen</string>
-    <string name="_notification_send">Benachrichtigungen anzeiegn</string>
-    <string name="_recieve_notification_summary_on">Benachrichtigungen von MyFitnessTracker erhalten</string>
-    <string name="_recieve_notification_summary_summary_off">Benachrichtigungen von MyFitnessTracker nicht erhalten</string>
-    <string name="_extended_function">Erweiterte Funktionen</string>
-    <string name="_daily_query">Tagesabfrage</string>
-    <string name="_how_often_take_query">Feststellen wie oft die Tagesabfrage erhalten</string>
 
 </resources>

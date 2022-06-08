@@ -2,35 +2,35 @@
 
     <PreferenceCategory
         app:icon="@drawable/ic_baseline_settings_24"
-        app:title="Allgemeine Verwaltung">
+        app:title="@string/_general_settings">
 
         <Preference
             app:key="lang"
-            app:title="Sprache"
-            app:summary="Sprache feststellen"/>
+            app:title="@string/_language"
+            app:summary="@string/_choose_language_summary"/>
 
 
     </PreferenceCategory>
 
     <PreferenceCategory
         app:icon="@drawable/ic_baseline_notifications_24"
-        app:title="Benachrichtigungen">
+        app:title="@string/_notification">
 
         <SwitchPreferenceCompat
-            app:key="Benachrichtigungen"
-            app:title="Benachrichtigungen anzeiegn"
-            app:summaryOn="Benachrichtigungen von MyFitnessTracker erhalten"
-            app:summaryOff="Benachrichtigungen von MyFitnessTracker nicht erhalten"/>
+            app:key="notification"
+            app:title="@string/_notification_send"
+            app:summaryOn="@string/_recieve_notification_summary_on"
+            app:summaryOff="@string/_recieve_notification_summary_summary_off"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         app:icon="@drawable/ic_baseline_control_point_24"
-        app:title="Erweiterte Funktionen">
+        app:title="@string/_extended_function">
 
         <Preference
         app:key="query"
-        app:title="Tagesabfrage"
-        app:summary="Feststellen wie oft die Tagesabfrage erhalten"/>
+        app:title="@string/_daily_query"
+        app:summary="@string/_how_often_take_query"/>
 
     </PreferenceCategory>
 </PreferenceScreen>
