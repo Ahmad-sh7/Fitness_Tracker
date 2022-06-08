@@ -16,6 +16,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         displayAlert(); //called upon app start
+        FloatingActionButton mySettings = (FloatingActionButton) findViewById(R.id.my_settings);
+
+        mySettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MySettings.class));
+            }
+        });
     }
     //Tagesabfrage
     public void displayAlert() {
