@@ -22,11 +22,11 @@ public class DBHandler extends SQLiteOpenHelper {
     private final String KEY_SENSOR_SOURCE = "Data_Source";
 
     //define names for table Activity_Log
-    private final String TABLE_A_LOG = "Activity_Log";
-    private final String KEY_AID = "Activity_ID";
-    private final String KEY_A_TYPE = "Activity_Type";
-    private final String KEY_E_TIME = "End_Time";
-    private final String KEY_S_TIME = "Start_Time";
+    private final String TABLE_ACTIVITY_LOG = "Activity_Log";
+    private final String KEY_ACTIVITY_AID = "Activity_ID";
+    private final String KEY_ACTIVITY_TYPE = "Activity_Type";
+    private final String KEY_ACTIVITY_S_TIME = "Start_Time";
+    private final String KEY_ACTIVITY_E_TIME = "End_Time";
     // Start_Time defined above
 
     //define names for table Mood_Log
@@ -55,11 +55,11 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL((CREATE_TABLE));
 
         //create table activity log
-        CREATE_TABLE = "CREATE TABLE " + TABLE_A_LOG + "("
-                + KEY_AID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + KEY_A_TYPE + " TEXT, "
-                + KEY_S_TIME + " REAL, "
-                + KEY_E_TIME + " REAL" + ")";
+        CREATE_TABLE = "CREATE TABLE " + TABLE_ACTIVITY_LOG + "("
+                + KEY_ACTIVITY_AID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_ACTIVITY_TYPE + " TEXT, "
+                + KEY_ACTIVITY_S_TIME + " REAL, "
+                + KEY_ACTIVITY_E_TIME + " REAL" + ")";
         db.execSQL(CREATE_TABLE);
         CREATE_TABLE = "CREATE TABLE " + TABLE_M_LOG + "()"
                 + KEY_M_TIME + " REAL PRIMARY KEY, "
@@ -71,16 +71,10 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void safeSensorData(long sTime, long data, String source){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cValues = new ContentValues();
-        cValues.put(KEY_SENSOR_R_TIME, sTime);
-        cValues.put(KEY_SENSOR_XDATA, data);
-        cValues.put(KEY_SENSOR_YDATA, data);
-        cValues.put(KEY_SENSOR_ZDATA, data);
-        cValues.put(KEY_SENSOR_SOURCE, source);
-        db.insert(TABLE_SENSOR_DATA,null,cValues);
-    }
+    /**
+     * @param data Sensor data as SensorData object
+     * @param source name of the source device
+     */
     public void safeSensorData(com.example.myfitnesstracker.model.SensorData data, String source){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -91,27 +85,67 @@ public class DBHandler extends SQLiteOpenHelper {
         cValues.put(KEY_SENSOR_SOURCE, source);
         db.insert(TABLE_SENSOR_DATA,null,cValues);
     }
-    public void insertActivityStart(String aType, long sTime){
+
+    /**
+     * @param timeData time the data is safed, used as primary key, must be unique in table
+     * @param xData
+     * @param yData
+     * @param zData
+     * @param source
+     */
+    public void safeSensorData(float timeData, float xData, float yData, float zData, String source){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
-        cValues.put(KEY_A_TYPE, aType);
-        cValues.put(KEY_S_TIME, sTime);
-        long tableIndex = db.insert(TABLE_A_LOG,null,cValues);
+        cValues.put(KEY_SENSOR_R_TIME, timeData);
+        cValues.put(KEY_SENSOR_XDATA, xData);
+        cValues.put(KEY_SENSOR_YDATA, yData);
+        cValues.put(KEY_SENSOR_ZDATA, zData);
+        cValues.put(KEY_SENSOR_SOURCE, source);
+        db.insert(TABLE_SENSOR_DATA,null,cValues);
     }
-    public void insertActivityStart(String aType, long sTime, long eTime){
+
+    /**
+     * @param aType type of the activity
+     * @param sTime start time of the activity
+     * @return rowid of the inserted activity or -1 if insertion failed
+     */
+    public long insertActivityStart(String aType, long sTime){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
-        cValues.put(KEY_A_TYPE, aType);
-        cValues.put(KEY_S_TIME, sTime);
-        cValues.put(KEY_E_TIME, eTime);
-        long tableIndex = db.insert(TABLE_A_LOG,null,cValues);
+        cValues.put(KEY_ACTIVITY_TYPE, aType);
+        cValues.put(KEY_ACTIVITY_S_TIME, sTime);
+        return db.insert(TABLE_ACTIVITY_LOG,null,cValues);
     }
-    //TODO: implement entering activity end
-/*    public void insertActivityEnd(long eTime){
-    }*/
+
+    /**
+     * @param aType type of the activity
+     * @param sTime start time of the activity
+     * @param eTime end time of the activity
+     * @return rowid of the inserted activity or -1 if insertion failed
+     */
+    public long insertActivity(String aType, long sTime, long eTime){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+        cValues.put(KEY_ACTIVITY_TYPE, aType);
+        cValues.put(KEY_ACTIVITY_S_TIME, sTime);
+        cValues.put(KEY_ACTIVITY_E_TIME, eTime);
+        return db.insert(TABLE_ACTIVITY_LOG,null,cValues);
+    }
+
+    /**
+     * @param rowID id of the row to update
+     * @param eTime end time to be inserted
+     * @return returns 1 if update worked, other value indicates something went wrong
+     */
+    public int insertActivityEnd(int rowID, long eTime){
+        ContentValues cv = new ContentValues();
+        cv.put(KEY_ACTIVITY_E_TIME,eTime);
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.update(TABLE_ACTIVITY_LOG,cv,"rowid = ?",new String[]{Integer.toString(rowID)});
+    }
     /**
      * returns an arraylist of only the data value from the data table or null if the table is empty
-     *
+     * obsolete, please use getSensorData(float minTime)
      */
     public ArrayList<com.github.mikephil.charting.matrix.Vector3> getSensorData(){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -126,15 +160,14 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return out;
     }
-
     /**
      *
      * @param minTime minimum Time to consider
-     * @return ArrayList<ContentValues> with "time" and "value" values
+     * @return ArrayList<ContentValues> with "time" and "value" values or null is table is empty
      */
     public ArrayList<ContentValues> getSensorData(float minTime){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_SENSOR_DATA, new String[]{KEY_SENSOR_R_TIME, KEY_SENSOR_XDATA, KEY_SENSOR_YDATA,KEY_SENSOR_ZDATA},"? > ?",new String[]{KEY_SENSOR_R_TIME, Float.toString(minTime)},null,null,null);
+        Cursor cursor = db.query(TABLE_SENSOR_DATA, new String[]{KEY_SENSOR_R_TIME, KEY_SENSOR_XDATA, KEY_SENSOR_YDATA,KEY_SENSOR_ZDATA},"? >= ?",new String[]{KEY_SENSOR_R_TIME, Float.toString(minTime)},null,null,null);
         if (!cursor.moveToFirst()) return null;
         ArrayList<ContentValues> out = new ArrayList<>(cursor.getCount());
         while (!cursor.isAfterLast()) {
