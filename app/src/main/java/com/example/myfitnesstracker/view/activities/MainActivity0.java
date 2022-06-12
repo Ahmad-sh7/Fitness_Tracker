@@ -1,12 +1,14 @@
 package com.example.myfitnesstracker.view.activities;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -14,11 +16,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.example.myfitnesstracker.R;
 import com.example.myfitnesstracker.databinding.ActivityMain0Binding;
 import com.example.myfitnesstracker.viewmodel.MainViewModel;
 
-public class MainActivity0 extends AppCompatActivity {
+public class MainActivity0 extends LocalizationActivity {
 
     private ActivityMain0Binding binding;
     private AppBarConfiguration appBarConfiguration;
@@ -44,6 +47,13 @@ public class MainActivity0 extends AppCompatActivity {
         NavController navController =navHostFragment.getNavController();
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
+
+        SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+        if (settings.getString("lang","de").equals("en")){
+            setLanguage("en");
+        }else{
+            setLanguage("de");
+        }
 
     }
 

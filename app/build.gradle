@@ -55,4 +55,8 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'androidx.preference:preference:1.2.0'
 
+    implementation ('com.akexorcist:localization:1.2.11') {
+        exclude group: 'androidx.core', module: 'core'
+    }
+
 }

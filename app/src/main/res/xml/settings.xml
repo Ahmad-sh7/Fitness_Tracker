@@ -1,16 +1,17 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <PreferenceCategory
         app:icon="@drawable/ic_baseline_settings_24"
         app:title="@string/_general_settings">
-
-        <Preference
+        <ListPreference
+            app:entries="@array/language_array"
+            app:entryValues="@array/language_array"
             app:key="lang"
-            app:title="@string/_language"
-            app:summary="@string/_choose_language_summary"/>
+            app:summary="@string/_choose_language_summary"
+            app:title="@string/_language">
 
-
+        </ListPreference>
     </PreferenceCategory>
+
 
     <PreferenceCategory
         app:icon="@drawable/ic_baseline_notifications_24"
@@ -18,9 +19,9 @@
 
         <SwitchPreferenceCompat
             app:key="notification"
-            app:title="@string/_notification_send"
+            app:summaryOff="@string/_recieve_notification_summary_summary_off"
             app:summaryOn="@string/_recieve_notification_summary_on"
-            app:summaryOff="@string/_recieve_notification_summary_summary_off"/>
+            app:title="@string/_notification_send" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -28,9 +29,9 @@
         app:title="@string/_extended_function">
 
         <Preference
-        app:key="query"
-        app:title="@string/_daily_query"
-        app:summary="@string/_how_often_take_query"/>
+            app:key="query"
+            app:summary="@string/_how_often_take_query"
+            app:title="@string/_daily_query" />
 
     </PreferenceCategory>
 </PreferenceScreen>

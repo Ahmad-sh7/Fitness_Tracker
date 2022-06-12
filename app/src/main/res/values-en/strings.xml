@@ -53,6 +53,8 @@
     <string name="einstellungen">Settings</string>
     <string name="_choose_language">Choose your own language</string>
     <string name="_go_to_home">Go to HomeScreen</string>
+    <string name="_daily_question_query">"How often do you want to take the quiz?"</string>
+
 
     <string-array name="listActivities">
         <item>Walking</item>
@@ -100,6 +102,11 @@
         <item>Weight sport</item>
         <item>Yoga</item>
         <item>Others</item>
+    </string-array>
+
+    <string-array name="language_array">
+        <item>Deutsch</item>
+        <item>English</item>
     </string-array>
 
     <string name="button_log_mood">Log Mood</string>

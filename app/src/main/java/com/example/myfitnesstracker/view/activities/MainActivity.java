@@ -1,19 +1,21 @@
 package com.example.myfitnesstracker.view.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.example.myfitnesstracker.R;
 import com.example.myfitnesstracker.StatisticsPageActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends LocalizationActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         displayAlert(); //called upon app start
         FloatingActionButton mySettings = (FloatingActionButton) findViewById(R.id.my_settings);
+        SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+        if (settings.getString("lang","de").equals("en")){
+            setLanguage("en");
+        }else{
+            setLanguage("de");
+        }
 
         mySettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     public void displayAlert() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Tagesabfrage");
-        builder.setMessage("Wie oft möchtest Du die Tagesabfrage erhalten?");
+        builder.setTitle((getResources().getString(R.string._daily_query)));
+        builder.setMessage(getResources().getString(R.string._daily_question_query));
         final SeekBar seek = new SeekBar(this);
         seek.setMax(10);
         seek.setKeyProgressIncrement(1);
