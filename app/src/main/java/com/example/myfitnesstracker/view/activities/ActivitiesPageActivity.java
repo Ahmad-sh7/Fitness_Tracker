@@ -3,6 +3,7 @@ package com.example.myfitnesstracker.view.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -19,9 +20,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.example.myfitnesstracker.R;
 import com.example.myfitnesstracker.model.ActivityRecord;
 import com.example.myfitnesstracker.model.AppDatabase;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ActivitiesPageActivity extends AppCompatActivity implements SensorEventListener,OnClickListener {
+public class ActivitiesPageActivity extends LocalizationActivity implements SensorEventListener,OnClickListener {
     private SensorManager sensorManager;
     private Sensor Accelerometer;
     Handler handler;
@@ -104,6 +105,13 @@ public class ActivitiesPageActivity extends AppCompatActivity implements SensorE
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         //create the accelerometer
         Accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+        if (settings.getString("lang","de").equals("en")){
+            setLanguage("en");
+        }else{
+            setLanguage("de");
+        }
     }
 
     protected void onResume() {
