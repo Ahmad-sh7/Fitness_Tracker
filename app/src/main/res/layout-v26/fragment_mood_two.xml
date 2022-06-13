@@ -46,8 +46,7 @@
             android:thumbTintMode="multiply"
             app:layout_constraintEnd_toEndOf="@+id/sehrIntensiv"
             app:layout_constraintStart_toStartOf="@+id/keinEreignis"
-            app:layout_constraintTop_toBottomOf="@+id/keinEreignis"
-            tools:targetApi="o" />
+            app:layout_constraintTop_toBottomOf="@+id/keinEreignis" />
 
         <TextView
             android:id="@+id/keinEreignis"
@@ -102,8 +101,7 @@
             android:thumbTintMode="multiply"
             app:layout_constraintEnd_toEndOf="@+id/sehrIntensiv2"
             app:layout_constraintStart_toStartOf="@+id/keinEreignis2"
-            app:layout_constraintTop_toBottomOf="@+id/keinEreignis2"
-            tools:targetApi="o" />
+            app:layout_constraintTop_toBottomOf="@+id/keinEreignis2" />
 
         <TextView
             android:id="@+id/keinEreignis2"
@@ -154,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="88dp"
             android:backgroundTint="#673FCA"
-            android:text="next>>"
+            android:text="Next>>"
             app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine2"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine2"
@@ -171,8 +169,7 @@
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="@+id/seekBarTwo"
             app:layout_constraintStart_toStartOf="@+id/seekBarTwo"
-            app:layout_constraintTop_toBottomOf="@+id/seekBarTwo"
-            android:autofillHints="" />
+            app:layout_constraintTop_toBottomOf="@+id/seekBarTwo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

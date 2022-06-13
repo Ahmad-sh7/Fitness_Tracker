@@ -22,8 +22,6 @@ public class MoodThreeFragment extends Fragment {
 
     private Button buttonNo;
     private Button btnNextMoodThree;
-    private SeekBar seekBar;
-    TextView textView;
     MainViewModel viewModel;
 
     public MoodThreeFragment() {
@@ -49,29 +47,9 @@ public class MoodThreeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        seekBar = view.findViewById(R.id.seekBarID9);
-        textView = view.findViewById(R.id.progress9);
         buttonNo=view.findViewById(R.id.nein1);
         btnNextMoodThree = view.findViewById(R.id.btn_next_mood_three);
         viewModel =new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textView.setText(String.valueOf(progress) + "%");
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
 
         btnNextMoodThree.setOnClickListener(new View.OnClickListener() {
             @Override

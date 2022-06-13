@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,8 @@ public class MoodFourFragment extends Fragment  implements AdapterView.OnItemSel
 
     private Button button;
     Spinner spinner;
+    private SeekBar seekBar;
+    TextView textView;
     MainViewModel viewModel;
 
     public MoodFourFragment() {
@@ -43,7 +47,25 @@ public class MoodFourFragment extends Fragment  implements AdapterView.OnItemSel
         super.onViewCreated(view, savedInstanceState);
         spinner = view.findViewById(R.id.spinner1);
         button = view.findViewById(R.id.fertig);
+        seekBar = view.findViewById(R.id.seekBarID9);
+        textView = view.findViewById(R.id.progress9);
         viewModel =new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textView.setText(String.valueOf(progress) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(), R.array.answers, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);

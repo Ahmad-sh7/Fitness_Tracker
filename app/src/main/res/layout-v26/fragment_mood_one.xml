@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -48,8 +47,7 @@
             android:thumbTintMode="multiply"
             app:layout_constraintEnd_toEndOf="@+id/zufrieden"
             app:layout_constraintStart_toStartOf="@+id/unzufrieden"
-            app:layout_constraintTop_toBottomOf="@+id/unzufrieden"
-            tools:targetApi="o" />
+            app:layout_constraintTop_toBottomOf="@+id/unzufrieden" />
 
         <SeekBar
             android:id="@+id/seekBarID2"
@@ -69,8 +67,7 @@
             android:thumbTintMode="multiply"
             app:layout_constraintEnd_toEndOf="@+id/Ruhig"
             app:layout_constraintStart_toStartOf="@+id/unruhig"
-            app:layout_constraintTop_toBottomOf="@+id/unruhig"
-            tools:targetApi="o" />
+            app:layout_constraintTop_toBottomOf="@+id/unruhig" />
 
         <SeekBar
             android:id="@+id/seekBarID3"
@@ -90,8 +87,7 @@
             android:thumbTintMode="multiply"
             app:layout_constraintEnd_toEndOf="@+id/wohl"
             app:layout_constraintStart_toStartOf="@+id/unwohl"
-            app:layout_constraintTop_toBottomOf="@+id/unwohl"
-            tools:targetApi="o" />
+            app:layout_constraintTop_toBottomOf="@+id/unwohl" />
 
         <SeekBar
             android:id="@+id/seekBarID4"
@@ -111,8 +107,7 @@
             android:thumbTintMode="multiply"
             app:layout_constraintEnd_toEndOf="@+id/entspannt"
             app:layout_constraintStart_toStartOf="@+id/angespannt"
-            app:layout_constraintTop_toBottomOf="@+id/angespannt"
-            tools:targetApi="o" />
+            app:layout_constraintTop_toBottomOf="@+id/angespannt" />
 
         <SeekBar
             android:id="@+id/seekBarID5"
@@ -132,8 +127,7 @@
             android:thumbTintMode="multiply"
             app:layout_constraintEnd_toEndOf="@+id/energiegeladen"
             app:layout_constraintStart_toStartOf="@+id/energielos"
-            app:layout_constraintTop_toBottomOf="@+id/energielos"
-            tools:targetApi="o" />
+            app:layout_constraintTop_toBottomOf="@+id/energielos" />
 
         <SeekBar
             android:id="@+id/seekBarID6"
@@ -153,8 +147,7 @@
             android:thumbTintMode="multiply"
             app:layout_constraintEnd_toEndOf="@+id/wach"
             app:layout_constraintStart_toStartOf="@+id/müde"
-            app:layout_constraintTop_toBottomOf="@+id/müde"
-            tools:targetApi="o" />
+            app:layout_constraintTop_toBottomOf="@+id/müde" />
 
         <TextView
             android:id="@+id/unzufrieden"
@@ -351,7 +344,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:text="next>>"
+            android:text="Next>>"
             app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine"
@@ -363,12 +356,10 @@
             android:layout_width="296dp"
             android:layout_height="141dp"
             android:layout_marginTop="36dp"
-            android:autofillHints=""
             android:ems="10"
             android:gravity="start|top"
             android:hint="Notizen:"
             android:inputType="textMultiLine"
-            android:textColorHint="#757575"
             app:layout_constraintEnd_toEndOf="@+id/seekBarID6"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="@+id/seekBarID6"
