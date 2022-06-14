@@ -21,6 +21,7 @@ import com.example.myfitnesstracker.viewmodel.MainViewModel;
 public class MoodTwoFragment extends Fragment {
 
     private Button button;
+    private Button abbrechen;
     private SeekBar seekBar1;
     private SeekBar seekBar2;
     public TextView textView;
@@ -91,6 +92,14 @@ public class MoodTwoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(MoodTwoFragment.this).navigate(R.id.action_moodTwoFragment_to_moodThreeFragment);
+            }
+        });
+
+        abbrechen = view.findViewById(R.id.abbrechen2);
+        abbrechen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(MoodTwoFragment.this).navigate(R.id.action_moodTwoFragment_to_moodSixFragment);
             }
         });
     }

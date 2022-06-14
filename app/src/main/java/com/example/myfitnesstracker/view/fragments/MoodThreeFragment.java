@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +20,7 @@ public class MoodThreeFragment extends Fragment {
 
     private Button buttonNo;
     private Button btnNextMoodThree;
+    private Button abbrechen;
     MainViewModel viewModel;
 
     public MoodThreeFragment() {
@@ -62,6 +61,14 @@ public class MoodThreeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(MoodThreeFragment.this).navigate(R.id.action_moodThreeFragment_to_moodFourFragment);
+            }
+        });
+
+        abbrechen = view.findViewById(R.id.abbrechen3);
+        abbrechen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(MoodThreeFragment.this).navigate(R.id.action_moodThreeFragment_to_moodSixFragment);
             }
         });
 

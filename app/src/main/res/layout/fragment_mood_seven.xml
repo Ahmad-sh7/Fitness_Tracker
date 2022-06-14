@@ -14,6 +14,19 @@
         android:layout_height="wrap_content"
         tools:context=".view.fragments.MoodSevenFragment">
 
+        <Button
+            android:id="@+id/abbrechen7"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="85dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="48dp"
+            android:text="abbrechen"
+            android:textSize="9dp"
+            app:layout_constraintEnd_toEndOf="@+id/zurück6"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/zurück6"
+            app:layout_constraintTop_toBottomOf="@+id/zurück6" />
+
         <RatingBar
             android:id="@+id/ratingBar1"
             style="@style/Widget.AppCompat.RatingBar.Indicator"

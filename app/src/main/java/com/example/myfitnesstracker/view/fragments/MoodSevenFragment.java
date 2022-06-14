@@ -20,6 +20,7 @@ import com.example.myfitnesstracker.viewmodel.MainViewModel;
 public class MoodSevenFragment extends Fragment {
 
     private Button button;
+    private Button abbrechen;
     private RatingBar ratingBar1;
     private RatingBar ratingBar2;
     MainViewModel viewModel;
@@ -69,6 +70,15 @@ public class MoodSevenFragment extends Fragment {
             public void onClick(View v) {
                 String s = String.valueOf(ratingBar2.getRating());
                 Toast.makeText(requireContext(), s+"Star", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        abbrechen = view.findViewById(R.id.abbrechen7);
+        abbrechen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(MoodSevenFragment.this).navigate(R.id.action_moodSevenFragment_to_moodSixFragment);
             }
         });
     }

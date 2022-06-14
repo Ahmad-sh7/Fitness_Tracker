@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myfitnesstracker.R;
 import com.example.myfitnesstracker.viewmodel.MainViewModel;
@@ -42,7 +41,7 @@ public class MoodSixFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(MoodSixFragment.this).navigate(R.id.action_moodSixFragment_to_moodSevenFragment);
+                getActivity().finish();
             }
         });
 

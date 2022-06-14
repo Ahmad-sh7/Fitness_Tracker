@@ -21,6 +21,7 @@ import com.example.myfitnesstracker.viewmodel.MainViewModel;
 
 public class MoodFiveFragment extends Fragment  implements AdapterView.OnItemSelectedListener{
     private Button button;
+    private Button abbrechen;
     MainViewModel viewModel;
 
     public MoodFiveFragment() {
@@ -39,21 +40,29 @@ public class MoodFiveFragment extends Fragment  implements AdapterView.OnItemSel
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Spinner spinner = view.findViewById(R.id.spinner2);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(), R.array.answers2, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         button = (Button) view.findViewById(R.id.zurück4);
         viewModel =new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(MoodFiveFragment.this).navigate(R.id.action_moodFiveFragment_to_moodSixFragment);
+                NavHostFragment.findNavController(MoodFiveFragment.this).navigate(R.id.action_moodFiveFragment_to_moodSevenFragment);
             }
         });
 
-        Spinner spinner = view.findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(), R.array.answers2, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+
+        abbrechen = view.findViewById(R.id.abbrechen5);
+        abbrechen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(MoodFiveFragment.this).navigate(R.id.action_moodFiveFragment_to_moodSixFragment);
+            }
+        });
     }
 
     @Override

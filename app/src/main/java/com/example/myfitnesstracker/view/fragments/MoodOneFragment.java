@@ -23,7 +23,8 @@ public class MoodOneFragment extends Fragment {
 
     long surveyStartTime;
     AppDatabase db;
-    Button button;
+    private Button button;
+    private Button abbrechen;
     MainViewModel viewModel;
 
     public MoodOneFragment() {
@@ -48,9 +49,9 @@ public class MoodOneFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        surveyStartTime=System.currentTimeMillis();
-        viewModel =new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        db= Room.databaseBuilder(getActivity().getApplicationContext(),AppDatabase.class,"mooddb").build();
+        surveyStartTime = System.currentTimeMillis();
+        viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "mooddb").build();
         SeekBar seekBar1 = view.findViewById(R.id.seekBarID1);
         TextView textView1 = view.findViewById(R.id.progress1);
         SeekBar seekBar2 = view.findViewById(R.id.seekBarID2);
@@ -63,7 +64,7 @@ public class MoodOneFragment extends Fragment {
         TextView textView5 = view.findViewById(R.id.progress5);
         SeekBar seekBar6 = view.findViewById(R.id.seekBarID6);
         TextView textView6 = view.findViewById(R.id.progress6);
-        button=view.findViewById(R.id.btnMoodOneNext);
+        button = view.findViewById(R.id.btnMoodOneNext);
 
         seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -162,11 +163,20 @@ public class MoodOneFragment extends Fragment {
             }
         });
 
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 viewModel.setX(10);
                 NavHostFragment.findNavController(MoodOneFragment.this).navigate(R.id.action_moodOneFragment_to_moodTwoFragment);
+            }
+        });
+
+        abbrechen = view.findViewById(R.id.abbrechen1);
+        abbrechen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(MoodOneFragment.this).navigate(R.id.action_moodOneFragment_to_moodSixFragment);
             }
         });
     }
