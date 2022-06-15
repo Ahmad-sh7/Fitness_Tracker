@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.graphics.Color;
+import android.view.View;
+import android.widget.Button;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -18,11 +21,15 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
 
-public class StatisticsPageActivity extends AppCompatActivity {
+public class StatisticsPageActivity extends AppCompatActivity implements View.OnClickListener{
 
     // Initialize Variables
     BarChart barChartActivity;
     LineChart lineChartMood;
+    Button button7days;
+    Button button30days;
+    Button button90days;
+    Button button365days;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +39,38 @@ public class StatisticsPageActivity extends AppCompatActivity {
         // Assign Variables
         barChartActivity = findViewById(R.id.bar_chart_activity);
         lineChartMood = findViewById(R.id.line_chart_mood);
+        button7days = (Button) findViewById(R.id.button_7_days);
+        button30days = (Button) findViewById(R.id.button_30_days);
+        button90days = (Button) findViewById(R.id.button_90_days);
+        button365days = (Button) findViewById(R.id.button_365_days);
+        button7days.setOnClickListener(this);
+        button30days.setOnClickListener(this);
+        button90days.setOnClickListener(this);
+        button365days.setOnClickListener(this);
 
-        makeBarChart();
-        makeLineChart();
+        makeBarChart(7);
+        makeLineChart(7);
 
     }
 
+    @Override
+    public void onClick(View v)
+    {
+        int days = 7;
+        if(v.getId() == R.id.button_7_days){days = 7;}
+        else if (v.getId() == R.id.button_30_days){days = 30;}
+        else if (v.getId() == R.id.button_90_days){days = 90;}
+        else if (v.getId() == R.id.button_365_days){days = 365;}
+        makeBarChart(days);
+        makeLineChart(days);
+    }
 
-    private void makeBarChart(){
+    private void makeBarChart(int daysShown){
 
         ArrayList<BarEntry> barActivityEntries = new ArrayList<>();// Initialize Array List
 
         // Example Instances
-        for (int i=1; i<=7; i++){
+        for (int i=0; i<daysShown; i++){
             float value = (float) ((i+1)*10.0);// Convert To Float
             BarEntry barEntry = new BarEntry(i, value);// Initialize Entry
             barActivityEntries.add(barEntry);// Add Values in Array List
@@ -53,7 +79,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
         XAxis xAxis = barChartActivity.getXAxis();
         xAxis.setDrawGridLines(false);
 
-        BarDataSet barDataSet = new BarDataSet(barActivityEntries, "Activität in Minuten");// Initialize Bar Data Set
+        BarDataSet barDataSet = new BarDataSet(barActivityEntries, "Aktivität in Minuten");// Initialize Bar Data Set
         barDataSet.setColors(Color.parseColor("#3A2BA9"));// Set Bar Color
         barChartActivity.setData(new BarData(barDataSet));// Set Bar Data
         barChartActivity.animateY(3000);// Set Animations
@@ -61,7 +87,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
         //barChartActivity.getDescription().setTextColor(Color.WHITE);
     }
 
-    private void makeLineChart(){
+    private void makeLineChart(int daysShown){
 
         ArrayList<ArrayList<Entry>> linesMoodEntries = new ArrayList<>(); // List of all Moods
         ArrayList<Entry> Mood1 = new ArrayList<>();
@@ -89,7 +115,7 @@ public class StatisticsPageActivity extends AppCompatActivity {
 
         // Example values
         for(int i = 0; i < linesMoodEntries.size(); i++){
-            for(int j = 1; j <= 7; j++){
+            for(int j = 0; j < daysShown; j++){
                 float value = (float) ((i+j)*8.0);// Convert To Float
                 Entry lineEntry = new Entry(j, value);// Initialize Entry
                 linesMoodEntries.get(i).add(lineEntry);// Add Values in Array List
