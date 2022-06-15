@@ -119,5 +119,9 @@
         <item>Deutsch</item>
         <item>English</item>
     </string-array>
+    <string name="button_7_days">7 Tage</string>
+    <string name="button_30_days">30 Tage</string>
+    <string name="button_90_days">90 Tage</string>
+    <string name="button_365_days">365 Tage</string>
 
 </resources>

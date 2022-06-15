@@ -122,6 +122,10 @@
     <string name="_extended_function">Extended Functions</string>
     <string name="_daily_query">Daily query</string>
     <string name="_how_often_take_query">Choose how oft do you want to receive the daily query</string>
+    <string name="button_7_days">7 days</string>
+    <string name="button_30_days">30 days</string>
+    <string name="button_90_days">90 days</string>
+    <string name="button_365_days">365 days</string>
 
 
 </resources>
