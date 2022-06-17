@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
+import java.util.*;
 
 public class StatisticsPageActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -30,6 +31,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
     Button button30days;
     Button button90days;
     Button button365days;
+    DBHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,8 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
     public void onClick(View v)
     {
         int days = 7;
-        if(v.getId() == R.id.button_7_days){days = 7;}
-        else if (v.getId() == R.id.button_30_days){days = 30;}
+        //if(v.getId() == R.id.button_7_days){days = 7;}
+        if (v.getId() == R.id.button_30_days){days = 30;}
         else if (v.getId() == R.id.button_90_days){days = 90;}
         else if (v.getId() == R.id.button_365_days){days = 365;}
         makeBarChart(days);
@@ -68,10 +70,11 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
     private void makeBarChart(int daysShown){
 
         ArrayList<BarEntry> barActivityEntries = new ArrayList<>();// Initialize Array List
+        ArrayList<Float> dbEntries = getMinutesOfActivityFromDB(daysShown); //List where the entries of the DB are put into
 
-        // Example Instances
+        // Chart Instances
         for (int i=0; i<daysShown; i++){
-            float value = (float) ((i+1)*10.0);// Convert To Float
+            float value = dbEntries.get(i);
             BarEntry barEntry = new BarEntry(i, value);// Initialize Entry
             barActivityEntries.add(barEntry);// Add Values in Array List
         }
@@ -85,6 +88,20 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         barChartActivity.animateY(3000);// Set Animations
         barChartActivity.getDescription().setText(" ");// Removing Description text
         //barChartActivity.getDescription().setTextColor(Color.WHITE);
+        YAxis yAxisL = barChartActivity.getAxisLeft();
+        YAxis yAxisR = barChartActivity.getAxisRight();
+        yAxisL.setAxisMinimum(0);
+        yAxisR.setAxisMinimum(0);
+    }
+
+    private ArrayList<Float> getMinutesOfActivityFromDB(int daysToShow){
+        ArrayList<Float> dbEntries= new ArrayList<>();//List where the entries of the DB are put into
+        Date now = new Date();
+        long timeStartOfTheDay = now.getTime() - (now.getTime() % 86400000); //gets the time of the first millisecond of the current day
+
+        for(int i = 0; i < daysToShow; i++){dbEntries.add((float)0.0);} //Making an entry for every day needed
+
+        return dbEntries;
     }
 
     private void makeLineChart(int daysShown){
