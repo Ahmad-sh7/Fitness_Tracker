@@ -67,6 +67,11 @@
     <string name="_daily_query">Tagesabfrage</string>
     <string name="_how_often_take_query">Feststellen wie oft die Tagesabfrage erhalten</string>
     <string name="_daily_question_query">"Wie oft möchtest Du die Tagesabfrage erhalten?"</string>
+     <string name="set_your_own_reminder">Deine Erinnerung erstellen</string>
+    <string name="note">Hinweis: Diese Auswahl stellt die Alarme für die Erinnerungen automatisch ein </string>
+    <string name="cancel_all_alarms">Alle Alarme löschen</string>
+    <string name="cancel_reminder">Erinnerung löschen</string>
+    <string name="select_time">Zeit auswählen</string>
     <string-array name="listActivities">
         <item>Gehen</item>
         <item>Laufen</item>
