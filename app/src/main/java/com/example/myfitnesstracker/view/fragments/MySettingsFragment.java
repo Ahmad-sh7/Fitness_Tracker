@@ -38,6 +38,10 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements OnLo
                 return false;
             }
         });
+        
+        Preference query = findPreference("query");
+        Intent intent = new Intent (getContext(), QueryActivity.class);
+        query.setIntent(intent);
     }
 
     @Override
