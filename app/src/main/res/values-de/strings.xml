@@ -72,6 +72,9 @@
     <string name="cancel_all_alarms">Alle Alarme löschen</string>
     <string name="cancel_reminder">Erinnerung löschen</string>
     <string name="select_time">Zeit auswählen</string>
+    <string name="button_query">Erinnerung Feststellen</string>
+    <string name="query_question">Wie oft möchtest Du die Tagesabfrage erhalten?</string>
+    
     <string-array name="listActivities">
         <item>Gehen</item>
         <item>Laufen</item>
