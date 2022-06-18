@@ -60,7 +60,7 @@
     <string name="cancel_reminder">Cancel Reminder</string>
     <string name="select_time">Select Time</string>
      <string name="button_query">Set Reminder</string>
-    <string name="query_question">How often would you like to receive the Day Query?</string>
+    <string name="query_question">How often would you like to receive the Daily Query?</string>
 
 
     <string-array name="listActivities">
@@ -127,8 +127,8 @@
     <string name="_recieve_notification_summary_on">Receive Notification from MyFitnessTracker</string>
     <string name="_recieve_notification_summary_summary_off">Do not receive Notification from MyFitnessTracker</string>
     <string name="_extended_function">Extended Functions</string>
-    <string name="_daily_query">Daily query</string>
-    <string name="_how_often_take_query">Choose how oft do you want to receive the daily query</string>
+    <string name="_daily_query">Daily Query</string>
+    <string name="_how_often_take_query">Choose how often you want to receive the Daily Query</string>
     <string name="button_7_days">7 days</string>
     <string name="button_30_days">30 days</string>
     <string name="button_90_days">90 days</string>
