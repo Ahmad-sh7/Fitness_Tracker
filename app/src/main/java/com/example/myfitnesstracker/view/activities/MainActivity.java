@@ -21,7 +21,6 @@ public class MainActivity extends LocalizationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        displayAlert(); //called upon app start
         FloatingActionButton mySettings = (FloatingActionButton) findViewById(R.id.my_settings);
         SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
         if (settings.getString("lang","de").equals("en")){
@@ -36,51 +35,6 @@ public class MainActivity extends LocalizationActivity {
                 startActivity(new Intent(MainActivity.this, MySettings.class));
             }
         });
-    }
-    //Tagesabfrage
-    public void displayAlert() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle((getResources().getString(R.string._daily_query)));
-        builder.setMessage(getResources().getString(R.string._daily_question_query));
-        final SeekBar seek = new SeekBar(this);
-        seek.setMax(10);
-        seek.setKeyProgressIncrement(1);
-        builder.setView(seek);
-        seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                int seekBarValue = seek.getProgress();
-                if (seekBarValue == 1) {
-                    //fragbatterie um 20 uhr zeigen
-                }
-                else {
-                    //wähle zeitraum wann fragebatterie gezeigt werden soll
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        builder.setNegativeButton("Fertig", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                dialog.dismiss();
-
-            }
-        });
-        //Create AlertDialog object
-        AlertDialog dialog = builder.create();
-        //show the AlertDialog using show() method
-        dialog.show();
-          
     }
 
     /** Called when the user taps the Log Activity button */
