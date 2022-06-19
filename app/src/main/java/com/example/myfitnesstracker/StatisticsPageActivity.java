@@ -52,7 +52,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
 
         makeBarChart(7);
         makeLineChart(7);
-
+        makeExampleDbEntries();
     }
 
     @Override
@@ -67,6 +67,9 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         makeLineChart(days);
     }
 
+    /**
+     * @param daysShown number of days which need to be shown on the chart
+     */
     private void makeBarChart(int daysShown){
 
         ArrayList<BarEntry> barActivityEntries = new ArrayList<>();// Initialize Array List
@@ -94,16 +97,29 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         yAxisR.setAxisMinimum(0);
     }
 
+    /**
+     * @param daysToShow number of days which need to be shown on the chart
+     * @return ArrayList<Float> with the minutes of activity for each day as floats
+     */
     private ArrayList<Float> getMinutesOfActivityFromDB(int daysToShow){
         ArrayList<Float> dbEntries= new ArrayList<>();//List where the entries of the DB are put into
         Date now = new Date();
-        long timeStartOfTheDay = now.getTime() - (now.getTime() % 86400000); //gets the time of the first millisecond of the current day
+        long millimecondsPerDay = 86400000; // a day has 86400000 milliseconds
+        long timeStartOfTheDay = now.getTime() - (now.getTime() % millimecondsPerDay); //gets the time of the first millisecond of the current day
 
-        for(int i = 0; i < daysToShow; i++){dbEntries.add((float)0.0);} //Making an entry for every day needed
+        //gets the DB entry for every day, starting with the day furthest in the past
+        for(int i = daysToShow-1; i >= 0; i--){
+            long neededDay = timeStartOfTheDay - (i * millimecondsPerDay);
+            Long time = db.getActivityData(neededDay, neededDay + millimecondsPerDay); //get the DB entries for the needed day
+            dbEntries.add(((float)time)/60000); // calculating milliseconds into minutes
+        }
 
         return dbEntries;
     }
 
+    /**
+     * @param daysShown number of days which need to be shown on the chart
+     */
     private void makeLineChart(int daysShown){
 
         ArrayList<ArrayList<Entry>> linesMoodEntries = new ArrayList<>(); // List of all Moods
@@ -186,6 +202,13 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         lineChartMood.animateX(3000);
         lineChartMood.getDescription().setText(" ");
 
+    }
+
+    /**
+     * makes example entries in the DB for the charts
+     */
+    private void makeExampleDbEntries(){
+        //TODO
     }
 
 }

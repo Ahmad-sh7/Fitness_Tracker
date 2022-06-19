@@ -182,5 +182,31 @@ public class DBHandler extends SQLiteOpenHelper {
         return out;
     }
 
+    /**
+     * @param minTime begin of the considered time frame
+     * @param maxTime end of the considered time frame
+     * @return float with the sum of active minutes in the considered time frame
+     */
+    public Long getActivityData(long minTime, long maxTime){
+        Long sumOfActiveMinutes = (long) 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_ACTIVITY_LOG, new String[]{KEY_ACTIVITY_S_TIME, KEY_ACTIVITY_E_TIME},
+                minTime + "<=" + KEY_ACTIVITY_S_TIME + "&&" + minTime + ">" + KEY_ACTIVITY_S_TIME,
+                null,
+                null,
+                null,
+                null);
+        if (!cursor.moveToFirst()) return sumOfActiveMinutes;
+        while (!cursor.isAfterLast()) {
+            long startTime = cursor.getLong(0);
+            long stopTime = cursor.getLong(1);
+            sumOfActiveMinutes += (stopTime - startTime);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return sumOfActiveMinutes;
+    }
 
 }
