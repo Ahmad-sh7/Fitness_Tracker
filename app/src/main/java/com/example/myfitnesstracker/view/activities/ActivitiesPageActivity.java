@@ -15,10 +15,16 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.room.Room;
@@ -34,8 +40,11 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Calendar;
+import java.util.Locale;
 
-public class ActivitiesPageActivity extends LocalizationActivity implements SensorEventListener,OnClickListener {
+
+public class ActivitiesPageActivity extends LocalizationActivity implements SensorEventListener,OnClickListener,AdapterView.OnItemSelectedListener {
     private SensorManager sensorManager;
     private Sensor Accelerometer;
     Handler handler;
@@ -54,6 +63,12 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     double previous_y =0;
     double previous_z =0;
 
+    Button timeButton;
+    Button timeButton2;
+    int hour, minute;
+    private DatePickerDialog datePickerDialog;
+    private Button dateButton;
+
     private double accelerationCurrentValue;
     private double accelerationPreviousValue;
     private double changedAcceleration;
@@ -63,6 +78,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     Button startButton;
     Button stopButton;
     Spinner spinner;
+    Spinner spinner2;
     AppDatabase db;
 
 
@@ -84,10 +100,22 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activities_page);
+        Spinner spinner2 = findViewById(R.id.spinner3);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.answers3, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(adapter2);
+        spinner2.setOnItemSelectedListener(this);
+        timeButton = findViewById(R.id.timePickerButton);
+        timeButton2 = findViewById(R.id.timePickerButton2);
+        initDatePicker();
+        dateButton = findViewById(R.id.DatePicker);
+        dateButton.setText(getTodayDate());
+
+
         db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"sensordb").build();
 
 
-       spinner = (Spinner) findViewById(R.id.spinner_activities);
+        spinner = findViewById(R.id.spinner_activities);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.listActivities, android.R.layout.simple_spinner_item);
@@ -125,6 +153,111 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
         }
     }
 
+    private String getTodayDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month++;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return  makeDateString(day, month, year);
+    }
+
+    private void initDatePicker() {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month + 1;
+                String date = makeDateString(day, month, year);
+                dateButton.setText(date);
+            }
+        };
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        int style = android.app.AlertDialog.THEME_HOLO_LIGHT;
+        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+    }
+
+    private String makeDateString(int day, int month, int year){
+        return getMonthFormat(month) + " " + day + " " + year;
+    }
+
+    private String getMonthFormat(int month) {
+        if(month == 1)
+            return "JAN";
+        if(month == 2)
+            return "FEB";
+        if(month == 3)
+            return "MAR";
+        if(month == 4)
+            return "APR";
+        if(month == 5)
+            return "MAY";
+        if(month == 6)
+            return "JUN";
+        if(month == 7)
+            return "JUL";
+        if(month == 8)
+            return "AUG";
+        if(month == 9)
+            return "SEP";
+        if(month == 10)
+            return "OCT";
+        if(month == 11)
+            return "NOV";
+        if(month == 12)
+            return "DEC";
+        return "JAN";
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void popTimePicker(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectedHour, int selecedMinute) {
+                hour = selectedHour;
+                minute = selecedMinute;
+                timeButton.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
+    }
+
+    public void popTimePicker2(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectedHour, int selecedMinute) {
+                hour = selectedHour;
+                minute = selecedMinute;
+                timeButton2.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
+            }
+        };
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
+    }
+
+    public void openDatePicker(View view) {
+        datePickerDialog.show();
+    }
+
     protected void onResume() {
         super.onResume();
         sensorManager.registerListener(this, Accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
@@ -137,7 +270,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
         handler.removeCallbacks(processSensors); // Remove any pending posts of Runnable that are in the message queue.
     }
     Boolean isFirstTime=true;
-    Timer timer=new Timer();
+    Timer timer=   new Timer();
     Timer timer2 = new Timer();
 
 
@@ -176,7 +309,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 int begin=0;
                 int timeInterval =1000;
                 timer.schedule(new TimerTask() {
-                    int counter=0;
+                    final int counter=0;
                     @Override
                     public void run() {
                         periodicSensorData.add(new SensorData(
