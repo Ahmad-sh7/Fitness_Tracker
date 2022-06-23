@@ -41,18 +41,19 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         // Assign Variables
         barChartActivity = findViewById(R.id.bar_chart_activity);
         lineChartMood = findViewById(R.id.line_chart_mood);
-        button7days = (Button) findViewById(R.id.button_7_days);
-        button30days = (Button) findViewById(R.id.button_30_days);
-        button90days = (Button) findViewById(R.id.button_90_days);
-        button365days = (Button) findViewById(R.id.button_365_days);
+        button7days = findViewById(R.id.button_7_days);
+        button30days = findViewById(R.id.button_30_days);
+        button90days = findViewById(R.id.button_90_days);
+        button365days = findViewById(R.id.button_365_days);
         button7days.setOnClickListener(this);
         button30days.setOnClickListener(this);
         button90days.setOnClickListener(this);
         button365days.setOnClickListener(this);
+        //db = new DBHandler();
 
         makeBarChart(7);
         makeLineChart(7);
-        makeExampleDbEntries();
+        makeExampleDbEntries(7);
     }
 
     @Override
@@ -104,13 +105,13 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
     private ArrayList<Float> getMinutesOfActivityFromDB(int daysToShow){
         ArrayList<Float> dbEntries= new ArrayList<>();//List where the entries of the DB are put into
         Date now = new Date();
-        long millimecondsPerDay = 86400000; // a day has 86400000 milliseconds
-        long timeStartOfTheDay = now.getTime() - (now.getTime() % millimecondsPerDay); //gets the time of the first millisecond of the current day
+        long millisecondsPerDay = 86400000; // a day has 86400000 milliseconds
+        long timeStartOfTheDay = now.getTime() - (now.getTime() % millisecondsPerDay); //gets the time of the first millisecond of the current day
 
         //gets the DB entry for every day, starting with the day furthest in the past
         for(int i = daysToShow-1; i >= 0; i--){
-            long neededDay = timeStartOfTheDay - (i * millimecondsPerDay);
-            Long time = db.getActivityData(neededDay, neededDay + millimecondsPerDay); //get the DB entries for the needed day
+            long neededDay = timeStartOfTheDay - (i * millisecondsPerDay);
+            Long time = db.getActivityData(neededDay, neededDay + millisecondsPerDay); //get the DB entries for the needed day
             dbEntries.add(((float)time)/60000); // calculating milliseconds into minutes
         }
 
@@ -204,11 +205,23 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
 
     }
 
+
+    private ArrayList<Float> getMoodScoreFromDB(int daysToShow){
+        ArrayList<Float> dbEntries= new ArrayList<>();//List where the entries of the DB are put into
+
+        return  dbEntries;
+    }
+
+
     /**
      * makes example entries in the DB for the charts
      */
-    private void makeExampleDbEntries(){
-        //TODO
+    private void makeExampleDbEntries(int daysShown){
+        Date now = new Date();
+        long millisecondsPerDay = 86400000; // a day has 86400000 milliseconds
+        db.insertActivity("Walking", now.getTime(), now.getTime() + 2700000);
+        db.insertActivity("Walking", now.getTime()-(millisecondsPerDay*2), now.getTime()-(millisecondsPerDay*2) + 1800000);
+        db.insertActivity("Walking", now.getTime()-(millisecondsPerDay*(daysShown-2)), now.getTime()-(millisecondsPerDay*(daysShown-2)) + 3600000);
     }
 
 }

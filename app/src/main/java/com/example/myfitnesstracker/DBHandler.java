@@ -64,6 +64,7 @@ public class DBHandler extends SQLiteOpenHelper {
         CREATE_TABLE = "CREATE TABLE " + TABLE_M_LOG + "()"
                 + KEY_M_TIME + " REAL PRIMARY KEY, "
                 + KEY_MOOD + " INT" + ")";
+        db.execSQL(CREATE_TABLE);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -192,7 +193,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 TABLE_ACTIVITY_LOG, new String[]{KEY_ACTIVITY_S_TIME, KEY_ACTIVITY_E_TIME},
-                minTime + "<=" + KEY_ACTIVITY_S_TIME + "&&" + minTime + ">" + KEY_ACTIVITY_S_TIME,
+                minTime + "<=" + KEY_ACTIVITY_S_TIME + "&&" + maxTime + ">" + KEY_ACTIVITY_S_TIME,
                 null,
                 null,
                 null,
@@ -209,4 +210,37 @@ public class DBHandler extends SQLiteOpenHelper {
         return sumOfActiveMinutes;
     }
 
+    /**
+     * @param minTime begin of the considered time frame
+     * @param maxTime end of the considered time frame
+     * @return integer with the average of the mood scores in the considered time frame
+     */
+    public int getMoodData(long minTime, long maxTime){ //TODO: missing String for which mood, Table not right?
+        int moodSum = 404; //impossible value to test if there is any data at all (404 error not found)
+        int counter = 0; //counts how many entries exists
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_M_LOG, new String[]{KEY_M_TIME, KEY_MOOD},
+                minTime + "<=" + KEY_M_TIME + "&&" + maxTime + ">" + KEY_M_TIME,
+                null,
+                null,
+                null,
+                null);
+        if (!cursor.moveToFirst()) return moodSum;
+        while (!cursor.isAfterLast()) {
+            if(counter == 0){
+                moodSum = cursor.getInt(1);//TODO: wrong Integer, Table not right?
+                counter += 1;
+                cursor.moveToNext();
+            }
+            else{
+                moodSum += cursor.getInt(1);//TODO: wrong Integer, Table not right?
+                counter += 1;
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+
+        return moodSum/counter;
+    }
 }
