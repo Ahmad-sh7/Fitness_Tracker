@@ -40,7 +40,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     DBHandler(Context context){
-        super(context, DB_NAME, null, DB_V);
+        super(context.getApplicationContext(), DB_NAME, null, DB_V);
     }
 
     @Override
@@ -142,6 +142,30 @@ public class DBHandler extends SQLiteOpenHelper {
         cv.put(KEY_ACTIVITY_E_TIME,eTime);
         SQLiteDatabase db = this.getReadableDatabase();
         return db.update(TABLE_ACTIVITY_LOG,cv,"rowid = ?",new String[]{Integer.toString(rowID)});
+    }
+
+    /**
+     * returns an ArrayList with the data from the Activities Table
+     * @param minTime minimum Time to consider as starting time
+     * @return ArrayList with ContentValues "Activity_ID", "Activity_Type", "Start_Time", "End_Time"
+     */
+    public ArrayList<ContentValues> getActivities(int minTime) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_ACTIVITY_LOG, new String[]{KEY_ACTIVITY_AID,KEY_ACTIVITY_TYPE,KEY_ACTIVITY_S_TIME,KEY_ACTIVITY_E_TIME},
+                "? > ?", new String[]{KEY_ACTIVITY_S_TIME, Float.toString(minTime)}, null, null,null );
+        if (!cursor.moveToFirst()) return null;
+        ArrayList<ContentValues> out = new ArrayList<>();
+
+        while (!cursor.isAfterLast()) {
+            ContentValues entry = new ContentValues();
+            entry.put("Activity_ID",cursor.getInt(0));
+            entry.put("Activity_Type", cursor.getString(1));
+            entry.put("Start_Time", cursor.getFloat(2));
+            entry.put("End_Time", cursor.getFloat(3));
+            out.add(entry);
+            cursor.moveToNext();
+        }
+        return out;
     }
     /**
      * returns an arraylist of only the data value from the data table or null if the table is empty
