@@ -1,26 +1,18 @@
 package com.example.myfitnesstracker.view.activities;
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myfitnesstracker.R;
@@ -45,6 +37,47 @@ PendingIntent pendingIntent;
         binding = ActivityQueryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         createNotificationChannel();
+        calendar = new Calendar() {
+            @Override
+            protected void computeTime() {
+
+            }
+
+            @Override
+            protected void computeFields() {
+
+            }
+
+            @Override
+            public void add(int i, int i1) {
+
+            }
+
+            @Override
+            public void roll(int i, boolean b) {
+
+            }
+
+            @Override
+            public int getMinimum(int i) {
+                return 0;
+            }
+
+            @Override
+            public int getMaximum(int i) {
+                return 0;
+            }
+
+            @Override
+            public int getGreatestMinimum(int i) {
+                return 0;
+            }
+
+            @Override
+            public int getLeastMaximum(int i) {
+                return 0;
+            }
+        };
 
         binding.SetReminderbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,8 +253,7 @@ PendingIntent pendingIntent;
             @Override
             public void onClick(View v) {
                 if(picker.getHour() > 12) {
-                    binding.selectedTime.setText(
-                            String.format("%02d", (picker.getHour()-12)+" : "+ String.format("%02d", picker.getMinute()) + " PM"));
+                    binding.selectedTime.setText(picker.getHour()%12 + " : " + picker.getMinute() + " AM");
                 } else{
                     binding.selectedTime.setText(picker.getHour() + " : " + picker.getMinute() + " AM");
                 }

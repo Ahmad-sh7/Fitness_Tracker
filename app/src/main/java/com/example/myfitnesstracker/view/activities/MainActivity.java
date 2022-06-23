@@ -1,33 +1,69 @@
 package com.example.myfitnesstracker.view.activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.example.myfitnesstracker.R;
 import com.example.myfitnesstracker.StatisticsPageActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends LocalizationActivity {
 
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+      // displayAlert();
         FloatingActionButton mySettings = (FloatingActionButton) findViewById(R.id.my_settings);
         SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
-        if (settings.getString("lang","de").equals("en")){
+        if (settings.getString("lang", "de").equals("en")) {
             setLanguage("en");
-        }else{
+        } else {
             setLanguage("de");
         }
+
+        isLocationPermissionGranted();
+        //access last location after permission
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                        if (location!=null){
+                            Toast.makeText(MainActivity.this, location.getLatitude()+" "+location.getLongitude(), Toast.LENGTH_SHORT).show();
+                        }
+                }
+            });
+
+
+
+
+
+
 
         mySettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +71,72 @@ public class MainActivity extends LocalizationActivity {
                 startActivity(new Intent(MainActivity.this, MySettings.class));
             }
         });
+    }
+
+
+    //ask for permission
+    private boolean isLocationPermissionGranted(){
+        boolean result=false;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},55
+            );
+            result=true;
+        }
+        else{
+            result=false;
+        }
+
+        return  result;
+    }
+
+    //Tagesabfrage
+    public void displayAlert() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle((getResources().getString(R.string._daily_query)));
+        builder.setMessage(getResources().getString(R.string._daily_question_query));
+        final SeekBar seek = new SeekBar(this);
+        seek.setMax(10);
+        seek.setKeyProgressIncrement(1);
+        builder.setView(seek);
+        seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+                int seekBarValue = seek.getProgress();
+                if (seekBarValue == 1) {
+                    //fragbatterie um 20 uhr zeigen
+                }
+                else {
+                    //wähle zeitraum wann fragebatterie gezeigt werden soll
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        builder.setNegativeButton("Fertig", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+
+            }
+        });
+        //Create AlertDialog object
+        AlertDialog dialog = builder.create();
+        //show the AlertDialog using show() method
+        dialog.show();
+
     }
 
     /** Called when the user taps the Log Activity button */

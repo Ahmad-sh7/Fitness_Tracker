@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -30,6 +31,7 @@ import com.example.myfitnesstracker.model.SensorData;
 import com.example.myfitnesstracker.model.SensorDataDao;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,6 +44,15 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     TextView txt_x; //declare x axis object
     TextView txt_y; //declare y axis object
     TextView txt_z; //declare z axis object
+    TextView tv_bpm;
+    Random rand = new Random();
+    int multiplier =50;
+    int upperbound = 15;
+    int randomInitialHeartbeat = (rand.nextInt(upperbound)+63)*multiplier;
+    int initialHeartValueForCheck = randomInitialHeartbeat;
+    double previous_x =0;
+    double previous_y =0;
+    double previous_z =0;
 
     private double accelerationCurrentValue;
     private double accelerationPreviousValue;
@@ -84,7 +95,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-
+        tv_bpm=findViewById(R.id.tv_bpm);
         startButton = (Button) findViewById(R.id.start);
         stopButton = (Button) findViewById(R.id.stop);
         startButton.setOnClickListener(this);
@@ -143,6 +154,20 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
             double changedAcceleration = Math.abs(accelerationCurrentValue - accelerationPreviousValue);
             accelerationPreviousValue = accelerationCurrentValue;
 
+            if (x!=previous_x || y!=previous_y || z!=previous_z){
+                if(randomInitialHeartbeat<initialHeartValueForCheck+(150*multiplier)){
+                    Log.d("Ahmad", "onSensorChanged: "+ (++ randomInitialHeartbeat)/multiplier);
+                }
+
+            }else{
+                if (randomInitialHeartbeat>initialHeartValueForCheck){
+                    randomInitialHeartbeat=randomInitialHeartbeat-2;
+                }
+                Log.d("Ahmad", "onSensorChanged: "+ randomInitialHeartbeat/multiplier);
+                tv_bpm.setText(""+ randomInitialHeartbeat/multiplier+" bpm");
+
+            }
+
             //txt_x.setText(String.format("Current =%s", accelerationCurrentValue));
             //txt_y.setText(String.format("prev =%s", accelerationPreviousValue));
             //txt_z.setText(String.format("changed =%s", changedAcceleration));
@@ -164,8 +189,9 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 isFirstTime=false;
             }
 
-
-
+            previous_x =x;
+            previous_y= y;
+            previous_z= z;
 
         }else{
             //txt_x.setText("Waiting for sensor data..");
@@ -187,6 +213,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 timer= new Timer();
                 timer2= new Timer();
                 isFirstTime = true;
+                tv_bpm.setVisibility(View.VISIBLE);
 
                 sensorManager.registerListener(this, Accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
                 stopButton.setEnabled(true);
