@@ -49,7 +49,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         button30days.setOnClickListener(this);
         button90days.setOnClickListener(this);
         button365days.setOnClickListener(this);
-        //db = new DBHandler();
+        db = new DBHandler(this);
 
         makeBarChart(7);
         makeLineChart(7);
@@ -206,8 +206,8 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
     }
 
 
-    private ArrayList<Float> getMoodScoreFromDB(int daysToShow){
-        ArrayList<Float> dbEntries= new ArrayList<>();//List where the entries of the DB are put into
+    private ArrayList<ArrayList<Float>> getMoodScoresFromDB(int daysToShow){
+        ArrayList<ArrayList<Float>> dbEntries= new ArrayList<>();//List where the entries of the DB are put into
 
         return  dbEntries;
     }

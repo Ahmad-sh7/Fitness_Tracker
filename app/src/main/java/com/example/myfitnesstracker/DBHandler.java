@@ -215,9 +215,19 @@ public class DBHandler extends SQLiteOpenHelper {
      * @param maxTime end of the considered time frame
      * @return integer with the average of the mood scores in the considered time frame
      */
-    public int getMoodData(long minTime, long maxTime){ //TODO: missing String for which mood, Table not right?
-        int moodSum = 404; //impossible value to test if there is any data at all (404 error not found)
-        int counter = 0; //counts how many entries exists
+    public ArrayList<Float> getMoodData(long minTime, long maxTime){ //TODO: missing String for which mood, Table not right?
+
+        //list with the scores with [0] = zufrieden, [1] = ruhe, [2] = wohl, [3] = entspannt, [4] = energie, [5] = wach
+        ArrayList<Float> moodsScores = new ArrayList<>();
+        ArrayList<Integer> moodsCounters = new ArrayList<>();
+
+        for(int i = 0; i < 6; i++){
+            moodsScores.add((float)404);//impossible value to test if there is any data at all (404 error not found)
+            moodsCounters.add(0);//counts how many entries exists
+        }
+
+        int moodSum = 404;
+        int counter = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 TABLE_M_LOG, new String[]{KEY_M_TIME, KEY_MOOD},
@@ -226,21 +236,21 @@ public class DBHandler extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
-        if (!cursor.moveToFirst()) return moodSum;
+        if (!cursor.moveToFirst()) return moodsScores;
         while (!cursor.isAfterLast()) {
             if(counter == 0){
-                moodSum = cursor.getInt(1);//TODO: wrong Integer, Table not right?
-                counter += 1;
+                //moodSum = cursor.getInt(1);//TODO: wrong Integer, Table not right?
+                //counter += 1;
                 cursor.moveToNext();
             }
             else{
-                moodSum += cursor.getInt(1);//TODO: wrong Integer, Table not right?
-                counter += 1;
+                //moodSum += cursor.getInt(1);//TODO: wrong Integer, Table not right?
+                //counter += 1;
                 cursor.moveToNext();
             }
         }
         cursor.close();
 
-        return moodSum/counter;
+        return moodsScores;
     }
 }
