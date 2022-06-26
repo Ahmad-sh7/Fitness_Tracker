@@ -215,7 +215,7 @@ public class DBHandler extends SQLiteOpenHelper {
      * @param maxTime end of the considered time frame
      * @return integer with the average of the mood scores in the considered time frame
      */
-    public ArrayList<Float> getMoodData(long minTime, long maxTime){ //TODO: missing String for which mood, Table not right?
+    public ArrayList<Float> getMoodData(long minTime, long maxTime){
 
         //list with the scores with [0] = zufrieden, [1] = ruhe, [2] = wohl, [3] = entspannt, [4] = energie, [5] = wach
         ArrayList<Float> moodsScores = new ArrayList<>();

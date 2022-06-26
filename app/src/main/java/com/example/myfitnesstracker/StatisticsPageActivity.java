@@ -147,12 +147,18 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         XAxis xAxis = lineChartMood.getXAxis();
         xAxis.setDrawGridLines(false);
 
-        // Example values
+        //get database data
+        ArrayList<ArrayList<Float>> dbEntries = getMoodScoresFromDB(daysShown);
+
+        // Set chart values
         for(int i = 0; i < linesMoodEntries.size(); i++){
+            ArrayList<Float> mood = dbEntries.get(i);
             for(int j = 0; j < daysShown; j++){
-                float value = (float) ((i+j)*8.0);// Convert To Float
-                Entry lineEntry = new Entry(j, value);// Initialize Entry
-                linesMoodEntries.get(i).add(lineEntry);// Add Values in Array List
+                float value = mood.get(j);
+                if(value != 404){ // checking if there is valid data
+                    Entry lineEntry = new Entry(j, value);// Initialize Entry
+                    linesMoodEntries.get(i).add(lineEntry);// Add Values in Array List
+                }
             }
         }
 
@@ -208,6 +214,18 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
 
     private ArrayList<ArrayList<Float>> getMoodScoresFromDB(int daysToShow){
         ArrayList<ArrayList<Float>> dbEntries= new ArrayList<>();//List where the entries of the DB are put into
+        Date now = new Date();
+        long millisecondsPerDay = 86400000; // a day has 86400000 milliseconds
+        long timeStartOfTheDay = now.getTime() - (now.getTime() % millisecondsPerDay); //gets the time of the first millisecond of the current day
+
+        //gets the DB entry for every day, starting with the day furthest in the past
+        for(int i = daysToShow-1; i >= 0; i--){
+            long neededDay = timeStartOfTheDay - (i * millisecondsPerDay);
+            ArrayList<Float> entriesOneDay = db.getMoodData(neededDay, neededDay + millisecondsPerDay); //get the DB entries for every mood for the needed day
+            for(int p = 0; p < 6 ; i++){
+                dbEntries.get(p).add(entriesOneDay.get(p));
+            }
+        }
 
         return  dbEntries;
     }
