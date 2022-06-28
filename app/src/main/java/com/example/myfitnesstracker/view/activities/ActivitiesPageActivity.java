@@ -15,23 +15,17 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.room.Room;
 
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
+import com.example.myfitnesstracker.DBHandler;
 import com.example.myfitnesstracker.R;
-import com.example.myfitnesstracker.model.ActivityRecord;
 import com.example.myfitnesstracker.model.AppDatabase;
 import com.example.myfitnesstracker.model.SensorData;
 import com.example.myfitnesstracker.model.SensorDataDao;
@@ -40,11 +34,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Calendar;
-import java.util.Locale;
 
 
-public class ActivitiesPageActivity extends LocalizationActivity implements SensorEventListener,OnClickListener,AdapterView.OnItemSelectedListener {
+public class ActivitiesPageActivity extends LocalizationActivity implements SensorEventListener,OnClickListener {
     private SensorManager sensorManager;
     private Sensor Accelerometer;
     Handler handler;
@@ -62,12 +54,9 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     double previous_x =0;
     double previous_y =0;
     double previous_z =0;
+    Button button;
+    DBHandler dbHandler;
 
-    Button timeButton;
-    Button timeButton2;
-    int hour, minute;
-    private DatePickerDialog datePickerDialog;
-    private Button dateButton;
 
     private double accelerationCurrentValue;
     private double accelerationPreviousValue;
@@ -78,12 +67,11 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     Button startButton;
     Button stopButton;
     Spinner spinner;
-    Spinner spinner2;
     AppDatabase db;
 
 
 
-
+    SensorDataDao sensorDataDao;
 
     private final Runnable processSensors = new Runnable() {
         @Override
@@ -100,19 +88,18 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activities_page);
-        Spinner spinner2 = findViewById(R.id.spinner3);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.answers3, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
-        spinner2.setOnItemSelectedListener(this);
-        timeButton = findViewById(R.id.timePickerButton);
-        timeButton2 = findViewById(R.id.timePickerButton2);
-        initDatePicker();
-        dateButton = findViewById(R.id.DatePicker);
-        dateButton.setText(getTodayDate());
-
-
         db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"sensordb").build();
+        sensorDataDao=db.sensorDataDao();
+        dbHandler=new DBHandler(this);
+
+
+        button = (Button) findViewById(R.id.buttonactivity);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoactivity();
+            }
+        });
 
 
         spinner = findViewById(R.id.spinner_activities);
@@ -123,6 +110,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        spinner.setSelection(0);
         tv_bpm=findViewById(R.id.tv_bpm);
         startButton = (Button) findViewById(R.id.start);
         stopButton = (Button) findViewById(R.id.stop);
@@ -134,10 +122,6 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
         //txt_x = findViewById(R.id.textView2); //create x axis object
         //txt_y = findViewById(R.id.textView3); // create y axis object
         //txt_z = findViewById(R.id.textView4); //create z axis object
-
-
-
-
 
 
         //create the sensor manager
@@ -152,111 +136,11 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
             setLanguage("de");
         }
     }
-
-    private String getTodayDate() {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        month++;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return  makeDateString(day, month, year);
+    public void gotoactivity(){
+        Intent intent = new Intent(this, RecordFinishedActivity.class);
+        startActivity(intent);
     }
 
-    private void initDatePicker() {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
-                dateButton.setText(date);
-            }
-        };
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-
-        int style = android.app.AlertDialog.THEME_HOLO_LIGHT;
-        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
-        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-    }
-
-    private String makeDateString(int day, int month, int year){
-        return getMonthFormat(month) + " " + day + " " + year;
-    }
-
-    private String getMonthFormat(int month) {
-        if(month == 1)
-            return "JAN";
-        if(month == 2)
-            return "FEB";
-        if(month == 3)
-            return "MAR";
-        if(month == 4)
-            return "APR";
-        if(month == 5)
-            return "MAY";
-        if(month == 6)
-            return "JUN";
-        if(month == 7)
-            return "JUL";
-        if(month == 8)
-            return "AUG";
-        if(month == 9)
-            return "SEP";
-        if(month == 10)
-            return "OCT";
-        if(month == 11)
-            return "NOV";
-        if(month == 12)
-            return "DEC";
-        return "JAN";
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public void popTimePicker(View view) {
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int selectedHour, int selecedMinute) {
-                hour = selectedHour;
-                minute = selecedMinute;
-                timeButton.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
-            }
-        };
-
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
-        timePickerDialog.setTitle("Select Time");
-        timePickerDialog.show();
-    }
-
-    public void popTimePicker2(View view) {
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int selectedHour, int selecedMinute) {
-                hour = selectedHour;
-                minute = selecedMinute;
-                timeButton2.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
-            }
-        };
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
-        timePickerDialog.setTitle("Select Time");
-        timePickerDialog.show();
-    }
-
-    public void openDatePicker(View view) {
-        datePickerDialog.show();
-    }
 
     protected void onResume() {
         super.onResume();
@@ -282,6 +166,8 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
             float y = sensorEvent.values[1];
             float z = sensorEvent.values[2];
 
+
+
             accelerationCurrentValue = Math.sqrt(x * x + y * y + z * z);
 
             double changedAcceleration = Math.abs(accelerationCurrentValue - accelerationPreviousValue);
@@ -293,10 +179,11 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 }
 
             }else{
+
                 if (randomInitialHeartbeat>initialHeartValueForCheck){
+
                     randomInitialHeartbeat=randomInitialHeartbeat-2;
                 }
-                Log.d("Ahmad", "onSensorChanged: "+ randomInitialHeartbeat/multiplier);
                 tv_bpm.setText(""+ randomInitialHeartbeat/multiplier+" bpm");
 
             }
@@ -307,15 +194,18 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
 
             if (isFirstTime){
                 int begin=0;
-                int timeInterval =1000;
+                int timeInterval =100;
                 timer.schedule(new TimerTask() {
                     final int counter=0;
                     @Override
                     public void run() {
-                        periodicSensorData.add(new SensorData(
+                        sensorDataDao.insertAll(new SensorData(
                                 System.currentTimeMillis(),
-                                x,y,z
+                                sensorEvent.values[0],sensorEvent.values[1],sensorEvent.values[2], getResources().getStringArray(R.array.listActivities)[spinner.getSelectedItemPosition()]
                         ));
+
+
+
 
                     }
                 },begin,2000);
@@ -360,11 +250,6 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
-                                SensorDataDao sensorDataDao=db.sensorDataDao();
-                                String[] arrayActivities = getResources().getStringArray(R.array.listActivities);
-                                sensorDataDao.insertAll(new ActivityRecord(
-                                        periodicSensorData, arrayActivities[spinner.getSelectedItemPosition()],System.currentTimeMillis(),System.currentTimeMillis()
-                                ));
                                 sensorDataDao.getAll();
                                 periodicSensorData.clear();
 

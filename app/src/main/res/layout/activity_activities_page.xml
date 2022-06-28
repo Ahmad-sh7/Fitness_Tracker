@@ -15,140 +15,33 @@
 
         <TextView
             android:id="@+id/textView21"
-            android:layout_width="315dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="Wenn Sie eine Aktivität bereits beendet haben"
             android:textColor="#DD2C00"
-            android:textSize="15sp"
+            android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/spinner_activities"
             app:layout_constraintStart_toStartOf="@+id/spinner_activities"
             app:layout_constraintTop_toBottomOf="@+id/tv_bpm" />
 
-        <Button
-            android:id="@+id/timePickerButton"
-            style="?android:spinnerStyle"
-            android:layout_width="117dp"
-            android:layout_height="42dp"
-            android:onClick="popTimePicker"
-            android:text="  00:00"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.716"
-
-            app:layout_constraintStart_toStartOf="@+id/timeText"
-            app:layout_constraintTop_toBottomOf="@+id/DatePicker"
-            app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/timePickerButton2"
-            style="?android:spinnerStyle"
-            android:layout_width="117dp"
-            android:layout_height="42dp"
-            android:onClick="popTimePicker2"
-            android:text="  00:00"
+            android:id="@+id/buttonactivity"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="110dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="16dp"
+            android:background="#3E4FED"
+            android:text="@string/_click_here"
             android:textColor="@color/black"
-            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.716"
-
-            app:layout_constraintStart_toStartOf="@+id/timeText2"
-            app:layout_constraintTop_toBottomOf="@+id/timePickerButton"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Spinner
-            android:id="@+id/spinner3"
-            android:layout_width="169dp"
-            android:layout_height="29dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/chooseAnActivity"
-            app:layout_constraintVertical_bias="0.334" />
-
-        <Button
-            android:id="@+id/DatePicker"
-            style="?android:spinnerStyle"
-            android:layout_width="187dp"
-            android:layout_height="48dp"
-            android:onClick="openDatePicker"
-            android:text="JAN 01 2022"
-            android:textColor="@color/black"
-            android:textSize="23sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Date"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/chooseAnActivity"
-            android:layout_width="342dp"
-            android:layout_height="86dp"
-            android:text="Wählen Sie eine Aktivität aus"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.605"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView21"
-            app:layout_constraintVertical_bias="0.008" />
-
-        <TextView
-            android:id="@+id/Date"
-            android:layout_width="191dp"
-            android:layout_height="46dp"
-            android:layout_marginTop="28dp"
-            android:text="Datum auswählen:"
-            android:textColor="@color/black"
-            android:textSize="23sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner3" />
-
-        <TextView
-            android:id="@+id/timeText2"
-            android:layout_width="93dp"
-            android:layout_height="41dp"
-            android:text="bis"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.255"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeText"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/timeText"
-            android:layout_width="93dp"
-            android:layout_height="41dp"
-            android:text="von"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.255"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DatePicker"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.076" />
 
         <TextView
             android:id="@+id/textView"
@@ -200,14 +93,13 @@
 
         <TextView
             android:id="@+id/tv_bpm"
-            android:layout_width="245dp"
-            android:layout_height="140dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
             android:text="72 bpm"
-            android:textSize="64sp"
+            android:textSize="56sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/stop"
-            app:layout_constraintHorizontal_bias="0.296"
             app:layout_constraintStart_toStartOf="@+id/stop"
             app:layout_constraintTop_toBottomOf="@+id/stop" />
 

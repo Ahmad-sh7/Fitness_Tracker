@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activities.RecordFinishedActivity">
+
+    <TextView
+        android:id="@+id/chooseAnActivity"
+        android:layout_width="338dp"
+        android:layout_height="77dp"
+        android:text="Wählen Sie eine Aktivität aus"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.081" />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="191dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:text="Datum auswählen:"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+
+    <Button
+        android:id="@+id/DatePicker"
+        style="?android:spinnerStyle"
+        android:layout_width="187dp"
+        android:layout_height="48dp"
+        android:onClick="openDatePicker"
+        android:text="JAN 01 2022"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Date"
+        app:layout_constraintVertical_bias="0.055" />
+
+    <Button
+        android:id="@+id/timePickerButton"
+        style="?android:spinnerStyle"
+        android:layout_width="117dp"
+        android:layout_height="52dp"
+        android:onClick="popTimePicker"
+        android:text="  00:00"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.727"
+
+        app:layout_constraintStart_toStartOf="@+id/timeText"
+        app:layout_constraintTop_toBottomOf="@+id/DatePicker"
+        app:layout_constraintVertical_bias="0.174" />
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="93dp"
+        android:layout_height="41dp"
+        android:text="von"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DatePicker"
+        app:layout_constraintVertical_bias="0.173" />
+
+    <Button
+        android:id="@+id/timePickerButton2"
+        style="?android:spinnerStyle"
+        android:layout_width="113dp"
+        android:layout_height="50dp"
+        android:onClick="popTimePicker2"
+        android:text="  00:00"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.727"
+
+        app:layout_constraintStart_toStartOf="@+id/timeText2"
+        app:layout_constraintTop_toBottomOf="@+id/timePickerButton"
+        app:layout_constraintVertical_bias="0.096" />
+
+    <TextView
+        android:id="@+id/timeText2"
+        android:layout_width="93dp"
+        android:layout_height="41dp"
+        android:text="bis"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeText"
+        app:layout_constraintVertical_bias="0.098" />
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="169dp"
+        android:layout_height="29dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chooseAnActivity"
+        app:layout_constraintVertical_bias="0.191" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Absenden"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DatePicker" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

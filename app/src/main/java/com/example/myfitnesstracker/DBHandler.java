@@ -11,14 +11,14 @@ import com.github.mikephil.charting.matrix.Vector3;
 import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
-    private static final String DB_NAME = "Tracker_Database";
+    private static final String DB_NAME = "sensordb";
     private static final int DB_V = 1;
     //define names for table Activity_Data
-    private final String TABLE_SENSOR_DATA = "Sensor_Data";
-    private final String KEY_SENSOR_R_TIME = "Record_Time";
-    private final String KEY_SENSOR_XDATA = "X_Acceleration";
-    private final String KEY_SENSOR_YDATA = "Y_Acceleration";
-    private final String KEY_SENSOR_ZDATA = "Z_Acceleration";
+    private final String TABLE_SENSOR_DATA = "sensordata";
+    private final String KEY_SENSOR_R_TIME = "timestamp";
+    private final String KEY_SENSOR_XDATA = "x_data";
+    private final String KEY_SENSOR_YDATA = "y_data";
+    private final String KEY_SENSOR_ZDATA = "z_data";
     private final String KEY_SENSOR_SOURCE = "Data_Source";
 
     //define names for table Activity_Log
@@ -39,7 +39,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private final String KEY_version = "Version";
 
 
-    DBHandler(Context context){
+    public DBHandler(Context context){
         super(context, DB_NAME, null, DB_V);
     }
 

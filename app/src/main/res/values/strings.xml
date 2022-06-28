@@ -75,7 +75,7 @@
     <string name="_go_to_home">Gehen Sie zum Homescreen</string>
     <string name="button_query">Erinnerung Feststellen</string>
     <string name="query_question">Wie oft möchtest Du die Tagesabfrage erhalten?</string>
-     <string name="set_your_own_reminder">Deine Erinnerung erstellen</string>
+    <string name="set_your_own_reminder">Deine Erinnerung erstellen</string>
     <string name="note">Hinweis: Diese Auswahl stellt die Alarme für die Erinnerungen automatisch ein </string>
     <string name="cancel_all_alarms">Alle Alarme löschen</string>
     <string name="cancel_reminder">Erinnerung löschen</string>
