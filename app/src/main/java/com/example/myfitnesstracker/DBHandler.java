@@ -84,7 +84,6 @@ public class DBHandler extends SQLiteOpenHelper {
         //TODO: think about upgrade procedures and implement them
     }
 
-
     /**
      * @param data Sensor data as SensorData object
      * @param source name of the source device
@@ -221,11 +220,16 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
+     * @param minTime minimum time to consider, pass -1 to get all data
      * @return returns an arraylist of int[] with int[0] being the time and the rest being mood values in order of sampling scheme
      */
-    public ArrayList<int[]> getMoodData(){
+    public ArrayList<int[]> getMoodData(int minTime){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_MOOD_LOG,null,null,null,null,null,null);
+        Cursor cursor;
+        if (minTime == -1)
+            cursor = db.query(TABLE_MOOD_LOG,null,null,null,null,null,null);
+        else
+            cursor = db.query(TABLE_MOOD_LOG,null,"? >= ?", new String[]{KEY_MOOD_TIME,Integer.toString(minTime)},null,null,null);
         if (!cursor.moveToFirst()) return null;
         ArrayList<int[]> out = new ArrayList<>(cursor.getCount());
         while (!cursor.isAfterLast()) {
@@ -242,6 +246,31 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         return out;
     }
+
+    /**
+     * @param timeData time the data is safed, used as primary key, must be unique in table
+     * @param zufriedenheit
+     * @param ruhe
+     * @param wohl
+     * @param spannung
+     * @param energie
+     * @param wach
+     */
+    public void safeMoodData(float timeData, int zufriedenheit, int ruhe, int wohl , int spannung, int energie, int wach){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+        cValues.put(KEY_MOOD_TIME, timeData);
+        cValues.put(KEY_MOOD_ZUFRIEDENHEIT, zufriedenheit);
+        cValues.put(KEY_MOOD_RUHE, ruhe);
+        cValues.put(KEY_MOOD_WOHL, wohl);
+        cValues.put(KEY_MOOD_SPANNUNG, spannung);
+        cValues.put(KEY_MOOD_ENERGIE, energie);
+        cValues.put(KEY_MOOD_WACH, wach);
+        db.insert(TABLE_SENSOR_DATA,null,cValues);
+    }
+
+
+
 
 
 }
