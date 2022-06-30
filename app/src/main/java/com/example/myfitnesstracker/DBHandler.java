@@ -268,9 +268,4 @@ public class DBHandler extends SQLiteOpenHelper {
         cValues.put(KEY_MOOD_WACH, wach);
         db.insert(TABLE_SENSOR_DATA,null,cValues);
     }
-
-
-
-
-
 }
