@@ -37,8 +37,15 @@ public class MainActivity extends LocalizationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-      // displayAlert();
+      // connect floating button to the settings page
         FloatingActionButton mySettings = (FloatingActionButton) findViewById(R.id.my_settings);
+         mySettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MySettings.class));
+            }
+        });
+        
         SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
         if (settings.getString("lang", "de").equals("en")) {
             setLanguage("en");
@@ -59,16 +66,40 @@ public class MainActivity extends LocalizationActivity {
                 }
             });
 
+          /** Called when the user taps the Log Activity card */
 
-
-
-
-
-
-        mySettings.setOnClickListener(new View.OnClickListener() {
+        CardView cardView=findViewById(R.id.activityCard);
+        cardView.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, MySettings.class));
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(getApplicationContext(), ActivitiesPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /** Called when the user taps the Log Mood card */
+        CardView cardView2 =findViewById(R.id.moodCard);
+        cardView2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(getApplicationContext(), MainActivity0.class);
+                startActivity(intent);
+            }
+        });
+
+        /** Called when the user taps the My Statistics card */
+        CardView cardView3 =findViewById(R.id.statisticsCard);
+        cardView3.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(getApplicationContext(), StatisticsPageActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -138,24 +169,5 @@ public class MainActivity extends LocalizationActivity {
         dialog.show();
 
     }
-
-    /** Called when the user taps the Log Activity button */
-    public void goToActivityPage(View view) {
-        Intent intent = new Intent(this, com.example.myfitnesstracker.view.activities.ActivitiesPageActivity.class);
-        startActivity(intent);
-    }
-
-    /** Called when the user taps the My Statistics button */
-    public void goToStatisticsPage(View view) {
-        Intent intent = new Intent(this, StatisticsPageActivity.class);
-        startActivity(intent);
-    }
-
-    /** Called when the user taps the My Statistics button */
-    public void goToLogMoodPage(View view) {
-        Intent intent = new Intent(this, MainActivity0.class);
-        startActivity(intent);
-    }
-
 
 }
