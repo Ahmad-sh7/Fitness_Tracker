@@ -10,8 +10,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.SeekBar;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+import androidx.cardview.widget.CardView;
+import android.animation.LayoutTransition;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.transition.TransitionManager;
+import android.transition.AutoTransition;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +36,7 @@ private MaterialTimePicker picker;
 Calendar calendar;
 AlarmManager alarmManager;
 PendingIntent pendingIntent;
+Spinner spinner;
 LinearLayout layout1;
 TextView backCard;
 LinearLayout layout2;
