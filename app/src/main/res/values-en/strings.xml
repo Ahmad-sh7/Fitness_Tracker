@@ -8,7 +8,7 @@
     <string name="_start">Start</string>
     <string name="_stop">Stop</string>
     <string name="_record_finished_activity">In order to record an  already finished activity</string>
-    <string name="_click_here">click here</string>
+    <string name="_click_here">Add</string>
     <string name="_how_are_you_feeling">For the past 24 hours, I’ve been feeling, on average. . .</string>
     <string name="_satisfied">Satisfied</string>
     <string name="_dissatisfied">Dissatisfied</string>
@@ -57,9 +57,9 @@
     <string name="set_your_own_reminder">Set your own reminder</string>
     <string name="note">Note: this will set the alarms for the reminders automatically</string>
     <string name="cancel_all_alarms">Cancel all alarms</string>
-    <string name="cancel_reminder">Cancel Reminder</string>
+    <string name="cancel_reminder">Cancel</string>
     <string name="select_time">Select Time</string>
-     <string name="button_query">Set Reminder</string>
+     <string name="button_query">Set</string>
     <string name="query_question">How often would you like to receive the Daily Query?</string>
 
 
@@ -115,6 +115,20 @@
         <item>Deutsch</item>
         <item>English</item>
     </string-array>
+    
+     <string-array name="DayQuery">
+        <item>Zero</item>
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+        <item>Ten</item>
+    </string-array>
 
     <string name="button_log_mood">Log Mood</string>
     <string name="button_statistics">My Statistics</string>
@@ -134,5 +148,9 @@
     <string name="button_90_days">90 days</string>
     <string name="button_365_days">365 days</string>
 
+    <string name="my_dashboard">My Dashboard</string>
+    <string name="items">4 items</string>
+    <string name="recordFinishedActivity">Add a finished activity</string>
+    <string name="note2">In case you would like to set your own alarm instead of having it set automatically</string>
 
 </resources>
