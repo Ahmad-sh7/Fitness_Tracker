@@ -28,6 +28,10 @@ private MaterialTimePicker picker;
 Calendar calendar;
 AlarmManager alarmManager;
 PendingIntent pendingIntent;
+LinearLayout layout1;
+TextView backCard;
+LinearLayout layout2;
+TextView backCard2;
 
 
     @Override
@@ -37,6 +41,15 @@ PendingIntent pendingIntent;
         binding = ActivityQueryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         createNotificationChannel();
+        
+        //Enable Animation for the text cards
+       layout1 = findViewById(R.id.layoutCard1);
+       backCard = findViewById(R.id.back_card1);
+       layout1.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+       layout2 = findViewById(R.id.layoutCard2);
+       backCard2 = findViewById(R.id.back_card2);
+       layout2.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+
         calendar = new Calendar() {
             @Override
             protected void computeTime() {
@@ -123,36 +136,41 @@ PendingIntent pendingIntent;
 
         });
 
-        //Button queryButton = findViewById(R.id.button3);
-        //queryButton.setOnClickListener(view -> displayAlert());
-        SeekBar seekbar = (findViewById(R.id.your_dialog_seekbar));
-        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                //int seekBarValue = seek.getProgress();
-                if (progress == 1) {
-                    //fragbatterie um 20 uhr und dann pop up message als bestätigung zeigen
+        spinner = findViewById(R.id.spinner_query);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.DayQuery, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner.setSelection(0);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int item, long l) {
+                if ( item ==1){
                     CreateAlarm8();
                 }
 
-                if (progress == 2) {
+                if (item == 2 ) {
                     CreateAlarm2(); //8 am
                     CreateAlarm8(); //8 pm
                 }
 
-                if (progress == 3) {
+                if (item == 3) {
                     CreateAlarm2(); // 8 am
                     CreateAlarm5(); // 2 pm
                     CreateAlarm8(); // 8 pm
                 }
 
-                if (progress == 4) {
+                if (item == 4) {
                     CreateAlarm2(); // 8 am
                     CreateAlarm4(); // 12 pm
                     CreateAlarm6(); // 16 pm
                     CreateAlarm9(); //10 pm
                 }
 
-                if (progress == 5) {
+                if (item == 5) {
                     CreateAlarm1();
                     CreateAlarm2();
                     CreateAlarm3();
@@ -160,7 +178,7 @@ PendingIntent pendingIntent;
                     CreateAlarm5();
                 }
 
-                if (progress == 6) {
+                if (item == 6) {
                     CreateAlarm1();
                     CreateAlarm2();
                     CreateAlarm3();
@@ -169,7 +187,7 @@ PendingIntent pendingIntent;
                     CreateAlarm6();
                 }
 
-                if (progress == 7) {
+                if (item == 7) {
                     CreateAlarm1();
                     CreateAlarm2();
                     CreateAlarm3();
@@ -178,7 +196,7 @@ PendingIntent pendingIntent;
                     CreateAlarm6();
                     CreateAlarm7();
                 }
-                if (progress == 8) {
+                if (item == 8) {
                     CreateAlarm1();
                     CreateAlarm2();
                     CreateAlarm3();
@@ -188,7 +206,7 @@ PendingIntent pendingIntent;
                     CreateAlarm7();
                     CreateAlarm8();
                 }
-                if (progress == 9) {
+                if (item == 9) {
                     CreateAlarm1();
                     CreateAlarm2();
                     CreateAlarm3();
@@ -199,7 +217,7 @@ PendingIntent pendingIntent;
                     CreateAlarm8();
                     CreateAlarm9();
                 }
-                if (progress == 10) {
+                if (item == 10) {
                     CreateAlarm1();
                     CreateAlarm2();
                     CreateAlarm3();
@@ -215,12 +233,7 @@ PendingIntent pendingIntent;
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
@@ -578,6 +591,20 @@ PendingIntent pendingIntent;
                 AlarmManager.INTERVAL_DAY, alarmIntent);
         Toast.makeText(this, "Erinnerung um 24:00 Uhr zeigen!", Toast.LENGTH_LONG).show();
 
+    }
+    
+    //Methods for cards animation
+    public void expand(View view) {
+        int v = (backCard.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+        TransitionManager.beginDelayedTransition(layout1, new AutoTransition());
+        backCard.setVisibility(v);
+
+    }
+
+    public void expand2(View view) {
+        int v = (backCard2.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+        TransitionManager.beginDelayedTransition(layout2, new AutoTransition());
+        backCard2.setVisibility(v);
     }
 
 }
