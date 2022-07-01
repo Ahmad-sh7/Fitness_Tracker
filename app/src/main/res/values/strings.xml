@@ -20,6 +20,22 @@
         <item>Deutsch</item>
         <item>English</item>
     </string-array>
+    
+    //Array List for the Day Query
+
+    <string-array name="DayQuery">
+        <item>Null</item>
+        <item>Eins</item>
+        <item>Zwei</item>
+        <item>Drei</item>
+        <item>Vier</item>
+        <item>Fünf</item>
+        <item>Sechs</item>
+        <item>Sieben</item>
+        <item>Acht</item>
+        <item>Neun</item>
+        <item>Zehn</item>
+    </string-array>
 
 
     <string name="_log_activity">Aktivität aufzeichnen</string>
@@ -28,7 +44,7 @@
     <string name="_start">Start</string>
     <string name="_stop">Stop</string>
     <string name="_record_finished_activity">um eine abgeschlossene Aktivität aufzuzeichnen</string>
-    <string name="_click_here">Hier drücken</string>
+    <string name="_click_here">Nachtragen</string>
     <string name="_how_are_you_feeling">In den letzten 24 Stunden fühlte ich mich im Durchschnitt…</string>
     <string name="_satisfied">zufrieden</string>
     <string name="_dissatisfied">unzufrieden</string>
@@ -73,12 +89,12 @@
     <string name="einstellungen">Einstellungen</string>
     <string name="_choose_language">Wählen Sie eine Sprache aus</string>
     <string name="_go_to_home">Gehen Sie zum Homescreen</string>
-    <string name="button_query">Erinnerung Feststellen</string>
+    <string name="button_query">Einstellen</string>
     <string name="query_question">Wie oft möchtest Du die Tagesabfrage erhalten?</string>
     <string name="set_your_own_reminder">Deine Erinnerung erstellen</string>
     <string name="note">Hinweis: Diese Auswahl stellt die Alarme für die Erinnerungen automatisch ein </string>
     <string name="cancel_all_alarms">Alle Alarme löschen</string>
-    <string name="cancel_reminder">Erinnerung löschen</string>
+    <string name="cancel_reminder">Löschen</string>
     <string name="select_time">Zeit auswählen</string>
 
 
@@ -136,5 +152,10 @@
     <string name="button_30_days">30 days</string>
     <string name="button_90_days">90 days</string>
     <string name="button_365_days">365 days</string>
+    <string name="my_dashboard">Mein Dashboard</string>
+    <string name="items">4 Objekte</string>
+    <string name="recordFinishedActivity">Ein abgeschlossenes Training nachtragen</string>
+    <string name="note2">Für den Fall, dass Du deinen eigenen Alarm einstellen möchtest, anstatt ihn automatisch einstellen zu lassen</string>
+
 
 </resources>
