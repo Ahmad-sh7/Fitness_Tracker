@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/my_dashboard"
-                android:textColor="@color/pink"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="24sp" />
 
