@@ -30,17 +30,25 @@ public class DBHandler extends SQLiteOpenHelper {
     // Start_Time defined above
 
     //define names for table Mood_Log
-    private final String TABLE_M_LOG = "Mood_Log";
-    private final String KEY_M_TIME = "Time";
-    private final String KEY_MOOD = "Mood";
+    private final String TABLE_MOOD_LOG = "Mood_Log";
+    private final String KEY_MOOD_TIME = "Time";
+    private final String KEY_MOOD_ZUFRIEDENHEIT = "Zufriedenheit";
+    private final String KEY_MOOD_RUHE = "Ruhe";
+    private final String KEY_MOOD_WOHL = "Wohlgefuehl";
+    private final String KEY_MOOD_SPANNUNG = "Entspannung";
+    private final String KEY_MOOD_ENERGIE = "Energie";
+    private final String KEY_MOOD_WACH = "Wachheit";
 
     //define names for table Questionnaires
     private final String TABLE_Quest = "Questionnaires";
     private final String KEY_version = "Version";
 
 
+    /**
+     * @param context the context from where the class is called, please use 'this'
+     */
     DBHandler(Context context){
-        super(context, DB_NAME, null, DB_V);
+        super(context.getApplicationContext(), DB_NAME, null, DB_V);
     }
 
     @Override
@@ -61,9 +69,15 @@ public class DBHandler extends SQLiteOpenHelper {
                 + KEY_ACTIVITY_S_TIME + " REAL, "
                 + KEY_ACTIVITY_E_TIME + " REAL" + ")";
         db.execSQL(CREATE_TABLE);
-        CREATE_TABLE = "CREATE TABLE " + TABLE_M_LOG + "()"
-                + KEY_M_TIME + " REAL PRIMARY KEY, "
-                + KEY_MOOD + " INT" + ")";
+        //create table mood log
+        CREATE_TABLE = "CREATE TABLE " + TABLE_MOOD_LOG + "("
+                + KEY_MOOD_TIME + " REAL PRIMARY KEY, "
+                + KEY_MOOD_ZUFRIEDENHEIT + " INT, "
+                + KEY_MOOD_RUHE + " INT, "
+                + KEY_MOOD_WOHL + " INT, "
+                + KEY_MOOD_SPANNUNG + " INT, "
+                + KEY_MOOD_ENERGIE + " INT, "
+                + KEY_MOOD_WACH + " INT" + ")";
         db.execSQL(CREATE_TABLE);
     }
     @Override
@@ -144,6 +158,30 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.update(TABLE_ACTIVITY_LOG,cv,"rowid = ?",new String[]{Integer.toString(rowID)});
     }
+
+    /**
+     * returns an ArrayList with the data from the Activities Table
+     * @param minTime minimum Time to consider as starting time
+     * @return ArrayList with ContentValues "Activity_ID", "Activity_Type", "Start_Time", "End_Time" or null if resulting table is empty
+     */
+    public ArrayList<ContentValues> getActivities(int minTime) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_ACTIVITY_LOG, new String[]{KEY_ACTIVITY_AID,KEY_ACTIVITY_TYPE,KEY_ACTIVITY_S_TIME,KEY_ACTIVITY_E_TIME},
+                "? > ?", new String[]{KEY_ACTIVITY_S_TIME, Float.toString(minTime)}, null, null,null );
+        if (!cursor.moveToFirst()) return null;
+        ArrayList<ContentValues> out = new ArrayList<>();
+
+        while (!cursor.isAfterLast()) {
+            ContentValues entry = new ContentValues();
+            entry.put("Activity_ID",cursor.getInt(0));
+            entry.put("Activity_Type", cursor.getString(1));
+            entry.put("Start_Time", cursor.getFloat(2));
+            entry.put("End_Time", cursor.getFloat(3));
+            out.add(entry);
+            cursor.moveToNext();
+        }
+        return out;
+    }
     /**
      * returns an arraylist of only the data value from the data table or null if the table is empty
      * obsolete, please use getSensorData(float minTime)
@@ -164,7 +202,7 @@ public class DBHandler extends SQLiteOpenHelper {
     /**
      *
      * @param minTime minimum Time to consider
-     * @return ArrayList<ContentValues> with "time" and "value" values or null is table is empty
+     * @return ArrayList<ContentValues> with "time" and "value" vector length, or null if resulting table is empty
      */
     public ArrayList<ContentValues> getSensorData(float minTime){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -183,6 +221,55 @@ public class DBHandler extends SQLiteOpenHelper {
         return out;
     }
 
+    /**
+     * @param minTime minimum time to consider, pass -1 to get all data
+     * @return returns an arraylist of int[] with int[0] being the time and the rest being mood values in order of sampling scheme
+     */
+    public ArrayList<int[]> getMoodData(int minTime){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        if (minTime == -1)
+            cursor = db.query(TABLE_MOOD_LOG,null,null,null,null,null,null);
+        else
+            cursor = db.query(TABLE_MOOD_LOG,null,"? >= ?", new String[]{KEY_MOOD_TIME,Integer.toString(minTime)},null,null,null);
+        if (!cursor.moveToFirst()) return null;
+        ArrayList<int[]> out = new ArrayList<>(cursor.getCount());
+        while (!cursor.isAfterLast()) {
+            out.add(new int[]{
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getInt(2),
+                    cursor.getInt(3),
+                    cursor.getInt(4),
+                    cursor.getInt(5),
+                    cursor.getInt(6)});
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return out;
+    }
+
+    /**
+     * @param timeData time the data is safed, used as primary key, must be unique in table
+     * @param zufriedenheit
+     * @param ruhe
+     * @param wohl
+     * @param spannung
+     * @param energie
+     * @param wach
+     */
+    public void safeMoodData(float timeData, int zufriedenheit, int ruhe, int wohl , int spannung, int energie, int wach){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+        cValues.put(KEY_MOOD_TIME, timeData);
+        cValues.put(KEY_MOOD_ZUFRIEDENHEIT, zufriedenheit);
+        cValues.put(KEY_MOOD_RUHE, ruhe);
+        cValues.put(KEY_MOOD_WOHL, wohl);
+        cValues.put(KEY_MOOD_SPANNUNG, spannung);
+        cValues.put(KEY_MOOD_ENERGIE, energie);
+        cValues.put(KEY_MOOD_WACH, wach);
+        db.insert(TABLE_SENSOR_DATA,null,cValues);
+    }
     /**
      * @param minTime begin of the considered time frame
      * @param maxTime end of the considered time frame
