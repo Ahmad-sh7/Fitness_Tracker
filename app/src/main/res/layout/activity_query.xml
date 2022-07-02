@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/query_question"
-                    android:textColor="@color/pink"
+                    android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
@@ -129,7 +129,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="2dp"
                     android:text="@string/set_your_own_reminder"
-                    android:textColor="@color/pink"
+                    android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@id/CancelAll" />
@@ -169,7 +169,7 @@
                     android:layout_height="133dp"
                     android:layout_weight="3"
                     android:text="08:45 AM"
-                    android:textColor="@color/pink"
+                    android:textColor="@color/black"
                     android:textSize="46sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
