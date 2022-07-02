@@ -280,7 +280,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 TABLE_ACTIVITY_LOG, new String[]{KEY_ACTIVITY_S_TIME, KEY_ACTIVITY_E_TIME},
-                minTime + "<=" + KEY_ACTIVITY_S_TIME + "&&" + maxTime + ">" + KEY_ACTIVITY_S_TIME,
+                minTime + "<=" + KEY_ACTIVITY_S_TIME +" AND " + maxTime + ">" + KEY_ACTIVITY_S_TIME,
                 null,
                 null,
                 null,
@@ -313,28 +313,30 @@ public class DBHandler extends SQLiteOpenHelper {
             moodsCounters.add(0);//counts how many entries exists
         }
 
-        int moodSum = 404;
-        int counter = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
-                TABLE_M_LOG, new String[]{KEY_M_TIME, KEY_MOOD},
-                minTime + "<=" + KEY_M_TIME + "&&" + maxTime + ">" + KEY_M_TIME,
+                TABLE_MOOD_LOG, new String[]{KEY_MOOD_TIME, KEY_MOOD_ZUFRIEDENHEIT, KEY_MOOD_RUHE, KEY_MOOD_WOHL, KEY_MOOD_SPANNUNG, KEY_MOOD_ENERGIE, KEY_MOOD_WACH},
+                minTime + "<=" + KEY_MOOD_TIME + " AND " + maxTime + ">" + KEY_MOOD_TIME,
                 null,
                 null,
                 null,
                 null);
+
         if (!cursor.moveToFirst()) return moodsScores;
         while (!cursor.isAfterLast()) {
-            if(counter == 0){
-                //moodSum = cursor.getInt(1);//TODO: wrong Integer, Table not right?
-                //counter += 1;
-                cursor.moveToNext();
+            for(int i = 0; i < 6; i++){
+                if(moodsCounters.get(i) == 0){
+                    float moodScore = cursor.getFloat(i+1);
+                    moodsScores.set(i, moodScore);
+                    moodsCounters.set(i, moodsCounters.get(i));
+                }
+                else{
+                    float moodScore = cursor.getFloat(i+1);
+                    moodsScores.set(i, moodsScores.get(i) + moodScore);
+                    moodsCounters.set(i, moodsCounters.get(i));
+                }
             }
-            else{
-                //moodSum += cursor.getInt(1);//TODO: wrong Integer, Table not right?
-                //counter += 1;
-                cursor.moveToNext();
-            }
+            cursor.moveToNext();
         }
         cursor.close();
 

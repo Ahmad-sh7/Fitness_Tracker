@@ -218,11 +218,17 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         long millisecondsPerDay = 86400000; // a day has 86400000 milliseconds
         long timeStartOfTheDay = now.getTime() - (now.getTime() % millisecondsPerDay); //gets the time of the first millisecond of the current day
 
+        //initialize array for dbEntries
+        for(int p = 0;p<6;p++){
+            ArrayList<Float> entries = new ArrayList<>();
+            dbEntries.add(entries);
+        }
+
         //gets the DB entry for every day, starting with the day furthest in the past
         for(int i = daysToShow-1; i >= 0; i--){
             long neededDay = timeStartOfTheDay - (i * millisecondsPerDay);
             ArrayList<Float> entriesOneDay = db.getMoodData(neededDay, neededDay + millisecondsPerDay); //get the DB entries for every mood for the needed day
-            for(int p = 0; p < 6 ; i++){
+            for(int p = 0; p < 6 ; p++){
                 dbEntries.get(p).add(entriesOneDay.get(p));
             }
         }
@@ -240,6 +246,10 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         db.insertActivity("Walking", now.getTime(), now.getTime() + 2700000);
         db.insertActivity("Walking", now.getTime()-(millisecondsPerDay*2), now.getTime()-(millisecondsPerDay*2) + 1800000);
         db.insertActivity("Walking", now.getTime()-(millisecondsPerDay*(daysShown-2)), now.getTime()-(millisecondsPerDay*(daysShown-2)) + 3600000);
+
+        db.safeMoodData(now.getTime(), 10,20,30,40,50,60);
+        db.safeMoodData(now.getTime()-(millisecondsPerDay*2), 20,30,40,50,60,70);
+        db.safeMoodData(now.getTime()-(millisecondsPerDay*(daysShown-2)), 30,40,50,60,70,80);
     }
 
 }
