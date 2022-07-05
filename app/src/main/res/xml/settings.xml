@@ -17,7 +17,8 @@
         app:icon="@drawable/ic_baseline_notifications_24"
         app:title="@string/_notification">
 
-        <SwitchPreferenceCompat
+        <CheckBoxPreference
+            app:defaultValue="true"
             app:key="notification"
             app:summaryOff="@string/_recieve_notification_summary_summary_off"
             app:summaryOn="@string/_recieve_notification_summary_on"
