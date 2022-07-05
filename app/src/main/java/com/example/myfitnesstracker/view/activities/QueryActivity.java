@@ -275,7 +275,7 @@ TextView backCard2;
             @Override
             public void onClick(View v) {
                 if(picker.getHour() > 12) {
-                    binding.selectedTime.setText(picker.getHour()%12 + " : " + picker.getMinute() + " AM");
+                    binding.selectedTime.setText(picker.getHour()%12 + " : " + picker.getMinute() + " PM");
                 } else{
                     binding.selectedTime.setText(picker.getHour() + " : " + picker.getMinute() + " AM");
                 }
