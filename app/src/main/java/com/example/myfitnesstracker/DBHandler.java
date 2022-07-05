@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import com.github.mikephil.charting.matrix.Vector3;
 
 import java.util.ArrayList;
@@ -42,6 +46,8 @@ public class DBHandler extends SQLiteOpenHelper {
     //define names for table Questionnaires
     private final String TABLE_Quest = "Questionnaires";
     private final String KEY_version = "Version";
+
+    //
 
 
     /**
@@ -246,6 +252,34 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         return out;
     }
+    /**
+     * @param maxTime maximum time to consider
+     * @param minTime minimum time to consider
+     * @return returns an arraylist of int[] with int[0] being the time and the rest being mood values in order of sampling scheme
+     */
+    public ArrayList<int[]> getMoodData(int minTime, int maxTime){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        if (minTime == -1)
+            cursor = db.query(TABLE_MOOD_LOG,null,null,null,null,null,null);
+        else
+            cursor = db.query(TABLE_MOOD_LOG,null,"? BETWEEN ? AND ?", new String[]{KEY_MOOD_TIME,Integer.toString(minTime), Integer.toString(minTime)},null,null,null);
+        if (!cursor.moveToFirst()) return null;
+        ArrayList<int[]> out = new ArrayList<>(cursor.getCount());
+        while (!cursor.isAfterLast()) {
+            out.add(new int[]{
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getInt(2),
+                    cursor.getInt(3),
+                    cursor.getInt(4),
+                    cursor.getInt(5),
+                    cursor.getInt(6)});
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return out;
+    }
 
     /**
      * @param timeData time the data is safed, used as primary key, must be unique in table
@@ -262,10 +296,14 @@ public class DBHandler extends SQLiteOpenHelper {
         cValues.put(KEY_MOOD_TIME, timeData);
         cValues.put(KEY_MOOD_ZUFRIEDENHEIT, zufriedenheit);
         cValues.put(KEY_MOOD_RUHE, ruhe);
+
         cValues.put(KEY_MOOD_WOHL, wohl);
         cValues.put(KEY_MOOD_SPANNUNG, spannung);
         cValues.put(KEY_MOOD_ENERGIE, energie);
         cValues.put(KEY_MOOD_WACH, wach);
         db.insert(TABLE_SENSOR_DATA,null,cValues);
     }
+
+    //External connection stuff
+
 }
