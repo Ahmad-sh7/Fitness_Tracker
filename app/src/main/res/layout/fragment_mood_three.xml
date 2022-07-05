@@ -20,13 +20,12 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="85dp"
             android:layout_height="48dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="32dp"
             android:text="abbrechen"
             android:textSize="9dp"
-            app:layout_constraintEnd_toEndOf="@+id/btn_next_mood_three"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/btn_next_mood_three"
-            app:layout_constraintTop_toBottomOf="@+id/btn_next_mood_three" />
+            app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine3"
+            app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine3"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine3" />
 
         <TextView
             android:id="@+id/textView"
@@ -67,18 +66,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ja1"
             app:layout_constraintTop_toTopOf="@+id/ja1" />
-
-        <Button
-            android:id="@+id/btn_next_mood_three"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="85dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="88dp"
-            android:backgroundTint="#673FCA"
-            android:text="next>>"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine3"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine3"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine3" />
 
         <EditText
             android:id="@+id/editTextTextMultiLine3"

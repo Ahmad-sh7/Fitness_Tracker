@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ public class MainActivity extends LocalizationActivity {
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
     private Bundle savedInstanceState;
+    LinearLayout activitiesListActivity;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -49,6 +51,7 @@ public class MainActivity extends LocalizationActivity {
         this.savedInstanceState = savedInstanceState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        activitiesListActivity = findViewById(R.id.activities_list_activity);
         // connect floating button to the settings page
         FloatingActionButton mySettings = (FloatingActionButton) findViewById(R.id.my_settings);
         mySettings.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +79,11 @@ public class MainActivity extends LocalizationActivity {
                     Toast.makeText(MainActivity.this, location.getLatitude() + " " + location.getLongitude(), Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+
+
+        activitiesListActivity.setOnClickListener(view -> {
+            startActivity(new Intent(this,ListOfActivitiesActivity.class));
         });
 
         /** Called when the user taps the Log Activity card */

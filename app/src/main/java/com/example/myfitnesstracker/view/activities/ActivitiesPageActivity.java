@@ -26,11 +26,16 @@ import androidx.room.Room;
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.example.myfitnesstracker.DBHandler;
 import com.example.myfitnesstracker.R;
+import com.example.myfitnesstracker.model.ActivityDataDao;
+import com.example.myfitnesstracker.model.Activity_log;
 import com.example.myfitnesstracker.model.AppDatabase;
 import com.example.myfitnesstracker.model.SensorData;
 import com.example.myfitnesstracker.model.SensorDataDao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -56,6 +61,9 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     double previous_z =0;
     Button button;
     DBHandler dbHandler;
+    String startTime;
+    String endTime;
+    String currentDate;
 
 
     private double accelerationCurrentValue;
@@ -72,6 +80,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
 
 
     SensorDataDao sensorDataDao;
+    ActivityDataDao activityDataDao;
 
     private final Runnable processSensors = new Runnable() {
         @Override
@@ -90,6 +99,8 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
         setContentView(R.layout.activity_activities_page);
         db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"sensordb").build();
         sensorDataDao=db.sensorDataDao();
+        activityDataDao =db.activityDataDao();
+
         dbHandler=new DBHandler(this);
 
 
@@ -237,7 +248,8 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 timer2= new Timer();
                 isFirstTime = true;
                 tv_bpm.setVisibility(View.VISIBLE);
-
+                startTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+                currentDate = new SimpleDateFormat("MMM d yyyy",Locale.getDefault()).format(new Date());
                 sensorManager.registerListener(this, Accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
                 stopButton.setEnabled(true);
                 startButton.setEnabled(false);
@@ -265,6 +277,20 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 sensorManager.unregisterListener(this);
                 startButton.setEnabled(true);
                 stopButton.setEnabled(false);
+                endTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        activityDataDao.insertAll(new Activity_log(
+                                getResources().getStringArray(R.array.listActivities)[spinner.getSelectedItemPosition()],
+                                currentDate,
+                                startTime,
+                                endTime
+                        ));
+                    }
+                };
+                new Thread(runnable).start();
+
                 flag=false;
                 timer.cancel();
                 timer2.cancel();

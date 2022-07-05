@@ -20,7 +20,7 @@
         <item>Deutsch</item>
         <item>English</item>
     </string-array>
-    
+
     //Array List for the Day Query
 
     <string-array name="DayQuery">
@@ -157,6 +157,7 @@
     <string name="recordFinishedActivity">Ein abgeschlossenes Training nachtragen</string>
     <string name="note2">Für den Fall, dass Du deinen eigenen Alarm einstellen möchtest, anstatt ihn automatisch einstellen zu lassen</string>
     <string name="agree">I agree</string>
+    <string name="show_activites">Aktivitäten zeigen</string>
 
 
 </resources>

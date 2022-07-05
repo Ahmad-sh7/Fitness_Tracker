@@ -1,12 +1,14 @@
 package com.example.myfitnesstracker.view.fragments;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ public class MoodFourFragment extends Fragment  implements AdapterView.OnItemSel
     private SeekBar seekBar;
     TextView textView;
     MainViewModel viewModel;
+    EditText textFourFragment;
 
     public MoodFourFragment() {
         // Required empty public constructor
@@ -50,11 +53,13 @@ public class MoodFourFragment extends Fragment  implements AdapterView.OnItemSel
         button = view.findViewById(R.id.fertig);
         seekBar = view.findViewById(R.id.seekBarID9);
         textView = view.findViewById(R.id.progress9);
+        textFourFragment = view.findViewById(R.id.editTextTextMultiLine4);
         viewModel =new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 textView.setText(String.valueOf(progress) + "%");
+                viewModel.setPeopleLikeability(String.valueOf(progress));
             }
 
             @Override
@@ -74,7 +79,10 @@ public class MoodFourFragment extends Fragment  implements AdapterView.OnItemSel
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(MoodFourFragment.this).navigateUp();
+                if (!TextUtils.isEmpty(textFourFragment.getText())){
+                    viewModel.setNotes(textFourFragment.getText().toString());
+                }
+                NavHostFragment.findNavController(MoodFourFragment.this).navigate(R.id.action_moodFourFragment_to_moodFiveFragment);
             }
         });
 
@@ -90,6 +98,7 @@ public class MoodFourFragment extends Fragment  implements AdapterView.OnItemSel
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
+        viewModel.setPeopleAroundYou(text);
         Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 

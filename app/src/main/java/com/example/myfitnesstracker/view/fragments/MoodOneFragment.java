@@ -1,10 +1,12 @@
 package com.example.myfitnesstracker.view.fragments;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ public class MoodOneFragment extends Fragment {
     AppDatabase db;
     private Button button;
     private Button abbrechen;
+    private EditText textFragmentOne;
     MainViewModel viewModel;
 
     public MoodOneFragment() {
@@ -65,11 +68,13 @@ public class MoodOneFragment extends Fragment {
         SeekBar seekBar6 = view.findViewById(R.id.seekBarID6);
         TextView textView6 = view.findViewById(R.id.progress6);
         button = view.findViewById(R.id.btnMoodOneNext);
+        textFragmentOne = view.findViewById(R.id.editTextTextMultiLine);
 
         seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar1, int progress1, boolean fromUser) {
                 textView1.setText(String.valueOf(progress1) + "%");
+                viewModel.setSatisfiedMeter(String.valueOf(progress1));
             }
 
             @Override
@@ -86,6 +91,7 @@ public class MoodOneFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar2, int progress2, boolean fromUser) {
                 textView2.setText(String.valueOf(progress2) + "%");
+                viewModel.setCalmMeter(String.valueOf(progress2));
             }
 
             @Override
@@ -102,6 +108,7 @@ public class MoodOneFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar3, int progress3, boolean fromUser) {
                 textView3.setText(String.valueOf(progress3) + "%");
+                viewModel.setHappinessMeter(String.valueOf(progress3));
             }
 
             @Override
@@ -118,6 +125,7 @@ public class MoodOneFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar4, int progress4, boolean fromUser) {
                 textView4.setText(String.valueOf(progress4) + "%");
+                viewModel.setExcitedMeter(String.valueOf(progress4));
             }
 
             @Override
@@ -134,6 +142,7 @@ public class MoodOneFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar5, int progress5, boolean fromUser) {
                 textView5.setText(String.valueOf(progress5) + "%");
+                viewModel.setEnergyMeter(String.valueOf(progress5));
             }
 
             @Override
@@ -150,6 +159,7 @@ public class MoodOneFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar6, int progress6, boolean fromUser) {
                 textView6.setText(String.valueOf(progress6) + "%");
+                viewModel.setSleepyMeter(String.valueOf(progress6));
             }
 
             @Override
@@ -167,7 +177,9 @@ public class MoodOneFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.setX(10);
+                if (!TextUtils.isEmpty(textFragmentOne.getText())){
+                    viewModel.setNotes(textFragmentOne.getText().toString());
+                }
                 NavHostFragment.findNavController(MoodOneFragment.this).navigate(R.id.action_moodOneFragment_to_moodTwoFragment);
             }
         });

@@ -6,126 +6,189 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "mooddata")
 public class MoodData {
     @PrimaryKey(autoGenerate = true)
-    int satisfiedMeter;
-    int calmMeter;
-    int hppinessMeter;
-    int excitedMeter;
-    int energyMeter;
-    int sleepyMeter;
-    int negative_events;
-    int positive_events;
-    boolean alone;
+     int uid;
+    String satisfiedMeter;
+    String calmMeter;
+    String happinessMeter;
+    String excitedMeter;
+    String energyMeter;
+    String sleepyMeter;
+    String negative_events;
+    String positive_events;
+    String alone;
+    String peopleAroundYou;
+    String peopleLikeability;
     String place;
-    int satisfiedrate;
-    int failurerate;
-    int impulsively;
-    int aggressive;
+    String satisfiedrate;
+    String failurerate;
+    String impulsively;
+    String aggressive;
+    String cancel_reason;
     String notes;
 
 
-
-
-
-    public MoodData(int satisfiedMeter, int calmMeter, int hppinessMeter, int excitedMeter, int energyMeter, int sleepyMeter, int negative_events, int positive_events ,
-                    boolean alone, String place,int satisfiedrate, int failurerate,int impulsively,int aggressive, String notes ) {
+    public MoodData(String satisfiedMeter, String calmMeter, String happinessMeter, String excitedMeter, String energyMeter, String sleepyMeter, String negative_events, String positive_events, String alone, String peopleAroundYou, String peopleLikeability, String place, String satisfiedrate, String failurerate, String impulsively, String aggressive, String cancel_reason, String notes) {
         this.satisfiedMeter = satisfiedMeter;
         this.calmMeter = calmMeter;
-        this.hppinessMeter = hppinessMeter;
+        this.happinessMeter = happinessMeter;
         this.excitedMeter = excitedMeter;
         this.energyMeter = energyMeter;
         this.sleepyMeter = sleepyMeter;
         this.negative_events = negative_events;
         this.positive_events = positive_events;
         this.alone = alone;
+        this.peopleAroundYou = peopleAroundYou;
+        this.peopleLikeability = peopleLikeability;
         this.place = place;
         this.satisfiedrate = satisfiedrate;
         this.failurerate = failurerate;
         this.impulsively = impulsively;
         this.aggressive = aggressive;
+        this.cancel_reason = cancel_reason;
         this.notes = notes;
     }
 
-    public int getSatisfiedMeter() {
+    public String getSatisfiedMeter() {
         return satisfiedMeter;
     }
 
-    public void setSatisfiedMeter(int satisfiedMeter) {
+    public void setSatisfiedMeter(String satisfiedMeter) {
         this.satisfiedMeter = satisfiedMeter;
     }
 
-    public int getCalmMeter() {
+    public String getCalmMeter() {
         return calmMeter;
     }
 
-    public void setCalmMeter(int calmMeter) {
+    public void setCalmMeter(String calmMeter) {
         this.calmMeter = calmMeter;
     }
 
-    public int getHppinessMeter() {
-        return hppinessMeter;
+    public String getHappinessMeter() {
+        return happinessMeter;
     }
 
-    public void setHppinessMeter(int hppinessMeter) {
-        this.hppinessMeter = hppinessMeter;
+    public void setHappinessMeter(String happinessMeter) {
+        this.happinessMeter = happinessMeter;
     }
 
-    public int getExcitedMeter() {
+    public String getExcitedMeter() {
         return excitedMeter;
     }
 
-    public void setExcitedMeter(int excitedMeter) {
+    public void setExcitedMeter(String excitedMeter) {
         this.excitedMeter = excitedMeter;
     }
 
-    public int getEnergyMeter() {
+    public String getEnergyMeter() {
         return energyMeter;
     }
 
-    public void setEnergyMeter(int energyMeter) {
+    public void setEnergyMeter(String energyMeter) {
         this.energyMeter = energyMeter;
     }
 
-    public int getSleepyMeter() {
+    public String getSleepyMeter() {
         return sleepyMeter;
     }
 
-    public void setSleepyMeter(int sleepyMeter) {
+    public void setSleepyMeter(String sleepyMeter) {
         this.sleepyMeter = sleepyMeter;
     }
 
-    public void setNegative_events(int negative_events) { this.negative_events = negative_events; }
+    public String getNegative_events() {
+        return negative_events;
+    }
 
-    public void setPositive_events(int positive_events) { this.positive_events = positive_events; }
+    public void setNegative_events(String negative_events) {
+        this.negative_events = negative_events;
+    }
 
-    public void setAlone(boolean alone) { this.alone = alone; }
+    public String getPositive_events() {
+        return positive_events;
+    }
 
-    public void setPlace(String place) { this.place = place; }
+    public void setPositive_events(String positive_events) {
+        this.positive_events = positive_events;
+    }
 
-    public void setSatisfiedrate(int satisfiedrate) { this.satisfiedrate = satisfiedrate; }
+    public String getAlone() {
+        return alone;
+    }
 
-    public void setFailurerate(int failurerate) { this.failurerate = failurerate; }
+    public void setAlone(String alone) {
+        this.alone = alone;
+    }
 
-    public void setImpulsively(int impulsively) { this.impulsively = impulsively; }
+    public String getPeopleAroundYou() {
+        return peopleAroundYou;
+    }
 
-    public void setAggressive(int aggressive) { this.aggressive = aggressive; }
+    public void setPeopleAroundYou(String peopleAroundYou) {
+        this.peopleAroundYou = peopleAroundYou;
+    }
 
-    public void setNotes(String notes) { this.notes = notes; }
+    public String getPeopleLikeability() {
+        return peopleLikeability;
+    }
 
-    public int getNegative_events() { return negative_events; }
+    public void setPeopleLikeability(String peopleLikeability) {
+        this.peopleLikeability = peopleLikeability;
+    }
 
-    public int getPositive_events() { return positive_events; }
+    public String getPlace() {
+        return place;
+    }
 
-    public boolean isAlone() { return alone; }
+    public void setPlace(String place) {
+        this.place = place;
+    }
 
-    public String getPlace() { return place; }
+    public String getSatisfiedrate() {
+        return satisfiedrate;
+    }
 
-    public int getSatisfiedrate() { return satisfiedrate; }
+    public void setSatisfiedrate(String satisfiedrate) {
+        this.satisfiedrate = satisfiedrate;
+    }
 
-    public int getFailurerate() { return failurerate; }
+    public String getFailurerate() {
+        return failurerate;
+    }
 
-    public int getImpulsively() { return impulsively; }
+    public void setFailurerate(String failurerate) {
+        this.failurerate = failurerate;
+    }
 
-    public int getAggressive() { return aggressive; }
+    public String getImpulsively() {
+        return impulsively;
+    }
 
-    public String getNotes() { return notes; }
+    public void setImpulsively(String impulsively) {
+        this.impulsively = impulsively;
+    }
+
+    public String getAggressive() {
+        return aggressive;
+    }
+
+    public void setAggressive(String aggressive) {
+        this.aggressive = aggressive;
+    }
+
+    public String getCancel_reason() {
+        return cancel_reason;
+    }
+
+    public void setCancel_reason(String cancel_reason) {
+        this.cancel_reason = cancel_reason;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }

@@ -1,10 +1,12 @@
 package com.example.myfitnesstracker.view.fragments;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -12,8 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
 import com.example.myfitnesstracker.R;
+import com.example.myfitnesstracker.model.AppDatabase;
+import com.example.myfitnesstracker.model.MoodDataDao;
 import com.example.myfitnesstracker.viewmodel.MainViewModel;
 
 
@@ -25,6 +30,11 @@ public class MoodEightFragment extends Fragment {
     private TextView textView;
     private TextView textView2;
     MainViewModel viewModel;
+    private EditText textFragmentEight;
+    AppDatabase db;
+    MoodDataDao moodDataDao;
+
+
 
 
 
@@ -48,11 +58,15 @@ public class MoodEightFragment extends Fragment {
         textView = view.findViewById(R.id.textView20);
         seekBar2 = view.findViewById(R.id.seekBar9);
         textView2 = view.findViewById(R.id.textView18);
+        textFragmentEight = view.findViewById(R.id.editTextTextMultiLine7);
         viewModel =new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        db= Room.databaseBuilder(getActivity().getApplicationContext(),AppDatabase.class,"sensordb").build();
+        moodDataDao = db.moodDataDao();
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 textView.setText(String.valueOf(progress));
+                viewModel.setImpulsively(String.valueOf(progress));
             }
 
             @Override
@@ -69,6 +83,7 @@ public class MoodEightFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar2, int progress2, boolean fromUser) {
                 textView2.setText(String.valueOf(progress2));
+                viewModel.setAggressive(String.valueOf(progress2));
             }
 
             @Override
@@ -87,7 +102,22 @@ public class MoodEightFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               getActivity().finish();
+                if (!TextUtils.isEmpty(textFragmentEight.getText())){
+                    viewModel.setNotes(textFragmentEight.getText().toString());
+                }
+
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        moodDataDao.insertAll(viewModel.saveMoodData());
+                        moodDataDao.getAll();
+                    }
+
+                };
+                new Thread(runnable).start();
+
+
+               //getActivity().finish();
             }
         });
 

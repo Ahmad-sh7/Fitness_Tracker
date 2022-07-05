@@ -1,14 +1,15 @@
 package com.example.myfitnesstracker.view.fragments;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ public class MoodFiveFragment extends Fragment  implements AdapterView.OnItemSel
     private Button button;
     private Button abbrechen;
     MainViewModel viewModel;
+    EditText textFragmentFive;
 
     public MoodFiveFragment() {
         // Required empty public constructor
@@ -41,6 +43,7 @@ public class MoodFiveFragment extends Fragment  implements AdapterView.OnItemSel
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Spinner spinner = view.findViewById(R.id.spinner2);
+        textFragmentFive =view.findViewById(R.id.editTextTextMultiLine5);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(), R.array.answers2, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -51,6 +54,9 @@ public class MoodFiveFragment extends Fragment  implements AdapterView.OnItemSel
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!TextUtils.isEmpty(textFragmentFive.getText())){
+                    viewModel.setNotes(textFragmentFive.getText().toString());
+                }
                 NavHostFragment.findNavController(MoodFiveFragment.this).navigate(R.id.action_moodFiveFragment_to_moodSevenFragment);
             }
         });
@@ -68,7 +74,7 @@ public class MoodFiveFragment extends Fragment  implements AdapterView.OnItemSel
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), ""+viewModel.getX()+text, Toast.LENGTH_SHORT).show();
+        viewModel.setPlace(text);
     }
 
     @Override

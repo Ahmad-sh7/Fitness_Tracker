@@ -1,10 +1,12 @@
 package com.example.myfitnesstracker.view.fragments;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +21,7 @@ public class MoodSixFragment extends Fragment {
 
     private Button button;
     MainViewModel viewModel;
+    EditText textFragmentSix;
 
     public MoodSixFragment() {
         // Required empty public constructor
@@ -37,10 +40,14 @@ public class MoodSixFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         button = (Button) view.findViewById(R.id.zurück5);
+        textFragmentSix =view.findViewById(R.id.editTextTextMultiLine8);
         viewModel =new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!TextUtils.isEmpty(textFragmentSix.getText())){
+                    viewModel.setNotes(textFragmentSix.getText().toString());
+                }
                 getActivity().finish();
             }
         });

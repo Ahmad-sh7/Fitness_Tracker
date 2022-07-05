@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_moodFourFragment_to_moodSixFragment"
             app:destination="@id/moodSixFragment" />
+        <action
+            android:id="@+id/action_moodFourFragment_to_moodFiveFragment"
+            app:destination="@id/moodFiveFragment" />
     </fragment>
     <fragment
         android:id="@+id/moodFiveFragment"

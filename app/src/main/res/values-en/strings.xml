@@ -152,5 +152,6 @@
     <string name="items">4 items</string>
     <string name="recordFinishedActivity">Add a finished activity</string>
     <string name="note2">In case you would like to set your own alarm instead of having it set automatically</string>
+    <string name="show_activites">Show Activities</string>
 
 </resources>
