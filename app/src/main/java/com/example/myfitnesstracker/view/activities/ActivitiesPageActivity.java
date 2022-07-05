@@ -299,6 +299,12 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 break;
         }
     }
+    
+     /*Ask user after three hours if they are done with sport
+    if done >> exit the activity and display the questionnaire
+    if not >> dismiss the dialog
+    */ 
+    
     void exitActivity() {
         sensorManager.unregisterListener(this, Accelerometer);
         startButton.setEnabled(true);
@@ -310,6 +316,8 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
         Intent intent = new Intent(this, MainActivity0.class);
         startActivity(intent);
     }
+
+
 
     void showAlertDialog() {
 
