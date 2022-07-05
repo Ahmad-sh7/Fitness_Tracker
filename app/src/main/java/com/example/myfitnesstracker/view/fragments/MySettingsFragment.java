@@ -42,6 +42,25 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements OnLo
         Preference query = findPreference("query");
         Intent intent = new Intent(getContext(), QueryActivity.class);
         query.setIntent(intent);
+        
+         // save checkbox values for enabling app notifications if check box is checked in settings
+        CheckBoxPreference checkBox = findPreference("notification");
+        checkBox.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(@NonNull Preference preference) {
+                if (checkBox.isChecked()) {
+                    //checkBox.setEnabled(true);
+                    editor.putBoolean("Notification", true);
+                    Toast.makeText(getContext(), "Notifications enabled", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    //checkBox.setEnabled(false);
+                    editor.putBoolean("Notification", false);
+                }
+                editor.apply();
+                return false;
+            }
+        });
     }
 
     @Override
