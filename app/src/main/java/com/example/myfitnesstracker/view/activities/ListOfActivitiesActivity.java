@@ -1,0 +1,52 @@
+package com.example.myfitnesstracker.view.activities;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+
+import com.example.myfitnesstracker.R;
+import com.example.myfitnesstracker.model.ActivityDataDao;
+import com.example.myfitnesstracker.model.Activity_log;
+import com.example.myfitnesstracker.model.AppDatabase;
+import com.example.myfitnesstracker.view.adapter.ActivitiesAdapter;
+
+import java.util.List;
+
+public class ListOfActivitiesActivity extends AppCompatActivity {
+
+    AppDatabase db;
+    ActivityDataDao activityDataDao;
+    List<Activity_log> activityList;
+    RecyclerView rv_activity_list;
+    ActivitiesAdapter activitiesAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_of_activities);
+        db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"sensordb").build();
+        activityDataDao =db.activityDataDao();
+        rv_activity_list = findViewById(R.id.rv_list_of_activities);
+        rv_activity_list.setLayoutManager(new LinearLayoutManager(this));
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+               activityList=activityDataDao.getAll();
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       activitiesAdapter = new ActivitiesAdapter(activityList);
+                       rv_activity_list.setAdapter(activitiesAdapter);
+                   }
+               });
+            }
+        };
+        new Thread(runnable).start();
+
+
+    }
+}
