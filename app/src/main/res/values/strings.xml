@@ -130,7 +130,7 @@
         <item>Sonstiges</item>
     </string-array>
     <string name="button_log_mood">Mood aufnehmen</string>
-    <string name="button_statistics">Mein Statistics</string>
+    <string name="button_statistics">Meine Statistiken</string>
     <string name="text_statistics_activity_chart">Tägliche Aktivitäten in Minuten</string>
     <string name="_language">Sprache</string>
     <string name="_choose_language_summary">Sprache feststellen</string>
