@@ -12,6 +12,9 @@ import com.example.myfitnesstracker.R;
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+         SharedPreferences settings = context.getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+        boolean notifyEnabled = settings.getBoolean("Notification", true);
+        if (notifyEnabled) {
         Intent i = new Intent(context, MainActivity0.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, 0);
@@ -26,7 +29,6 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent);
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         notificationManagerCompat.notify(123, builder.build());
-
-
+        }
     }
 }
