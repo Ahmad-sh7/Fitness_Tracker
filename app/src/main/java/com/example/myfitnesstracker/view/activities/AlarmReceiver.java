@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import android.content.SharedPreferences;
 
 import com.example.myfitnesstracker.R;
 
