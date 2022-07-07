@@ -153,5 +153,12 @@
     <string name="recordFinishedActivity">Add a finished activity</string>
     <string name="note2">In case you would like to set your own alarm instead of having it set automatically</string>
     <string name="show_activites">Show Activities</string>
+    
+    <string name="agree">I agree</string>
+    <string name="choose_activity_finished">Choose an activity</string>
+    <string name="choose_date">Choose a date:</string>
+    <string name="from">from</string>
+    <string name="until">until</string>
+    <string name="send">Send</string>
 
 </resources>

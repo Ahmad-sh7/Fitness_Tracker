@@ -54,7 +54,7 @@
     <string name="_choose_language">Wählen Sie eine Sprache aus</string>
     <string name="_go_to_home">Gehen Sie zum Homescreen</string>
     <string name="button_log_mood">Mood aufnehmen</string>
-    <string name="button_statistics">Mein Statistics</string>
+    <string name="button_statistics">Meine Statistiken</string>
     <string name="text_statistics_activity_chart">Tägliche Aktivitäten in Minuten</string>
     <string name="_language">Sprache</string>
     <string name="_choose_language_summary">Sprache feststellen</string>
@@ -153,5 +153,13 @@
     <string name="recordFinishedActivity">Ein abgeschlossenes Training nachtragen</string>
     <string name="note2">Für den Fall, dass Du deinen eigenen Alarm einstellen möchtest, anstatt ihn automatisch einstellen zu lassen</string>
     <string name="show_activites">Aktivitäten zeigen</string>
+    
+    <string name="agree">Ich stimme zu</string>
+    <string name="show_activites">Aktivitäten zeigen</string>
+    <string name="choose_activity_finished">Aktivität auswählen</string>
+    <string name="choose_date">Datum auswählen:</string>
+    <string name="from">von</string>
+    <string name="until">bis</string>
+    <string name="send">Absenden</string>
 
 </resources>
