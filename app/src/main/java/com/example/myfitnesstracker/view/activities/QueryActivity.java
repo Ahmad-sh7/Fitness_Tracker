@@ -1,28 +1,27 @@
 package com.example.myfitnesstracker.view.activities;
 
+import android.animation.LayoutTransition;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.cardview.widget.CardView;
-import android.animation.LayoutTransition;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.transition.TransitionManager;
-import android.transition.AutoTransition;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.example.myfitnesstracker.R;
 import com.example.myfitnesstracker.databinding.ActivityQueryBinding;
 import com.google.android.material.timepicker.MaterialTimePicker;
@@ -30,7 +29,7 @@ import com.google.android.material.timepicker.TimeFormat;
 
 import java.util.Calendar;
 
-public class QueryActivity extends AppCompatActivity {
+public class QueryActivity extends LocalizationActivity {
 private ActivityQueryBinding binding;
 private MaterialTimePicker picker;
 Calendar calendar;
@@ -246,6 +245,12 @@ TextView backCard2;
 
             }
         });
+        SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+        if (settings.getString("lang","de").equals("en")){
+            setLanguage("en");
+        }else{
+            setLanguage("de");
+        }
 
     }
 

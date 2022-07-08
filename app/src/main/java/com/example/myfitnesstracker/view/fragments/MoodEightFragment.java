@@ -60,7 +60,7 @@ public class MoodEightFragment extends Fragment {
         textView2 = view.findViewById(R.id.textView18);
         textFragmentEight = view.findViewById(R.id.editTextTextMultiLine7);
         viewModel =new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        db= Room.databaseBuilder(getActivity().getApplicationContext(),AppDatabase.class,"sensordb").build();
+        db= Room.databaseBuilder(getActivity().getApplicationContext(),AppDatabase.class,"Tracker_Database").build();
         moodDataDao = db.moodDataDao();
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -116,10 +116,10 @@ public class MoodEightFragment extends Fragment {
                 };
                 new Thread(runnable).start();
 
-
-               //getActivity().finish();
+               getActivity().finish();
             }
         });
 
     }
+
 }

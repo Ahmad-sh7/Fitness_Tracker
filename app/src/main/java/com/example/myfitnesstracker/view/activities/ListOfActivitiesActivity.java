@@ -27,7 +27,7 @@ public class ListOfActivitiesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_activities);
-        db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"sensordb").build();
+        db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"Tracker_Database").build();
         activityDataDao =db.activityDataDao();
         rv_activity_list = findViewById(R.id.rv_list_of_activities);
         rv_activity_list.setLayoutManager(new LinearLayoutManager(this));
@@ -39,7 +39,25 @@ public class ListOfActivitiesActivity extends AppCompatActivity {
                runOnUiThread(new Runnable() {
                    @Override
                    public void run() {
-                       activitiesAdapter = new ActivitiesAdapter(activityList);
+                       activitiesAdapter = new ActivitiesAdapter(activityList, new ActivitiesAdapter.OnItemClickListener() {
+                           @Override
+                           public void onItemClick(Activity_log activityLog) {
+                               Runnable runnable1 = new Runnable() {
+                                   @Override
+                                   public void run() {
+                                       activityDataDao.deleteByUniqueId(activityLog.getUid());
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                finish();
+                                                startActivity(getIntent());
+                                            }
+                                        });
+                                   }
+                               };
+                               new Thread(runnable1).start();
+                           }
+                       });
                        rv_activity_list.setAdapter(activitiesAdapter);
                    }
                });

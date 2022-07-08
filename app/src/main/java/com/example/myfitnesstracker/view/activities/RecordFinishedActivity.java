@@ -3,7 +3,9 @@ package com.example.myfitnesstracker.view.activities;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,9 +16,9 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.example.myfitnesstracker.R;
 import com.example.myfitnesstracker.model.Activity_log;
 import com.example.myfitnesstracker.model.AppDatabase;
@@ -24,7 +26,7 @@ import com.example.myfitnesstracker.model.AppDatabase;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class RecordFinishedActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class RecordFinishedActivity extends LocalizationActivity implements AdapterView.OnItemSelectedListener {
     Button timeButton;
     Button timeButton2;
     Button button;
@@ -37,7 +39,7 @@ public class RecordFinishedActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_finished);
-        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "sensordb").build();
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "Tracker_Database").build();
 
         Spinner spinner = findViewById(R.id.spinner3);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.answers3, android.R.layout.simple_spinner_item);
@@ -73,7 +75,12 @@ public class RecordFinishedActivity extends AppCompatActivity implements Adapter
                 goToActivity();
             }
         });
-
+        SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+        if (settings.getString("lang","de").equals("en")){
+            setLanguage("en");
+        }else{
+            setLanguage("de");
+        }
     }
 
     private String getTodayDate() {

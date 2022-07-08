@@ -13,4 +13,7 @@ public interface ActivityDataDao {
 
     @Insert
     void insertAll(Activity_log...activity_log);
+
+    @Query("DELETE FROM activity_log WHERE uid = :uniqueID")
+    abstract void deleteByUniqueId(long uniqueID);
 }

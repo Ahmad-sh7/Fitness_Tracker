@@ -160,5 +160,6 @@
     <string name="from">from</string>
     <string name="until">until</string>
     <string name="send">Send</string>
+    <string name="cance1">Cancel</string>
 
 </resources>

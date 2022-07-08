@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/FitnessGithub/app/src/main/res/layout-v26/fragment_mood_four.xml" value="0.1539855072463768" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FitnessGithub/app/src/main/res/layout-v26/fragment_mood_two.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FitnessGithub/app/src/main/res/layout/activity_activities_page.xml" value="0.14722222222222223" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FitnessGithub/app/src/main/res/layout/activity_list_of_activities.xml" value="0.21510416666666668" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/FitnessGithub/app/src/main/res/layout/layout_recycler_activity.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FitnessGithub/app/src/main/res/layout/my_settings.xml" value="0.14722222222222223" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FitnessGithub/app/src/main/res/menu/menu_main.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/FitnessGithub/app/src/main/res/mipmap-anydpi-v26/tracker_icon.xml" value="0.107" />
         <entry key="..\:/Users/User/AndroidStudioProjects/FitnessGithub/app/src/main/res/xml/settings.xml" value="0.21853388658367912" />
         <entry key="..\:/Users/bahaa/Downloads/22B13/app/src/main/res/layout/activity_activities_page.xml" value="0.24583333333333332" />
         <entry key="..\:/Users/bahaa/Downloads/22B13/app/src/main/res/layout/activity_main.xml" value="0.2975630611372381" />

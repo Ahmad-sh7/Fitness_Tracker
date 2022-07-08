@@ -6,10 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import com.github.mikephil.charting.matrix.Vector3;
 
 import java.util.ArrayList;
@@ -53,7 +49,7 @@ public class DBHandler extends SQLiteOpenHelper {
     /**
      * @param context the context from where the class is called, please use 'this'
      */
-    DBHandler(Context context){
+    public DBHandler(Context context){
         super(context.getApplicationContext(), DB_NAME, null, DB_V);
     }
 

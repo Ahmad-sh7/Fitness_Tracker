@@ -1,7 +1,4 @@
 package com.example.myfitnesstracker;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Connection;
 
 //highly experimental work in progress
 
@@ -14,7 +11,5 @@ public class SQLConnection {
                     + "encrypt=true;"
                     + "trustServerCertificate=false;"
                     + "loginTimeout=30;";
-    void test(){
-        Connection con = DriverManager.getConnection(connectionURL);
-    }
+
 }

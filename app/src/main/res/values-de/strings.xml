@@ -152,7 +152,6 @@
     <string name="items">4 Objekte</string>
     <string name="recordFinishedActivity">Ein abgeschlossenes Training nachtragen</string>
     <string name="note2">Für den Fall, dass Du deinen eigenen Alarm einstellen möchtest, anstatt ihn automatisch einstellen zu lassen</string>
-    <string name="show_activites">Aktivitäten zeigen</string>
     
     <string name="agree">Ich stimme zu</string>
     <string name="show_activites">Aktivitäten zeigen</string>
@@ -161,5 +160,6 @@
     <string name="from">von</string>
     <string name="until">bis</string>
     <string name="send">Absenden</string>
+    <string name="cance1">abbrechen</string>
 
 </resources>

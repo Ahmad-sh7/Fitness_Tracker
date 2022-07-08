@@ -52,7 +52,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     TextView txt_z; //declare z axis object
     TextView tv_bpm;
     Random rand = new Random();
-    int multiplier =50;
+    int multiplier =100;
     int upperbound = 15;
     int randomInitialHeartbeat = (rand.nextInt(upperbound)+63)*multiplier;
     int initialHeartValueForCheck = randomInitialHeartbeat;
@@ -97,7 +97,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activities_page);
-        db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"sensordb").build();
+        db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"Tracker_Database").build();
         sensorDataDao=db.sensorDataDao();
         activityDataDao =db.activityDataDao();
 
