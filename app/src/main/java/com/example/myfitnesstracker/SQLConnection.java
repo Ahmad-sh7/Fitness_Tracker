@@ -11,5 +11,9 @@ public class SQLConnection {
                     + "encrypt=true;"
                     + "trustServerCertificate=false;"
                     + "loginTimeout=30;";
+    
+    void test(){
+        Connection con = DriverManager.getConnection(connectionURL);
+    }
 
 }
