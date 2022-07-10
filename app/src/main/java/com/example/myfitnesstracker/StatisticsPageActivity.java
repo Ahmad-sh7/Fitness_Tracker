@@ -146,6 +146,8 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         yAxisR.setAxisMaximum(100);
         XAxis xAxis = lineChartMood.getXAxis();
         xAxis.setDrawGridLines(false);
+        xAxis.setAxisMinimum(0);
+        xAxis.setAxisMaximum(daysShown-1);
 
         //get database data
         ArrayList<ArrayList<Float>> dbEntries = getMoodScoresFromDB(daysShown);

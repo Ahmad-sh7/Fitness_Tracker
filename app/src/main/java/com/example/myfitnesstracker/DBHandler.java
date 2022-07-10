@@ -268,7 +268,7 @@ public class DBHandler extends SQLiteOpenHelper {
         cValues.put(KEY_MOOD_SPANNUNG, spannung);
         cValues.put(KEY_MOOD_ENERGIE, energie);
         cValues.put(KEY_MOOD_WACH, wach);
-        db.insert(TABLE_SENSOR_DATA,null,cValues);
+        db.insert(TABLE_MOOD_LOG,null,cValues);
     }
     /**
      * @param minTime begin of the considered time frame
