@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
+import java.util.*;
 
 public class StatisticsPageActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -30,6 +31,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
     Button button30days;
     Button button90days;
     Button button365days;
+    DBHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,39 +41,44 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         // Assign Variables
         barChartActivity = findViewById(R.id.bar_chart_activity);
         lineChartMood = findViewById(R.id.line_chart_mood);
-        button7days = (Button) findViewById(R.id.button_7_days);
-        button30days = (Button) findViewById(R.id.button_30_days);
-        button90days = (Button) findViewById(R.id.button_90_days);
-        button365days = (Button) findViewById(R.id.button_365_days);
+        button7days = findViewById(R.id.button_7_days);
+        button30days = findViewById(R.id.button_30_days);
+        button90days = findViewById(R.id.button_90_days);
+        button365days = findViewById(R.id.button_365_days);
         button7days.setOnClickListener(this);
         button30days.setOnClickListener(this);
         button90days.setOnClickListener(this);
         button365days.setOnClickListener(this);
+        db = new DBHandler(this);
 
         makeBarChart(7);
         makeLineChart(7);
-
+        makeExampleDbEntries(7);
     }
 
     @Override
     public void onClick(View v)
     {
         int days = 7;
-        if(v.getId() == R.id.button_7_days){days = 7;}
-        else if (v.getId() == R.id.button_30_days){days = 30;}
+        //if(v.getId() == R.id.button_7_days){days = 7;}
+        if (v.getId() == R.id.button_30_days){days = 30;}
         else if (v.getId() == R.id.button_90_days){days = 90;}
         else if (v.getId() == R.id.button_365_days){days = 365;}
         makeBarChart(days);
         makeLineChart(days);
     }
 
+    /**
+     * @param daysShown number of days which need to be shown on the chart
+     */
     private void makeBarChart(int daysShown){
 
         ArrayList<BarEntry> barActivityEntries = new ArrayList<>();// Initialize Array List
+        ArrayList<Float> dbEntries = getMinutesOfActivityFromDB(daysShown); //List where the entries of the DB are put into
 
-        // Example Instances
+        // Chart Instances
         for (int i=0; i<daysShown; i++){
-            float value = (float) ((i+1)*10.0);// Convert To Float
+            float value = dbEntries.get(i);
             BarEntry barEntry = new BarEntry(i, value);// Initialize Entry
             barActivityEntries.add(barEntry);// Add Values in Array List
         }
@@ -85,8 +92,35 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         barChartActivity.animateY(3000);// Set Animations
         barChartActivity.getDescription().setText(" ");// Removing Description text
         //barChartActivity.getDescription().setTextColor(Color.WHITE);
+        YAxis yAxisL = barChartActivity.getAxisLeft();
+        YAxis yAxisR = barChartActivity.getAxisRight();
+        yAxisL.setAxisMinimum(0);
+        yAxisR.setAxisMinimum(0);
     }
 
+    /**
+     * @param daysToShow number of days which need to be shown on the chart
+     * @return ArrayList<Float> with the minutes of activity for each day as floats
+     */
+    private ArrayList<Float> getMinutesOfActivityFromDB(int daysToShow){
+        ArrayList<Float> dbEntries= new ArrayList<>();//List where the entries of the DB are put into
+        Date now = new Date();
+        long millisecondsPerDay = 86400000; // a day has 86400000 milliseconds
+        long timeStartOfTheDay = now.getTime() - (now.getTime() % millisecondsPerDay); //gets the time of the first millisecond of the current day
+
+        //gets the DB entry for every day, starting with the day furthest in the past
+        for(int i = daysToShow-1; i >= 0; i--){
+            long neededDay = timeStartOfTheDay - (i * millisecondsPerDay);
+            Long time = db.getActivityData(neededDay, neededDay + millisecondsPerDay); //get the DB entries for the needed day
+            dbEntries.add(((float)time)/60000); // calculating milliseconds into minutes
+        }
+
+        return dbEntries;
+    }
+
+    /**
+     * @param daysShown number of days which need to be shown on the chart
+     */
     private void makeLineChart(int daysShown){
 
         ArrayList<ArrayList<Entry>> linesMoodEntries = new ArrayList<>(); // List of all Moods
@@ -112,13 +146,21 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         yAxisR.setAxisMaximum(100);
         XAxis xAxis = lineChartMood.getXAxis();
         xAxis.setDrawGridLines(false);
+        xAxis.setAxisMinimum(0);
+        xAxis.setAxisMaximum(daysShown-1);
 
-        // Example values
+        //get database data
+        ArrayList<ArrayList<Float>> dbEntries = getMoodScoresFromDB(daysShown);
+
+        // Set chart values
         for(int i = 0; i < linesMoodEntries.size(); i++){
+            ArrayList<Float> mood = dbEntries.get(i);
             for(int j = 0; j < daysShown; j++){
-                float value = (float) ((i+j)*8.0);// Convert To Float
-                Entry lineEntry = new Entry(j, value);// Initialize Entry
-                linesMoodEntries.get(i).add(lineEntry);// Add Values in Array List
+                float value = mood.get(j);
+                if(value != 404){ // checking if there is valid data
+                    Entry lineEntry = new Entry(j, value);// Initialize Entry
+                    linesMoodEntries.get(i).add(lineEntry);// Add Values in Array List
+                }
             }
         }
 
@@ -169,6 +211,47 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         lineChartMood.animateX(3000);
         lineChartMood.getDescription().setText(" ");
 
+    }
+
+
+    private ArrayList<ArrayList<Float>> getMoodScoresFromDB(int daysToShow){
+        ArrayList<ArrayList<Float>> dbEntries= new ArrayList<>();//List where the entries of the DB are put into
+        Date now = new Date();
+        long millisecondsPerDay = 86400000; // a day has 86400000 milliseconds
+        long timeStartOfTheDay = now.getTime() - (now.getTime() % millisecondsPerDay); //gets the time of the first millisecond of the current day
+
+        //initialize array for dbEntries
+        for(int p = 0;p<6;p++){
+            ArrayList<Float> entries = new ArrayList<>();
+            dbEntries.add(entries);
+        }
+
+        //gets the DB entry for every day, starting with the day furthest in the past
+        for(int i = daysToShow-1; i >= 0; i--){
+            long neededDay = timeStartOfTheDay - (i * millisecondsPerDay);
+            ArrayList<Float> entriesOneDay = db.getMoodData(neededDay, neededDay + millisecondsPerDay); //get the DB entries for every mood for the needed day
+            for(int p = 0; p < 6 ; p++){
+                dbEntries.get(p).add(entriesOneDay.get(p));
+            }
+        }
+
+        return  dbEntries;
+    }
+
+
+    /**
+     * makes example entries in the DB for the charts
+     */
+    private void makeExampleDbEntries(int daysShown){
+        Date now = new Date();
+        long millisecondsPerDay = 86400000; // a day has 86400000 milliseconds
+        db.insertActivity("Walking", now.getTime(), now.getTime() + 2700000);
+        db.insertActivity("Walking", now.getTime()-(millisecondsPerDay*2), now.getTime()-(millisecondsPerDay*2) + 1800000);
+        db.insertActivity("Walking", now.getTime()-(millisecondsPerDay*(daysShown-2)), now.getTime()-(millisecondsPerDay*(daysShown-2)) + 3600000);
+
+        db.safeMoodData(now.getTime(), 10,20,30,40,50,60);
+        db.safeMoodData(now.getTime()-(millisecondsPerDay*2), 20,30,40,50,60,70);
+        db.safeMoodData(now.getTime()-(millisecondsPerDay*(daysShown-2)), 30,40,50,60,70,80);
     }
 
 }
