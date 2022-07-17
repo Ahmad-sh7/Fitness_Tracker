@@ -63,6 +63,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + KEY_SENSOR_ZDATA + " REAL, "
                 + KEY_SENSOR_SOURCE + " TEXT" + ")";
         db.execSQL((CREATE_TABLE));
+
         //create table activity log
         CREATE_TABLE = "CREATE TABLE " + TABLE_ACTIVITY_LOG + "("
                 + KEY_ACTIVITY_AID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -85,6 +86,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         //TODO: think about upgrade procedures and implement them
     }
+
 
     /**
      * @param data Sensor data as SensorData object
@@ -297,7 +299,79 @@ public class DBHandler extends SQLiteOpenHelper {
         cValues.put(KEY_MOOD_SPANNUNG, spannung);
         cValues.put(KEY_MOOD_ENERGIE, energie);
         cValues.put(KEY_MOOD_WACH, wach);
-        db.insert(TABLE_SENSOR_DATA,null,cValues);
+        db.insert(TABLE_MOOD_LOG,null,cValues);
+    }
+    /**
+     * @param minTime begin of the considered time frame
+     * @param maxTime end of the considered time frame
+     * @return float with the sum of active minutes in the considered time frame
+     */
+    public Long getActivityData(long minTime, long maxTime){
+        Long sumOfActiveMinutes = (long) 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_ACTIVITY_LOG, new String[]{KEY_ACTIVITY_S_TIME, KEY_ACTIVITY_E_TIME},
+                minTime + "<=" + KEY_ACTIVITY_S_TIME +" AND " + maxTime + ">" + KEY_ACTIVITY_S_TIME,
+                null,
+                null,
+                null,
+                null);
+        if (!cursor.moveToFirst()) return sumOfActiveMinutes;
+        while (!cursor.isAfterLast()) {
+            long startTime = cursor.getLong(0);
+            long stopTime = cursor.getLong(1);
+            sumOfActiveMinutes += (stopTime - startTime);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return sumOfActiveMinutes;
+    }
+
+    /**
+     * @param minTime begin of the considered time frame
+     * @param maxTime end of the considered time frame
+     * @return integer with the average of the mood scores in the considered time frame
+     */
+    public ArrayList<Float> getMoodData(long minTime, long maxTime){
+
+        //list with the scores with [0] = zufrieden, [1] = ruhe, [2] = wohl, [3] = entspannt, [4] = energie, [5] = wach
+        ArrayList<Float> moodsScores = new ArrayList<>();
+        ArrayList<Integer> moodsCounters = new ArrayList<>();
+
+        for(int i = 0; i < 6; i++){
+            moodsScores.add((float)404);//impossible value to test if there is any data at all (404 error not found)
+            moodsCounters.add(0);//counts how many entries exists
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_MOOD_LOG, new String[]{KEY_MOOD_TIME, KEY_MOOD_ZUFRIEDENHEIT, KEY_MOOD_RUHE, KEY_MOOD_WOHL, KEY_MOOD_SPANNUNG, KEY_MOOD_ENERGIE, KEY_MOOD_WACH},
+                minTime + "<=" + KEY_MOOD_TIME + " AND " + maxTime + ">" + KEY_MOOD_TIME,
+                null,
+                null,
+                null,
+                null);
+
+        if (!cursor.moveToFirst()) return moodsScores;
+        while (!cursor.isAfterLast()) {
+            for(int i = 0; i < 6; i++){
+                if(moodsCounters.get(i) == 0){
+                    float moodScore = cursor.getFloat(i+1);
+                    moodsScores.set(i, moodScore);
+                    moodsCounters.set(i, moodsCounters.get(i));
+                }
+                else{
+                    float moodScore = cursor.getFloat(i+1);
+                    moodsScores.set(i, moodsScores.get(i) + moodScore);
+                    moodsCounters.set(i, moodsCounters.get(i));
+                }
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return moodsScores;
     }
 
     //External connection stuff

@@ -22,3 +22,4 @@
 ## GUI Sources:
 
 - Drop-Down-Menu (Spinner): https://developer.android.com/guide/topics/ui/controls/spinner#java
+- Linear Layout: https://developer.android.com/guide/topics/ui/layout/linear
