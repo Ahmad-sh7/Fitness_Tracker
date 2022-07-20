@@ -86,8 +86,8 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         XAxis xAxis = barChartActivity.getXAxis();
         xAxis.setDrawGridLines(false);
 
-        BarDataSet barDataSet = new BarDataSet(barActivityEntries, "Aktivität in Minuten");// Initialize Bar Data Set
-        barDataSet.setColors(Color.parseColor("#3A2BA9"));// Set Bar Color
+        BarDataSet barDataSet = new BarDataSet(barActivityEntries, getResources().getString(R.string.chart_active_minutes));// Initialize Bar Data Set
+        barDataSet.setColors(Color.parseColor("#4cc9f0"));// Set Bar Color
         barChartActivity.setData(new BarData(barDataSet));// Set Bar Data
         barChartActivity.animateY(3000);// Set Animations
         barChartActivity.getDescription().setText(" ");// Removing Description text
@@ -165,34 +165,40 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         }
 
         //making the 6 different lines
-        LineDataSet line1 = new LineDataSet(Mood1, "zufrieden");
-        line1.setColor(Color.parseColor("#F94144"));
-        line1.setCircleColor(Color.parseColor("#F94144"));
+        String color1 = "#4361ee";
+        LineDataSet line1 = new LineDataSet(Mood1, getResources().getString(R.string._satisfied));
+        line1.setColor(Color.parseColor(color1));
+        line1.setCircleColor(Color.parseColor(color1));
         line1.setDrawValues(false);
         line1.setLineWidth(2F);
-        LineDataSet line2 = new LineDataSet(Mood2, "ruhe");
-        line2.setColor(Color.parseColor("#F8961E"));
-        line2.setCircleColor(Color.parseColor("#F8961E"));
+        String color2 = "#3a0ca3";
+        LineDataSet line2 = new LineDataSet(Mood2, getResources().getString(R.string._calm));
+        line2.setColor(Color.parseColor(color2));
+        line2.setCircleColor(Color.parseColor(color2));
         line2.setDrawValues(false);
         line2.setLineWidth(2F);
-        LineDataSet line3 = new LineDataSet(Mood3, "wohl");
-        line3.setColor(Color.parseColor("#F9C74F"));
-        line3.setCircleColor(Color.parseColor("#F9C74F"));
+        String color3 = "#972c8b";
+        LineDataSet line3 = new LineDataSet(Mood3, getResources().getString(R.string._well));
+        line3.setColor(Color.parseColor(color3));
+        line3.setCircleColor(Color.parseColor(color3));
         line3.setDrawValues(false);
         line3.setLineWidth(2F);
-        LineDataSet line4 = new LineDataSet(Mood4, "entspannt");
-        line4.setColor(Color.parseColor("#90BE6D"));
-        line4.setCircleColor(Color.parseColor("#90BE6D"));
+        String color4 = "#e63367";
+        LineDataSet line4 = new LineDataSet(Mood4, getResources().getString(R.string._relaxed));
+        line4.setColor(Color.parseColor(color4));
+        line4.setCircleColor(Color.parseColor(color4));
         line4.setDrawValues(false);
         line4.setLineWidth(2F);
-        LineDataSet line5 = new LineDataSet(Mood5, "energie");
-        line5.setColor(Color.parseColor("#43AA8B"));
-        line5.setCircleColor(Color.parseColor("#43AA8B"));
+        String color5 = "#fb7607";
+        LineDataSet line5 = new LineDataSet(Mood5, getResources().getString(R.string._full_energy));
+        line5.setColor(Color.parseColor(color5));
+        line5.setCircleColor(Color.parseColor(color5));
         line5.setDrawValues(false);
         line5.setLineWidth(2F);
-        LineDataSet line6 = new LineDataSet(Mood6, "wach");
-        line6.setColor(Color.parseColor("#3D559F"));
-        line6.setCircleColor(Color.parseColor("#3D559F"));
+        String color6 = "#ffbe0b";
+        LineDataSet line6 = new LineDataSet(Mood6, getResources().getString(R.string._awake));
+        line6.setColor(Color.parseColor(color6));
+        line6.setCircleColor(Color.parseColor(color6));
         line6.setDrawValues(false);
         line6.setLineWidth(2F);
 

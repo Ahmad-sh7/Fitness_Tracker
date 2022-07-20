@@ -161,5 +161,6 @@
     <string name="until">until</string>
     <string name="send">Send</string>
     <string name="cance1">Cancel</string>
+    <string name="chart_active_minutes">Minutes of Activity</string>
 
 </resources>
