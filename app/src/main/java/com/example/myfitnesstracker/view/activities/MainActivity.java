@@ -35,6 +35,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
+import java.util.Random;
+
 public class MainActivity extends LocalizationActivity {
 
     public static final String PLANT_PLACES_PREFS = "PLANT_PLACES_PREFS";
@@ -60,6 +63,18 @@ public class MainActivity extends LocalizationActivity {
                 startActivity(new Intent(MainActivity.this, MySettings.class));
             }
         });
+
+        //generate a unique user ID when the app is first opened
+        SharedPreferences userData = getSharedPreferences("userData", Context.MODE_PRIVATE);
+        String userID = userData.getString("userID", "").toString();
+        if(userID == ""){
+            Date now = new Date();
+            Random random = new Random();
+            int addOn = random.nextInt(9000000) + 1000000;
+            SharedPreferences.Editor editor = userData.edit();
+            editor.putString("userID", ""+now.getTime()+ addOn);// generated userId as String (20 characters long)
+            editor.apply();
+        }
 
         SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
         if (settings.getString("lang", "de").equals("en")) {
