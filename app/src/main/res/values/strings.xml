@@ -166,6 +166,7 @@
     <string name="until">bis</string>
     <string name="send">Absenden</string>
     <string name="cance1">abbrechen</string>
+    <string name="chart_active_minutes">Aktivität in Minuten</string>
 
 
 </resources>
