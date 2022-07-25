@@ -62,6 +62,8 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     Button button;
     DBHandler dbHandler;
     String startTime;
+    Long startTimeMilli;
+    Long endTimeMilli;
     String endTime;
     String currentDate;
 
@@ -249,6 +251,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 isFirstTime = true;
                 tv_bpm.setVisibility(View.VISIBLE);
                 startTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+                startTimeMilli = System.currentTimeMillis();
                 currentDate = new SimpleDateFormat("MMM d yyyy",Locale.getDefault()).format(new Date());
                 sensorManager.registerListener(this, Accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
                 stopButton.setEnabled(true);
@@ -278,6 +281,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 startButton.setEnabled(true);
                 stopButton.setEnabled(false);
                 endTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+                endTimeMilli= System.currentTimeMillis();
                 Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
@@ -285,7 +289,9 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                                 getResources().getStringArray(R.array.listActivities)[spinner.getSelectedItemPosition()],
                                 currentDate,
                                 startTime,
-                                endTime
+                                endTime,
+                                startTimeMilli,
+                                endTimeMilli
                         ));
                     }
                 };

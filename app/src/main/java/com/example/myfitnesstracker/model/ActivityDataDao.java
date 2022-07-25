@@ -16,4 +16,7 @@ public interface ActivityDataDao {
 
     @Query("DELETE FROM activity_log WHERE uid = :uniqueID")
     abstract void deleteByUniqueId(long uniqueID);
+
+    @Query("SELECT * FROM activity_log WHERE startTimeMilli>=:startTime AND endTimeMilli<=:endTIme")
+    abstract List<Activity_log> getListOfEntriesInTimeFraame(long startTime, long endTIme);
 }

@@ -12,13 +12,17 @@ public class Activity_log {
     String date;
     String startTime;
     String endTime;
+    Long startTimeMilli;
+    Long endTimeMilli;
 
 
-    public Activity_log( String type, String date, String startTime, String endTime) {
+    public Activity_log(String type, String date, String startTime, String endTime, Long startTimeMilli, Long endTimeMilli) {
         this.type = type;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.startTimeMilli = startTimeMilli;
+        this.endTimeMilli = endTimeMilli;
     }
 
     public int getUid() {
@@ -59,5 +63,21 @@ public class Activity_log {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public Long getStartTimeMilli() {
+        return startTimeMilli;
+    }
+
+    public void setStartTimeMilli(Long startTimeMilli) {
+        this.startTimeMilli = startTimeMilli;
+    }
+
+    public Long getEndTimeMilli() {
+        return endTimeMilli;
+    }
+
+    public void setEndTimeMilli(Long endTimeMilli) {
+        this.endTimeMilli = endTimeMilli;
     }
 }

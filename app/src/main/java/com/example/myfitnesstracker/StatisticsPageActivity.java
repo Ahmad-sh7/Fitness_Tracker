@@ -1,26 +1,32 @@
 package com.example.myfitnesstracker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
+import com.example.myfitnesstracker.model.ActivityDataDao;
+import com.example.myfitnesstracker.model.Activity_log;
+import com.example.myfitnesstracker.model.AppDatabase;
+import com.example.myfitnesstracker.model.MoodDataDao;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Date;
 
 public class StatisticsPageActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -32,6 +38,9 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
     Button button90days;
     Button button365days;
     DBHandler db;
+    AppDatabase db2;
+    ActivityDataDao activityDataDao;
+    MoodDataDao moodDataDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +59,13 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         button90days.setOnClickListener(this);
         button365days.setOnClickListener(this);
         db = new DBHandler(this);
+        db2= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"Tracker_Database").build();
+        activityDataDao = db2.activityDataDao();
+        moodDataDao = db2.moodDataDao();
+
 
         makeBarChart(7);
-        makeLineChart(7);
+        //makeLineChart(7);
         makeExampleDbEntries(7);
     }
 
@@ -65,7 +78,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         else if (v.getId() == R.id.button_90_days){days = 90;}
         else if (v.getId() == R.id.button_365_days){days = 365;}
         makeBarChart(days);
-        makeLineChart(days);
+        //makeLineChart(days);
     }
 
     /**
@@ -108,12 +121,33 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         long millisecondsPerDay = 86400000; // a day has 86400000 milliseconds
         long timeStartOfTheDay = now.getTime() - (now.getTime() % millisecondsPerDay); //gets the time of the first millisecond of the current day
 
-        //gets the DB entry for every day, starting with the day furthest in the past
-        for(int i = daysToShow-1; i >= 0; i--){
-            long neededDay = timeStartOfTheDay - (i * millisecondsPerDay);
-            Long time = db.getActivityData(neededDay, neededDay + millisecondsPerDay); //get the DB entries for the needed day
-            dbEntries.add(((float)time)/60000); // calculating milliseconds into minutes
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = daysToShow-1; i >= 0; i--){
+                    long neededDay = timeStartOfTheDay - (i * millisecondsPerDay);
+                    //Long time = db.getActivityData(neededDay, neededDay + millisecondsPerDay); //get the DB entries for the needed day
+                    ArrayList<Activity_log> tempList = (ArrayList<Activity_log>) activityDataDao.getListOfEntriesInTimeFraame(neededDay, neededDay + millisecondsPerDay);
+                    long time = 0;
+                    for (int k =0;k<=tempList.size()-1;k++){
+                        time= time + (tempList.get(k).getEndTimeMilli()- tempList.get(k).getStartTimeMilli());
+                    }
+                    dbEntries.add(((float)time)/60000); // calculating milliseconds into minutes
+                    Log.d("Ahmad", "run: "+time);
+                }
+
+            }
+
+        }).start();
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        //gets the DB entry for every day, starting with the day furthest in the past
+
 
         return dbEntries;
     }
@@ -225,6 +259,28 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
             ArrayList<Float> entries = new ArrayList<>();
             dbEntries.add(entries);
         }
+
+        /*
+
+         new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+
+            }
+
+        }).start();
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+         */
+
+
 
         //gets the DB entry for every day, starting with the day furthest in the past
         for(int i = daysToShow-1; i >= 0; i--){

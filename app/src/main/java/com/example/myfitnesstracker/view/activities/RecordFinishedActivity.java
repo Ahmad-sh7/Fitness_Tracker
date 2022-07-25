@@ -64,7 +64,9 @@ public class RecordFinishedActivity extends LocalizationActivity implements Adap
                                 getResources().getStringArray(R.array.listActivities)[spinner.getSelectedItemPosition()],
                                 dateButton.getText().toString(),
                                 timeButton.getText().toString(),
-                                timeButton2.getText().toString()
+                                timeButton2.getText().toString(),
+                                (long)0,
+                                (long)0
                         ));
                         db.activityDataDao().getAll();
                     }
