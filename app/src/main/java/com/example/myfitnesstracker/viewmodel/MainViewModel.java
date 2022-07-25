@@ -24,7 +24,25 @@ public class MainViewModel extends ViewModel {
     String aggressive= "";
     String cancel_reason= "";
     String notes= "";
+    long moodStartTime;
+    long moodEndTime;
     AppDatabase db;
+
+    public long getMoodStartTime() {
+        return moodStartTime;
+    }
+
+    public void setMoodStartTime(long moodStartTime) {
+        this.moodStartTime = moodStartTime;
+    }
+
+    public long getMoodEndTime() {
+        return moodEndTime;
+    }
+
+    public void setMoodEndTime(long moodEndTime) {
+        this.moodEndTime = moodEndTime;
+    }
 
     public String getCancel_reason() {
         return cancel_reason;
@@ -191,7 +209,9 @@ public class MainViewModel extends ViewModel {
                         getImpulsively(),
                         getAggressive(),
                         getCancel_reason(),
-                        getNotes()
+                        getNotes(),
+                        getMoodStartTime(),
+                        getMoodEndTime()
                 );
         return  moodData;
     }

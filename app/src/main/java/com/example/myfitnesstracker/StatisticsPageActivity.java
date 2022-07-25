@@ -12,6 +12,7 @@ import androidx.room.Room;
 import com.example.myfitnesstracker.model.ActivityDataDao;
 import com.example.myfitnesstracker.model.Activity_log;
 import com.example.myfitnesstracker.model.AppDatabase;
+import com.example.myfitnesstracker.model.MoodData;
 import com.example.myfitnesstracker.model.MoodDataDao;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -65,7 +66,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
 
 
         makeBarChart(7);
-        //makeLineChart(7);
+        makeLineChart(7);
         makeExampleDbEntries(7);
     }
 
@@ -78,7 +79,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         else if (v.getId() == R.id.button_90_days){days = 90;}
         else if (v.getId() == R.id.button_365_days){days = 365;}
         makeBarChart(days);
-        //makeLineChart(days);
+        makeLineChart(days);
     }
 
     /**
@@ -142,7 +143,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         }).start();
 
         try {
-            Thread.sleep(100);
+            Thread.sleep(50);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -291,7 +292,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         //gets the DB entry for every day, starting with the day furthest in the past
         for(int i = daysToShow-1; i >= 0; i--){
             long neededDay = timeStartOfTheDay - (i * millisecondsPerDay);
-            ArrayList<Float> entriesOneDay = db.getMoodData(neededDay, neededDay + millisecondsPerDay); //get the DB entries for every mood for the needed day
+            ArrayList<Float> entriesOneDay = getMoodData(neededDay, neededDay + millisecondsPerDay); //get the DB entries for every mood for the needed day
             for(int p = 0; p < 6 ; p++){
                 dbEntries.get(p).add(entriesOneDay.get(p));
             }
@@ -315,5 +316,52 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         db.safeMoodData(now.getTime()-(millisecondsPerDay*2), 20,30,40,50,60,70);
         db.safeMoodData(now.getTime()-(millisecondsPerDay*(daysShown-2)), 30,40,50,60,70,80);
     }
+
+    public ArrayList<Float> getMoodData(long minTime, long maxTime){
+
+        //list with the scores with [0] = zufrieden, [1] = ruhe, [2] = wohl, [3] = entspannt, [4] = energie, [5] = wach
+        ArrayList<Float> moodsScores = new ArrayList<>();
+        ArrayList<Integer> moodsCounters = new ArrayList<>();
+
+       /* for(int i = 0; i < 6; i++){
+            moodsScores.add((float)404);//impossible value to test if there is any data at all (404 error not found)
+            moodsCounters.add(0);//counts how many entries exists
+        }*/
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<MoodData> tempList = (ArrayList<MoodData>) moodDataDao.getMoodDataInTimeFrame(minTime, maxTime);
+                if (!tempList.isEmpty()){
+                    moodsScores.add(Float.parseFloat(tempList.get(0).getSatisfiedMeter()));
+                    moodsScores.add(Float.parseFloat(tempList.get(0).getCalmMeter()));
+                    moodsScores.add(Float.parseFloat(tempList.get(0).getHappinessMeter()));
+                    moodsScores.add(Float.parseFloat(tempList.get(0).getExcitedMeter()));
+                    moodsScores.add(Float.parseFloat(tempList.get(0).getEnergyMeter()));
+                    moodsScores.add(Float.parseFloat(tempList.get(0).getSleepyMeter()));
+                }else{
+                    moodsScores.add(0F);
+                    moodsScores.add(0F);
+                    moodsScores.add(0F);
+                    moodsScores.add(0F);
+                    moodsScores.add(0F);
+                    moodsScores.add(0F);
+
+                }
+
+
+            }
+
+        }).start();
+
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return moodsScores;
+    }
+
 
 }

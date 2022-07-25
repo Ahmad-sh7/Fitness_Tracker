@@ -49,6 +49,7 @@ public class MoodSixFragment extends Fragment {
                     viewModel.setNotes(textFragmentSix.getText().toString());
                 }
                 getActivity().finish();
+                viewModel.setMoodEndTime(System.currentTimeMillis());
             }
         });
 

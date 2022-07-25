@@ -70,6 +70,8 @@ public class MoodOneFragment extends Fragment {
         button = view.findViewById(R.id.btnMoodOneNext);
         textFragmentOne = view.findViewById(R.id.editTextTextMultiLine);
 
+        viewModel.setMoodStartTime(System.currentTimeMillis());
+
         seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar1, int progress1, boolean fromUser) {

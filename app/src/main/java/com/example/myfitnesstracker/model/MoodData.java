@@ -25,9 +25,11 @@ public class MoodData {
     String aggressive;
     String cancel_reason;
     String notes;
+    long moodStartTime;
+    long moodSEndTime;
 
 
-    public MoodData(String satisfiedMeter, String calmMeter, String happinessMeter, String excitedMeter, String energyMeter, String sleepyMeter, String negative_events, String positive_events, String alone, String peopleAroundYou, String peopleLikeability, String place, String satisfiedrate, String failurerate, String impulsively, String aggressive, String cancel_reason, String notes) {
+    public MoodData(String satisfiedMeter, String calmMeter, String happinessMeter, String excitedMeter, String energyMeter, String sleepyMeter, String negative_events, String positive_events, String alone, String peopleAroundYou, String peopleLikeability, String place, String satisfiedrate, String failurerate, String impulsively, String aggressive, String cancel_reason, String notes, long moodStartTime, long moodSEndTime) {
         this.satisfiedMeter = satisfiedMeter;
         this.calmMeter = calmMeter;
         this.happinessMeter = happinessMeter;
@@ -46,6 +48,16 @@ public class MoodData {
         this.aggressive = aggressive;
         this.cancel_reason = cancel_reason;
         this.notes = notes;
+        this.moodStartTime = moodStartTime;
+        this.moodSEndTime = moodSEndTime;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getSatisfiedMeter() {
@@ -190,5 +202,21 @@ public class MoodData {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public long getMoodStartTime() {
+        return moodStartTime;
+    }
+
+    public void setMoodStartTime(long moodStartTime) {
+        this.moodStartTime = moodStartTime;
+    }
+
+    public long getMoodSEndTime() {
+        return moodSEndTime;
+    }
+
+    public void setMoodSEndTime(long moodSEndTime) {
+        this.moodSEndTime = moodSEndTime;
     }
 }

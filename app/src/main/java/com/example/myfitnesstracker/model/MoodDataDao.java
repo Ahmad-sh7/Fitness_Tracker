@@ -13,4 +13,7 @@ public interface MoodDataDao {
 
     @Insert
     void insertAll(MoodData...moodData);
+
+    @Query("SELECT * FROM mooddata WHERE moodStartTime>=:startTime AND moodSEndTime<=:endTIme")
+    abstract List<MoodData> getMoodDataInTimeFrame(long startTime, long endTIme);
 }
