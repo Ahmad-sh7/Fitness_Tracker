@@ -307,7 +307,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     }
     
      /*Ask user after three hours if they are done with sport
-    if done >> exit the activity and display the questionnaire
+    if done >> exit the activity, save to database and display the questionnaire
     if not >> dismiss the dialog
     */ 
     
@@ -315,6 +315,21 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
         sensorManager.unregisterListener(this, Accelerometer);
         startButton.setEnabled(true);
         stopButton.setEnabled(false);
+        endTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                activityDataDao.insertAll(new Activity_log(
+                        getResources().getStringArray(R.array.listActivities)[spinner.getSelectedItemPosition()],
+                        currentDate,
+                        startTime,
+                        endTime
+                ));
+            }
+        };
+        new Thread(runnable).start();
+        timer.cancel();
+        timer2.cancel();
         flag=false;
     }
     
