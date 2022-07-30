@@ -290,9 +290,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                                 currentDate,
                                 startTime,
                                 endTime,
-                                startTimeMilli,
-                                endTimeMilli
-                        ));
+                                startTimeMilli, endTimeMilli));
                     }
                 };
                 new Thread(runnable).start();

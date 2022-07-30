@@ -99,10 +99,11 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="85dp"
             android:layout_height="48dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#673FCA"
             android:text="@string/_finish"
             app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine7"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine7"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine7" />
 

@@ -60,14 +60,14 @@ public class RecordFinishedActivity extends LocalizationActivity implements Adap
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        Long endTimeMilli = System.currentTimeMillis();
+                        Long startTimeMilli = System.currentTimeMillis();
                         db.activityDataDao().insertAll(new Activity_log(
                                 getResources().getStringArray(R.array.listActivities)[spinner.getSelectedItemPosition()],
                                 dateButton.getText().toString(),
                                 timeButton.getText().toString(),
                                 timeButton2.getText().toString(),
-                                (long)0,
-                                (long)0
-                        ));
+                                startTimeMilli, endTimeMilli));
                         db.activityDataDao().getAll();
                     }
 

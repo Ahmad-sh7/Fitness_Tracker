@@ -20,7 +20,7 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="85dp"
             android:layout_height="48dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="8dp"
             android:text="@string/cance1"
             android:textSize="9dp"
             app:layout_constraintEnd_toEndOf="@+id/btnMoodOneNext"
@@ -59,7 +59,7 @@
             android:thumbOffset="0dp"
             android:thumbTint="#00ED0909"
             android:thumbTintMode="multiply"
-            app:layout_constraintEnd_toEndOf="@+id/zufrieden"
+            app:layout_constraintEnd_toEndOf="@+id/textView5"
             app:layout_constraintStart_toStartOf="@+id/unzufrieden"
             app:layout_constraintTop_toBottomOf="@+id/unzufrieden"
             tools:targetApi="o" />
@@ -181,8 +181,8 @@
 
         <TextView
             android:id="@+id/zufrieden"
-            android:layout_width="63dp"
-            android:layout_height="17dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -191,8 +191,8 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/unzufrieden"
             app:layout_constraintEnd_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toTopOf="@+id/unzufrieden" />
-
+            app:layout_constraintTop_toTopOf="@+id/unzufrieden"
+            app:layout_constraintVertical_bias="1.0" />
         <TextView
             android:id="@+id/unruhig"
             android:layout_width="wrap_content"
@@ -364,11 +364,11 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="85dp"
             android:layout_height="48dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#673FCA"
             android:text="next>>"
             app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
 

@@ -91,7 +91,6 @@
         <item>Sport</item>
         <item>Shopping</item>
         <item>Visiting</item>
-        <item>another Hobby</item>
         <item>Others</item>
     </string-array>
     <string-array name="language_choices">
