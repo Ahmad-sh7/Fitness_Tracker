@@ -323,7 +323,9 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                         getResources().getStringArray(R.array.listActivities)[spinner.getSelectedItemPosition()],
                         currentDate,
                         startTime,
-                        endTime
+                        endTime,
+                        startTimeMilli,
+                        endTimeMilli
                 ));
             }
         };
