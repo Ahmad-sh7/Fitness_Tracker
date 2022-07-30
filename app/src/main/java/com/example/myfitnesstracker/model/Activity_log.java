@@ -21,8 +21,8 @@ public class Activity_log {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.startTimeMilli = this.startTimeMilli;
-        this.endTimeMilli = this.endTimeMilli;
+        this.startTimeMilli = startTimeMilli;
+        this.endTimeMilli = endTimeMilli;
     }
 
     public int getUid() {

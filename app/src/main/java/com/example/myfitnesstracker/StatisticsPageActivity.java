@@ -60,7 +60,7 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
         button90days.setOnClickListener(this);
         button365days.setOnClickListener(this);
         db = new DBHandler(this);
-        db2= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"Tracker_Database").build();
+        db2= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"Tracker_Database").allowMainThreadQueries().build();
         activityDataDao = db2.activityDataDao();
         moodDataDao = db2.moodDataDao();
 
@@ -140,13 +140,8 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
 
             }
 
-        }).start();
+        }).run();
 
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         //gets the DB entry for every day, starting with the day furthest in the past
 
 
@@ -333,6 +328,10 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
             public void run() {
                 ArrayList<MoodData> tempList = (ArrayList<MoodData>) moodDataDao.getMoodDataInTimeFrame(minTime, maxTime);
                 if (!tempList.isEmpty()){
+
+                    /*
+                    Write code for averaging here
+                    * */
                     moodsScores.add(Float.parseFloat(tempList.get(0).getSatisfiedMeter()));
                     moodsScores.add(Float.parseFloat(tempList.get(0).getCalmMeter()));
                     moodsScores.add(Float.parseFloat(tempList.get(0).getHappinessMeter()));
@@ -346,19 +345,14 @@ public class StatisticsPageActivity extends AppCompatActivity implements View.On
                     moodsScores.add(0F);
                     moodsScores.add(0F);
                     moodsScores.add(0F);
-
                 }
 
 
             }
 
-        }).start();
+        }).run();
 
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
 
         return moodsScores;
     }

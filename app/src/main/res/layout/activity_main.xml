@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.MainActivity"
-    android:background="@drawable/gradient" >
+    android:background="@drawable/gradient"
+    tools:context=".view.activities.MainActivity">
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <RelativeLayout
-            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginRight="20dp">
 
             <TextView
@@ -28,8 +30,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/my_dashboard"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -38,7 +40,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/items"
 
-                 />
+                />
         </RelativeLayout>
 
         <GridLayout
@@ -79,8 +81,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:textSize="15sp"
-                        android:text="@string/button_log_activity" />
+                        android:text="@string/button_log_activity"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -113,8 +115,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:textSize="15sp"
-                        android:text="@string/button_log_mood" />
+                        android:text="@string/button_log_mood"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -147,8 +149,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:textSize="15sp"
-                        android:text="@string/button_statistics" />
+                        android:text="@string/button_statistics"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -183,7 +185,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:text="@string/show_activites"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -191,17 +193,20 @@
 
         </GridLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/my_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginTop="125dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_baseline_settings_24"
-            android:tint="@android:color/white" />
 
     </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/my_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_settings_24"
+        android:tint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

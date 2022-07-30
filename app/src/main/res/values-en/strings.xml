@@ -161,5 +161,9 @@
     <string name="send">Send</string>
     <string name="cance1">Cancel</string>
     <string name="chart_active_minutes">Minutes of Activity</string>
+    <string name="cancel2">Cancel</string>
+    <string name="notes_1">Notes:</string>
+    <string name="want_to_cancel">Why do you want to cancel?</string>
+    <string name="because">because...</string>
 
 </resources>

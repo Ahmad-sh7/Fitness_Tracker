@@ -166,6 +166,10 @@
     <string name="send">Absenden</string>
     <string name="cance1">abbrechen</string>
     <string name="chart_active_minutes">Aktivität in Minuten</string>
+    <string name="cancel2">abbrechen</string>
+    <string name="notes_1">Notizen:</string>
+    <string name="want_to_cancel">Warum wollen Sie abbrechen?</string>
+    <string name="because">Weil...</string>
 
 
 </resources>

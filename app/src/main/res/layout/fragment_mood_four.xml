@@ -144,7 +144,7 @@
             android:layout_height="151dp"
             android:layout_marginTop="36dp"
             android:ems="10"
-            android:hint="Notizen:"
+            android:hint="@string/notes_1"
             android:gravity="start|top"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="@+id/seekBarID9"

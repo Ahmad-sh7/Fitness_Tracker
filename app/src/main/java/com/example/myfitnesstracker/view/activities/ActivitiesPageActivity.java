@@ -51,8 +51,9 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
     TextView txt_y; //declare y axis object
     TextView txt_z; //declare z axis object
     TextView tv_bpm;
+    TextView tv_Heart;
     Random rand = new Random();
-    int multiplier =100;
+    int multiplier =50;
     int upperbound = 15;
     int randomInitialHeartbeat = (rand.nextInt(upperbound)+63)*multiplier;
     int initialHeartValueForCheck = randomInitialHeartbeat;
@@ -125,6 +126,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
         spinner.setAdapter(adapter);
         spinner.setSelection(0);
         tv_bpm=findViewById(R.id.tv_bpm);
+        tv_Heart=findViewById(R.id.tv_heart);
         startButton = (Button) findViewById(R.id.start);
         stopButton = (Button) findViewById(R.id.stop);
         startButton.setOnClickListener(this);
@@ -250,6 +252,7 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                 timer2= new Timer();
                 isFirstTime = true;
                 tv_bpm.setVisibility(View.VISIBLE);
+                tv_Heart.setVisibility(View.VISIBLE);
                 startTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
                 startTimeMilli = System.currentTimeMillis();
                 currentDate = new SimpleDateFormat("MMM d yyyy",Locale.getDefault()).format(new Date());
@@ -290,7 +293,8 @@ public class ActivitiesPageActivity extends LocalizationActivity implements Sens
                                 currentDate,
                                 startTime,
                                 endTime,
-                                startTimeMilli, endTimeMilli));
+                                startTimeMilli,
+                                endTimeMilli));
                     }
                 };
                 new Thread(runnable).start();
